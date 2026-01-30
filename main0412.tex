@@ -1,0 +1,1279 @@
+\documentclass[twoside,11pt]{article}
+ \sloppy
+% Any additional packages needed should be included after jmlr2e.
+% Note that jmlr2e.sty includes epsfig, amssymb, natbib and graphicx,
+% and defines many common macros, such as 'proof' and 'example'.
+%
+% It also sets the bibliographystyle to plainnat; for more information on
+% natbib citation styles, see the natbib documentation, a copy of which
+% is archived at http://www.jmlr.org/format/natbib.pdf
+
+% Available options for package jmlr2e are:
+%
+%   - abbrvbib : use abbrvnat for the bibliography style
+%   - nohyperref : do not load the hyperref package
+%   - preprint : remove JMLR specific information from the template,
+%         useful for example for posting to preprint servers.
+%
+% Example of using the package with custom options:
+%\usepackage[abbrvbib, preprint]{jmlr2e}
+\usepackage{jmlr2e}
+\usepackage{float}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{subfigure}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{enumerate}
+\usepackage{xcolor}
+\usepackage{abbe}
+\usepackage{booktabs, colortbl, array} % for professional tables
+\definecolor{Gray}{gray}{0.9} %Table cell color
+
+% Definitions of handy macros can go here
+\def\mcp#1{\textcolor{red}{#1}}
+\def\wy#1{\textcolor{blue}{#1}}
+
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\global\long\def\CE#1#2{\EE\left[\left.#1\right|#2\right]}%
+\global\long\def\CP#1#2{\PP\left(\left.#1\right|#2\right)}%
+\global\long\def\abs#1{\left|#1\right|}%
+\global\long\def\norm#1{\left\Vert #1\right\Vert }%
+\global\long\def\Indicator#1{\mathbb{I}\left(#1\right)}%
+
+\global\long\def\Pcal{\mathcal{P}}%
+\global\long\def\mS{\mathcal{S}}%
+\global\long\def\mD{\mathcal{D}}%
+\global\long\def\mA{\mathcal{A}}%
+\global\long\def\mM{\mathcal{M}}%
+
+\global\long\def\Reward#1#2{Y_{#1,#2}}%
+\global\long\def\Error#1#2{\eta_{#1,#2}}%
+\global\long\def\Tildepi#1#2{\tilde{\pi}_{#1,#2}}%
+\global\long\def\ZZ#1#2{\mathbf{Z}_{#1,#2}}%
+\global\long\def\Newreward#1#2{W_{#1,#2}}%
+\global\long\def\NewDRY#1#2#3{W_{#2,#3}^{DR(#1)}}%
+\global\long\def\Newcontext#1#2{Z_{#1,#2}}%
+\global\long\def\SelectionP#1#2{\pi_{#1,#2}}%
+\global\long\def\Newaction#1{\tilde{a}_{#1}}%
+\global\long\def\NewProb#1#2{\phi_{#1,#2}}%
+\global\long\def\Estimator#1{\widehat{\theta}_{#1}}%
+\global\long\def\DREstimator#1{\widehat{\theta}_{#1}^{DR}}%
+\global\long\def\IPW#1{\widehat{\theta}_{#1}^{IPW}}%
+\global\long\def\Impute#1{\check{\theta}_{#1}}%
+\global\long\def\DRY#1#2#3{Y_{#2,#3}^{DR(#1)}}%
+\global\long\def\TildeY#1#2#3{\tilde{Y}_{#2,#3}^{(#1)}}%
+\global\long\def\DRerror#1#2#3{\eta_{#2,#3}^{DR(#1)}}%
+\global\long\def\TildeError#1#2#3{\tilde{\eta}_{#2,#3}^{(#1)}}%
+\global\long\def\Selfbound#1#2{\beta_{#1}(#2)}%
+\global\long\def\Predbound#1#2#3{\gamma_{#1,#2}(#3)}%
+\global\long\def\Diff#1#2{\Delta_{#1,#2}}%
+\global\long\def\Action#1{a_{#1}}%
+\global\long\def\PseudoAction#1#2{\mathfrak{\mathfrak{I}}_{#2}^{(#1)}}%
+\global\long\def\History#1{\mathcal{H}_{#1}}%
+\global\long\def\XX#1#2{\boldsymbol{X}_{#1,#2}}%
+\global\long\def\Optimalarm#1{a_{#1}^{*}}%
+\global\long\def\Maxeigen#1{\lambda_{\max}\!\left(#1\right)}%
+\global\long\def\Mineigen#1{\lambda_{\min}\!\left(#1\right)}%
+\global\long\def\Trace#1{\text{Tr}\left(#1\right)}%
+\global\long\def\SetofContexts#1{\mathcal{X}_{#1}}%
+\global\long\def\Ridgebeta#1{\widehat{\theta}_{#1}^{ridge}}%
+\global\long\def\Order#1{\langle#1\rangle}%
+\global\long\def\AdmitRound#1{\tau(#1)}%
+\global\long\def\Regret#1{regret\ensuremath{(#1)}}%
+\global\long\def\Sampledreward#1#2#3{\tilde{Y}_{#2,#3}^{(#1)}}%
+\global\long\def\Sampledparameter#1#2#3{\tilde{\theta}_{#2,#3}^{(#1)}}%
+\global\long\def\Mod{\text{mod}}%
+
+% Heading arguments are {volume}{year}{pages}{date submitted}{date published}{paper id}{author-full-names}
+
+\usepackage{lastpage}
+\jmlrheading{24}{2024}{1-\pageref{LastPage}}{12/24}{??/??}{21-0000}{Wonyoung Kim}
+
+% Short headings should be running head and authors last names
+
+\ShortHeadings{Augmented Doubly Robust Thompson Sampling}{Kim}
+\firstpageno{1}
+
+\newtheorem{thm}{\protect\theoremname}\newtheorem{lem}[thm]{\protect\lemmaname}\newtheorem{prop}[thm]{\protect\propositionname}
+
+\usepackage{babel}
+\providecommand{\lemmaname}{Lemma}
+\providecommand{\propositionname}{Proposition}
+\providecommand{\remarkname}{Remark}
+\providecommand{\theoremname}{Theorem}
+
+\makeatother
+
+\begin{document}
+
+\title{Nearly Optimal Thompson Sampling for Linear Contextual Bandits 
+with Missing Data Techniques}
+\author{\name Wonyoung Kim 
+\email eraser347@gmail.com \\  
+\addr Department of Industrial Engineering and Operations Research \\         
+Columbia University \\         
+New York, NY 10027-6900, USA
+}
+%\AND         
+%\name Myunghee Cho Paik 
+%\email myungheechopaik@snu.ac.kr \\ 
+%\addr Department of Statistics \\         
+%Seoul National University\\         
+%Seoul 08826, Republic of Korea}
+\editor{My editor}
+\maketitle
+
+\begin{abstract}%
+In linear contextual bandits (LinCB), the goal is to choose actions that maximize cumulative rewards, with rewards modeled as a linear function of context vectors. 
+Thompson Sampling, a common algorithm for LinCB, performs well empirically but has suboptimal regret bounds.  
+This paper introduces a new framework that integrates missing data techniques into LinCB to achieve a minimax optimal regret bound.  
+Building on the insight that applying missing data methods is equivalent to regularization through augmented contexts and rewards, a hypothetical bandit problem is constructed and coupled with the original problem through resampling and a newly developed probabilistic analysis.  
+This approach results in an estimator that converges to the rewards of all arms without assuming a specific covariance structure for contexts. 
+Empirical results demonstrate that the proposed algorithm is robust and significantly outperforms existing methods.  
+\end{abstract}
+
+\begin{keywords}   
+Thompson Sampling, orthogonal basis augmentation, coupling, minimax optimal regret bound, doubly robust estimation.
+\end{keywords}
+
+
+\section{Introduction}
+
+Linear contextual bandits (LinCB) are central to sequential decision-making tasks, where the objective is to select an action from a finite set of context vectors to maximize cumulative rewards modeled as linear functions of the chosen contexts. 
+A special case of LinCB is the multi-armed bandit (MAB) problem, in which context vectors correspond to Euclidean basis vectors. 
+Compared to more complex models, such as generalized linear models or deep neural networks --- which require substantial updates at each decision epoch --- the MAB and LinCB frameworks offer computational efficiency.  
+LinCB has found widespread applications across diverse fields, including e-commerce personalization \citep{hsu2020recommending}, revenue management \citep{ferreira2018online}, clinical trials \citep{murphy2005experimental}, political science experiments \citep{offer2021adaptive}, and A/B testing in marketing \citep{satyal2018ab}, as comprehensively reviewed by \citet{bouneffouf2020survey}.  
+
+Two primary algorithmic paradigms dominate the LinCB literature: the upper confidence bound algorithm (\texttt{LinUCB}) and the Thompson Sampling algorithm (\texttt{LinTS}). 
+While \texttt{LinUCB} selects the arm that maximizes the upper confidence bound for rewards, \texttt{LinTS} selects an arm based on reward samples drawn from the estimated or posterior distribution. Empirical studies \citep{chapelle2011} have shown \texttt{LinTS} to outperform \texttt{LinUCB} in many scenarios. 
+However, a critical gap persists between the theoretical regret bounds of \texttt{LinTS} and the minimax lower bound.  
+This gap arises from the difficulty in bounding the variance of the reward for the optimal arm due to the stochastic nature of \texttt{LinTS}, as rewards are observed only for the chosen arm at each time step.  
+
+To further enhance algorithmic performance and develop theoretically grounded methods, the LinCB literature has increasingly adopted statistical techniques. High-dimensional parameter estimation \citep{buhlmann2011statistics}, optimal experimental design \citep{smith1918standard,guttorp2009karl}, and Bayesian optimization \citep{mockus2005bayesian} have been applied to LinCB problems. A potential remedy for the regret bound gap involves missing data techniques, which enable reward estimation as if rewards from all arms were observed in every decision epoch. Conventional estimators reduce error only for the selected arm, whereas missing data techniques allow the estimator to converge on the rewards of all arms. However, these techniques often weight samples by the inverse of their observation probabilities, which increases with the number of arms. To mitigate this, existing methods impose restrictive assumptions, such as independent and identically distributed (IID) contexts or specific diversity in context distributions, limiting their applicability. Addressing this challenge requires overcoming unresolved issues in the literature on both statistical missing data and LinCB.  
+
+This work resolves this problem by introducing a novel randomization scheme and analysis for applying missing data techniques to LinCB. It uncovers a hidden relationship between missing data techniques and regularization through the augmentation of hypothetical data points. Using eigenvalue decomposition, we construct a hypothetical bandit problem with a compact set of orthogonal basis vectors that retain the information of the original contexts while reducing the effective number of arms. To couple this hypothetical problem with the original one, we develop a resampling framework based on probabilistic analysis.  
+These innovations lead to a more efficient estimator, achieving a regret bound for \texttt{LinTS} that matches the minimax optimal bound up to a logarithmic factor, without relying on restrictive assumptions about context vectors.  
+
+The remainder of this paper is organized as follows: Section~\ref{sec:related_works} reviews the relevant literature on LinCB and statistical methods for missing data, highlighting the pioneering aspects of the proposed approach.  
+Section~\ref{sec:missing_to_LinCB} examines the application of missing data techniques to LinCB, discussing their current benefits and limitations.  
+Section~\ref{sec:proposed_method} introduces the proposed algorithm and its theoretical foundations, presenting a novel estimator.  
+Section~\ref{sec:regret_analysis} provides a regret analysis, demonstrating how the proposed method achieves minimax optimal regret bounds.  
+Section~\ref{sec:experiment} empirically validates the proposed approach through experiments, showcasing its effectiveness across various benchmarks.
+
+
+\section{Related Literature}
+\label{sec:related_works}
+
+The LinCB problem, introduced by \citet{abe1999associative}, have become a foundational framework in sequential decision-making problems.  
+Two dominant algorithmic approaches for LinCB are \texttt{LinUCB} and \texttt{LinTS} algorithms.  
+\texttt{LinUCB}, which selects the arm with the maximum upper confidence bound of the reward, has been extensively studied and analyzed in works such as \citet{auer2002using, dani2008stochastic, rusmevichientong2010linearly, chu2011contextual, abbasi2011improved}.  
+\texttt{LinTS}, which incorporates randomization by sampling from the estimated or posterior reward distribution of all arms, has also received significant attention \citep{agrawal2013thompson, abeille2017linear}.  
+Empirical studies, such as \citet{chapelle2011}, have demonstrated the superior performance of \texttt{LinTS} compared to \texttt{LinUCB} in various practical applications, including display advertising and news recommendation.
+Theoretically, \texttt{LinUCB} achieves a regret bound of $\tilde{O}(d\sqrt{T})$, matching the lower bound of $\Omega(d\sqrt{T})$ up to logarithmic factors \citep{lattimore2020bandit}.  
+However, \texttt{LinTS} has a higher regret bound of $\tilde{O}(d^{3/2}\sqrt{T})$, and whether this can be improved has been a critical research question.  
+
+Several works have explored this challenge.  
+\citet{hamidi2020worst} showed that the worst-case regret for \texttt{LinTS}, when equipped with a ridge estimator, remains $\tilde{\Omega}(d^{3/2}\sqrt{T})$.  
+\citet{kim2021doubly} proposed a \texttt{LinTS} algorithm using a doubly robust (DR) estimator, achieving a regret bound of $\tilde{O}(\alpha^{-1}\sqrt{T})$ under the assumption that contexts are independent and their covariance matrix has a strictly positive minimum eigenvalue $\alpha > 0$.  
+Special cases where $\alpha^{-1} = O(d)$ have been studied in \citet{bastani2021mostly, kim2023double}.
+While \citet{huix2023tight} achieve a minimax regret bound of $\tilde{O}(d\sqrt{T})$, their approach assumes the parameter is sampled from a Gaussian prior distribution, yielding Bayesian regret bounds that are not applicable to arbitrary parameters.  
+Similarly, \citet{agrawal2017near} and \citet{zhu2020thompson} achieve minimax optimal regret bounds in MAB settings, but the optimal regret bound for LinCB with arbitrary context vectors remains unresolved.
+This work addresses this gap by proposing a novel estimator and a refined \texttt{LinTS}-based algorithm.  
+
+
+Statistical methods have also been instrumental in advancing LinCB, with missing data techniques being a prominent example.  
+Statistical analysis of missing data has been studied by \citet{little2019statistical}, \citet{fleiss2013statistical}, and \citet{kim2021statistical}.  
+In the semiparametric literature, \citet{bickel1993efficient} demonstrated that modeling nuisance parameters, such as missing and censoring indicators, yields more efficient estimators than conventional ones.  
+\citet{bang2005doubly} developed a semiparametric DR estimation method using two nuisance models --- an observation probability model and an outcome imputation model --- which is robust to the misspecification of either model.  
+Recently, \citet{zhang2022stable} proposed a stable and efficient DR estimator, replacing inverse probability weights with conditional expectations.  
+However, current analysis of missing data in statistics is primarily asymptotic and lacks finite-sample guarantees considering other factors than the number of samples.  
+
+In LinCB, the learner observes contexts for all arms but receives rewards only for selected arms, making unselected rewards effectively missing data.  
+Methods such as inverse probability weighting (IPW) and DR estimation have been adapted to address this challenge.  
+\citet{dimakopoulou2019balanced} employed IPW, assigning weights to observed rewards inversely proportional to their selection probabilities, achieving a $\tilde{O}(d^{3/2}\sqrt{T})$ regret bound for the \texttt{LinTS} algorithm.  
+\citet{kim2019doubly} applied the DR method to high-dimensional linear bandits with sparse structures, incorporating information from unselected contexts.  
+Further advances by \citet{kim2021doubly} leveraged stochastic contexts to improve regret bounds under specific assumptions.  
+\citet{kim2023double} extended this approach to generalized linear rewards, and \citet{kim2023squeeze} developed a DR framework covering algorithms with zero probability of selecting specific arms.  
+However, these works rely on IID and diverse contexts, and improving the regret bound for arbitrary contexts remains an open challenge.  
+In this work, our main goal is to achieve the minimax optimal regret bound of $\tilde{O}(d\sqrt{T})$ for \texttt{LinTS} without any assumptions on the contexts.  
+
+Despite these advancements, applying missing data techniques to LinCB introduces unique challenges.  
+Unlike conventional missing data problems, LinCB requires finite-sample guarantees for regret bounds, where dependencies on $d$ or $K$ (the number of arms) significantly impact performance.  
+Additionally, the multinomial structure of observation indicators complicates the use of IPW and DR methods, as small selection probabilities can inflate weights, leading to suboptimal regret dependence on $K$.  
+Although assumptions on the positive definiteness of covariance matrices mitigate these issues in some cases, such constraints are not always applicable in LinCB.  
+
+This work addresses these limitations by uncovering a new relationship between the DR method and regularization.  
+We leverage novel regularization and dimension-reduction techniques to develop a \texttt{LinTS} algorithm that achieves a nearly optimal regret bound of $\tilde{O}(d\sqrt{T})$, overcoming the limitations of prior approaches.  
+
+
+
+\section{The Application of Missing Data Techniques in Linear Contextual Bandits}
+\label{sec:missing_to_LinCB}
+
+This section presents the problem formulation of LinCB, investigates missing data within LinCB, and reviews the methodology proposed by \citet{kim2021doubly} for applying DR estimation to LinCB.
+
+\subsection{The Linear Contextual Bandit Problem}
+
+In LinCB, the environment defines distributions \(\{\Pcal_t\}_{t=1}^T\) for \(d\)-dimensional contexts across \(K\) arms, constrained to the set \(\{(x_1,\ldots,x_K) \in \RR^{d \times K} : \max_{k \in [K]} \|x_k\|_2 \leq x_{\max}\}\).  
+This formulation also accommodates deterministic contexts by setting the context distributions as Dirac delta measures.  
+The time horizon \(T\) is finite but not revealed to the learner.  
+At each round \(t \in [T]\), the environment draws \(d\)-dimensional context vectors \((X_{1,t}, \ldots, X_{K,t})\) from \(\Pcal_t\), where \(X_{k,t}\) corresponds to the \(k\)-th arm.  
+For simplicity, it is assumed that \(x_{\max}\) is known; however, the proposed method can be extended to cases where \(x_{\max}\) is unknown by substituting it with \(X_{\max,t} := \max_{s \in [t]} \max_{k \in [K]} \|X_{k,s}\|_2\).
+
+Let \(\Hcal_t\) denote the sigma-algebra generated by the observed data up to round \(t-1\), i.e.,  
+\[
+\Hcal_t = \bigcup_{\tau=1}^{t-1} \big[\{X_{i,\tau}\}_{i=1}^{K} \cup \{\Action{\tau}\} \cup \{\Reward{\Action{\tau}}{\tau}\}\big] \cup \{X_{i,t}\}_{i=1}^{K}.
+\]  
+Using \(\Hcal_t\), the learner selects an arm \(a_t \in [K]\) and receives a reward \(\Reward{a_t}{t}\).  
+In linear contextual bandits (LinCB), rewards are linear in the context, given by:  
+\[
+\Reward{a_t}{t} = X_{a_t,t}^\top \theta_{\star} + \Error{a_t}{t},
+\]  
+where the unknown parameter \(\theta_{\star} \in \RR^d\) satisfies \(\|\theta_{\star}\|_2 \leq \theta_{\max}\) for some unknown \(\theta_{\max} > 0\). The noise term \(\Error{a_t}{t}\) is conditionally zero-mean and \(\sigma\)-sub-Gaussian, i.e.,  
+\[
+\CE{\exp(\lambda \Error{a_t}{t})}{\Hcal_t} \leq \exp\left(\frac{\lambda^2 \sigma^2}{2}\right) \quad \text{for all } \lambda \in \RR,
+\]  
+for some \(\sigma \geq 0\).  
+
+Following standard practice (see, e.g., \citealp{abbasi2011improved}), and to remove the scale of the regret, we assume \(|X_{k,t}^\top \theta_{\star}| \leq 1\) for all \(k \in [K]\) and \(t \in [T]\).  
+At each round \(t\), the optimal arm \(a_t^{\star}\) is defined as  
+\(a_t^{\star} := \arg\max_{i \in [K]} (X_{i,t}^\top \theta_{\star})\),  
+and the instantaneous regret is:  
+\[
+\Regret{t} := X_{a_t^{\star},t}^\top \theta_{\star} - X_{a_t,t}^\top \theta_{\star}.
+\]  
+The objective is to minimize the cumulative regret over \(T\) rounds: 
+\[
+R(T) := \sum_{t=1}^T \Regret{t}.
+\]  
+This general formulation aligns with the standard LinCB setting (see, e.g., \citealp{abbasi2011improved} and \citealp{lattimore2020bandit}) and encompasses specific cases studied in \citet{kim2021doubly} and \citet{kim2023squeeze}.  
+
+\subsection{Missing Mechanism in Linear Contextual Bandits}
+
+
+%--------------------------------------
+%Table 1.
+%--------------------------------------
+\begin{table}
+  \centering
+  \def\arraystretch{1.2}
+  \begin{tabular}{ccccc}
+  \toprule
+   & \multicolumn{2}{c}{\( t=1 \)}   & \multicolumn{2}{c}{\( t=2 \)}  \\ \hline
+  Arm 1 & \(X_{1,1}\)  & ?  & \(X_{1,2}\)  & ?   \\ \hline
+  Arm 2 & \(X_{2,1}\) & ?   & \cellcolor{Gray}{\(X_{a_2,2}\)} & \cellcolor{Gray}{\(Y_{a_2,2}\)} \\ \hline
+  Arm 3 & \cellcolor{Gray}{\(X_{a_1,1}\)} & \cellcolor{Gray}{\(Y_{a_1,1}\)}  & \(X_{3,2} \) & ? \\ \hline
+  Arm 4 & \( X_{4,1} \) & ? & \(X_{4,2}\) & ?  \\ \bottomrule
+  \end{tabular}
+  \hspace{15pt}
+  %\footnotesize
+  \begin{tabular}{ccccc}
+  \toprule
+  & \multicolumn{2}{c}{\( t=1 \)}   & \multicolumn{2}{c}{\( t=2 \)}  \\ \hline
+  Arm 1 &\cellcolor{Gray}{\(X_{1,1} \)}& \cellcolor{Gray}{\(\widehat{Y}_{1,1}\)}  & \cellcolor{Gray}{\(X_{1,2}\)}  & \cellcolor{Gray}{\(\widehat{Y}_{1,2}\)}  \\ \hline
+  Arm 2 & \cellcolor{Gray}{\(X_{2,1} \)} & \cellcolor{Gray}{\(\widehat{Y}_{2,1}\)}   & \cellcolor{Gray}{\(X_{\Action{2},2}\)} & \cellcolor{Gray}{\(\widehat{Y}_{\Action{2},2} \)} \\ \hline
+  Arm 3 & \cellcolor{Gray}{\(X_{\Action{1},1}\)} & \cellcolor{Gray}{\(\widehat{Y}_{\Action{1},1}\)}  & \cellcolor{Gray}{\(X_{3,2} \)} & \cellcolor{Gray}{\(\widehat{Y}_{3,2}\)}  \\ \hline
+  Arm 4 & \cellcolor{Gray}{\(X_{4,1} \)} & \cellcolor{Gray}{\(\widehat{Y}_{4,1}\)} & \cellcolor{Gray}{\(X_{4,2}\)} & \cellcolor{Gray}{\(\widehat{Y}_{4,2}\)}  \\ 
+  \bottomrule
+  \end{tabular}
+  \caption{The shaded data are used in \textit{complete record analysis} (left) and the application of missing data (right) for LinCB. 
+  The contexts, rewards and imputing values are denoted by \(X\), \(Y\), and \(\widehat{Y}\), respectively.
+  The question mark refers to the missing reward of unchosen arms.}
+  \label{tab:missingdata_bandit}
+\end{table}
+
+In the contextual bandit problem, the learner observes the contexts for all actions but only receives rewards for the selected action; the rewards for unselected actions remain missing.  
+Table~\ref{tab:missingdata_bandit} illustrates the difference in data usage between conventional bandit algorithms and those that incorporate missing data techniques.  
+By applying missing data techniques to LinCB, the algorithm can estimate the rewards as if it had observed the outcomes for all arms.  
+
+\citet{little2019statistical} identifies three types of missing data mechanisms: (i) missing completely at random, (ii) missing at random, and (iii) non-ignorable missing:  
+\begin{enumerate}[(i)]  
+    \item \textit{Missing completely at random} refers to cases where the missing data is independent of both the covariates and the outcome distribution.  
+    \item \textit{Missing at random} describes cases where the missing data is conditionally independent of the outcome, given the covariates.  
+    \item \textit{Non-ignorable missing} occurs when the missing indicator depends on the distribution of the outcome.  
+\end{enumerate}  
+
+Let \( X_t \) and \( Y_t \) denote the covariates and the reward generated at trial \( t \), respectively, and let \( A_t \) be a random variable indicating the observation: if \( A_t = 1 \), \( Y_t \) is observed; otherwise, \( Y_t \) is missing.
+\begin{enumerate}[(i)]
+    \item \textit{Missing completely at random} can be formulated as \( A_t \perp (Y_t, X_t) \).
+    \item \textit{Missing at random} can be formulated as \( A_t \perp Y_t \mid X_t \). 
+    \item The remaining cases are classified as \textit{non-ignorable missing}. 
+\end{enumerate}
+
+In the linear contextual bandit problem, the missing indicator depends only on the policy of the algorithm. 
+At round \( t \), the policy \( \pi_t \) is determined solely by the contexts observed up to round \( t \) and the actions and rewards observed up to round \( t-1 \), which are \(\mathcal{H}_t\)-measurable.  
+Given the historical data, the missing indicator is independent of the outcome distribution at round \( t \), i.e., \( A_t \perp Y_{t} \mid \mathcal{H}_t \).  
+Thus, the missing rewards for unchosen actions are classified as missing at random, justifying the use of IPW and DR estimation techniques.  
+
+
+\subsection{Doubly Robust Estimation for Linear Contextual Bandits}
+
+\citet{bickel1993efficient} highlights that modeling nuisance parameters leads to more efficient estimators. Examples of nuisance parameters include random variables that indicate censoring and missing data.  
+For missing data, two nuisance parameters are modeled: the observation probability model and the outcome imputation model. Based on these models, \citet{bang2005doubly} introduced the DR estimator, which combines IPW and imputation, both widely used in statistics. The term ``doubly robust'' reflects the property that the estimator remains unbiased if either the observation probability model or the imputation model is correctly specified.  
+
+In LinCB, the observation probability corresponds to the probability of selecting an arm, which is known to the learner, while the outcome imputation model is a linear model. In this context, DR estimation always provides unbiased estimates for unselected (and thus missing) rewards, regardless of the imputation model. However, when the imputation model is also correctly specified (as is the case with linear reward models), the simultaneous correctness of the two nuisance models further improves efficiency and reduces variance of the proposed estimator, leading to better regret bounds.  
+
+Building on this observation, \citet{kim2021doubly} used DR estimation to improve the regret bound of \texttt{LinTS} by a factor of \(\sqrt{d}\), particularly when \(\alpha := \EE[K^{-1} \sum_{k=1}^{K} X_{k,t} X_{k,t}^\top] = O(d)\). To derive their DR estimator, they first defined an unbiased estimating function, the IPW score:  
+\begin{equation}
+\sum_{s=1}^{t} \sum_{k=1}^{K} \frac{\Indicator{a_s=k}}{\SelectionP ks} X_{k,s} \left(\Reward ks - X_{k,s}^{\top} \theta\right),
+\label{eq:IPW_score}
+\end{equation}  
+where \(\SelectionP ks = \CP{a_s=k}{\Hcal_s}\) is the probability of selecting an arm, which is strictly positive for all arms. In this equation, only the pairs \((X_{k,s}, \Reward ks)\) from selected arms contribute, weighted by the inverse of \(\SelectionP ks\).  
+
+Next, they subtracted the projection onto the nuisance tangent space from \eqref{eq:IPW_score}. The nuisance tangent space consists of mean-zero random variables, \(\{\Indicator{a_s=k} - \SelectionP ks : k \in [K], s \in [t]\}\).  
+The projection onto this space is given by:  
+\[
+\sum_{s=1}^{t} \sum_{k=1}^{K} \frac{\Indicator{a_s=k} - \SelectionP ks}{\SelectionP ks} X_{k,s} \left(\CE{\Reward ks}{\Hcal_s} - X_{k,s}^{\top} \theta\right).
+\]  
+By replacing \(\CE{\Reward ks}{\Hcal_s}\) with \(X_{k,s}^{\top} \check{\theta}\) and subtracting this projection, the IPW score becomes the efficient score:  
+\begin{equation}
+\sum_{s=1}^{t} \sum_{k=1}^{K} X_{k,s} \left(\DRY{\check{\theta}}ks - X_{k,s}^{\top} \theta\right),
+\label{eq:efficient_score}
+\end{equation}  
+where  
+\begin{equation}
+\DRY{\check{\theta}}ks := \left(1 - \frac{\Indicator{a_s=k}}{\SelectionP ks}\right) X_{k,s}^{\top} \check{\theta} + \frac{\Indicator{a_s=k}}{\SelectionP ks} \Reward ks.
+\label{eq:pseudo_rewards}
+\end{equation}  
+Expression \eqref{eq:efficient_score} resembles the score when rewards for all arms are observed, with \(\Reward ks\) replaced by \(\DRY{\check{\theta}}ks\). Adding a regularization parameter \(\lambda_t = \Omega(\sqrt{t})\) to \eqref{eq:efficient_score} and setting it equal to zero yields the estimating equation for the DR estimator:  
+\begin{equation}
+\widehat{\theta}^{DR(\check{\theta})}_t := \left(\sum_{s=1}^{t} \sum_{k=1}^{K} X_{k,s} X_{k,s}^{\top} + \lambda_t I_{d}\right)^{-1} \left(\sum_{s=1}^{t} \sum_{k=1}^{K} X_{k,s} \DRY{\check{\theta}}ks\right).
+\label{eq:kim_DR}
+\end{equation}  
+The DR estimator is efficient because it uses all contexts and incorporates information about missing rewards through the unbiased pseudo-rewards \eqref{eq:pseudo_rewards}.  
+
+Since the inverse probability \(\pi_{k,s}^{-1}\) can become excessively large when the probability of selecting an arm is small, \citet{kim2021doubly} employed resampling to ensure the selection probability exceeds \(1 / (K+1)\). This is achieved within \(\lceil \log\frac{K+1}{K} / \log\frac{1}{\delta} \rceil\) trials with probability at least \(1 - \delta\), for any \(\delta \in (0,1)\). However, the minimum probability \(\min_{k \in [K]} \pi_{k,s}\) cannot fall below \(1 / K\), inflating the variance by a factor of \(K^2\). To address this, they assumed the minimum eigenvalue of the average covariance of the context vectors, \(\alpha := \lambda_{\min}(\EE[K^{-1} \sum_{k=1}^K X_{k,s} X_{k,s}^\top])\), is independent of \(K\) but dependent on \(d\).  
+
+
+\subsection{Benefits and Limitations of Doubly Robust Thompson Sampling}
+
+In LinCB, regret primarily arises from selecting suboptimal arms, typically due to inaccurate reward estimates. Since estimation errors directly influence regret, improving reward estimation is critical. The instantaneous regret is formally expressed as:  
+\[
+\Regret{t} := X_{a^{\star}_t,t}^\top \theta_{\star} - X_{a_t,t}^\top \theta_{\star} \le |X_{a^{\star}_t,t}^\top (\widehat{\theta} - \theta_{\star}) | + |X_{a_t,t}^\top (\widehat{\theta} - \theta_{\star}) | + X_{a^{\star}_t,t}^\top \widehat{\theta} - X_{a_t,t}^\top \widehat{\theta}.
+\]
+The first term, \(\ell_{\text{opt}}(\widehat{\theta}) := |X_{a^{\star}_t,t}^\top (\widehat{\theta} - \theta_{\star})|\), presents particular challenges. Although the Cauchy-Schwarz inequality provides the bound \(\ell_{\text{opt}}(\widehat{\theta}) \le \ell_{\text{ridge}}(\widehat{\theta}) \|X_{a^{\star}_t,t}\|_{U_{t-1}}\), bounding \(\|X_{a^{\star}_t,t}\|_{U^{-1}_{t-1}}\) to \(O(\sqrt{d})\) remains elusive. Existing approaches, such as those in \citet{agrawal2013thompson}, introduce the concept of unsaturated arms to find an upper bound for this norm, leading to regret bounds of the form:  
+\[
+\Regret{t} \le C d \sqrt{\log(t/\delta)} \cdot \norm{X_{a_t,t}}_{U_{t-1}^{-1}},
+\]
+for some absolute constant \(C > 0\).  
+However, this introduces an additional \(\sqrt{d}\) regret compared to \texttt{LinUCB}. 
+
+Missing data techniques, particularly the DR estimator, offer an effective way to reduce estimation errors.
+
+\begin{proposition}[Theorem 3 in \citealp{kim2021doubly}]
+\label{prop:kim_error} 
+Suppose the contexts are IID with $\alpha:=\lambda_{\min}(\EE[K^{-1}\sum_{k=1}^{K}X_{k,t}X_{k,t}]) >0$.
+For each $t=1,\ldots,T$, let $\check{\theta}$ be a $\Hcal_t$-measurable estimator satisfying $\|\check{\theta}-\theta\|_{2}\le b$, for some constant $b>0$. 
+For each $i$ and $t$, assume that $\pi_{i,t}>0$ and that there exists $\gamma \in [1/(K+1), 1/K)$ such that $\pi_{k,t}$.
+Given any $\delta\in(0,1)$, set $\lambda_{t}=4\sqrt{2}N\sqrt{t\log\frac{12\tau^{2}}{\delta}}$.
+Then with probability at least $1-\delta$, the estimator $\widehat{\theta}^{DR(\check{\theta})}_t$ in~\eqref{eq:kim_DR} satisfies
+\begin{equation}
+\norm{\widehat{\theta}^{DR(\check{\theta})}_t-\theta_{\star}}_{2}\le\frac{C_{b,\sigma}}{\alpha\sqrt{t}}\sqrt{\log\frac{12t^{2}}{\delta}},
+\label{eq:kim_error_bound}
+\end{equation}
+for all $t=1,\ldots,T$, where the constant $C_{b,\sigma}$ which depends only on $b$ and $\sigma$.
+\end{proposition}
+Unlike conventional ridge estimators, which improve reward estimates only for the selected arm, DR estimators enhance reward estimates for all arms at each decision epoch. 
+This improvement enables tighter regret bounds:
+\begin{equation}
+\Regret{t} \le 2x_{\max} \|\widehat{\theta}^{DR(\check{\theta})}_{t-1} - \theta_{\star}\|_2 + \sqrt{\norm{X_{a_t^{\star},t}}_{F^{-1}_{t-1}}^2 + \norm{X_{a_t,t}}_{F^{-1}_{t-1}}^2},
+\label{eq:kim_regret_bound}
+\end{equation}
+where \(F_t := \sum_{s=1}^{t} \sum_{k=1}^{K} X_{k,s} X_{k,s}^\top + \lambda_t I_d\) is the Gram matrix. The normalizing Gram matrix \(U_{t-1}\) has been replaced by \(F_{t-1}\), which reduces the self-normalized norm of the contexts for the optimal arms, \(X_{a^{\star}_t,t}\).  
+Summing over \(t \in [T]\), the main regret term scales as \(\tilde{O}(d\sqrt{T})\), provided \(\alpha^{-1} = O(d)\) for certain distributions like multivariate normal or uniform.
+
+Despite these advantages, DR estimators have limitations. Algorithms assigning very small probabilities adversely affect the regret, since their reciprocals are multiplied by the samples. While \citet{kim2021doubly} mitigates this by resampling to obtain an arm with a selection probability greater than \(1/(K+1)\), it cannot avoid the \(K\)-dependence of the error. As a result, \citet{kim2021doubly} resorts to a positive minimum eigenvalue condition on the Gram matrix, \(\lambda_{\min}(K^{-1} \sum_{k=1}^K X_{k,t} X_{k,t}^\top)\). This assumption limits applicability and can yield suboptimal regret bounds for specific context distributions.
+
+To overcome these challenges, this work proposes a novel randomization scheme that adjusts arm-selection probabilities by reducing the effective number of arms, free from the restrictive eigenvalue conditions. 
+The proposed approach replaces the instantaneous regret bound in equation~\eqref{eq:kim_regret_bound} with a tighter regret bound, using a novel Gram matrix that incorporates an orthogonal basis and augmentation of the orthogonal basis. This adjustment decomposes regret into a self-normalized bound rather than the \(\ell_2\)-norm bound, yielding improved theoretical guarantees and broader applicability.
+
+
+
+\section{Proposed Method}
+\label{sec:proposed_method}
+This section presents the proposed method that overcomes the limitations of \texttt{DRTS}. Section~\ref{sec:fresh_viewpoint} introduces a fresh perspective on DR estimation that motivates the proposed method. Section~\ref{sec:augment} discusses the construction of contexts with reduced dimensions using singular value decomposition to avoid \(K\)-dependency on the inverse probability weights and to relax the minimum eigenvalue assumption. 
+Based on the new contexts, Section~\ref{sec:hypo_bandits} presents an adaptive hypothetical bandit problem, and Section~\ref{sec:coupling} introduces a novel resampling and coupling method to connect it to the actual bandit problem, along with the proposed estimator and its convergence rate. 
+Lastly, Section~\ref{sec:algorithm} outlines the proposed algorithm, which is equipped with the novel estimator.
+
+\subsection{A Fresh Perspective: Doubly Robust Estimation as Regularization}
+\label{sec:fresh_viewpoint}
+In the linear bandit problem, as well as in the linear regression problem in statistics, regularization is widely used. Regularization can be viewed as augmenting hypothetical data points. Specifically, let \(\mathbf{e}_i \in \mathbb{R}^d\) denote the \(i\)-th Euclidean basis, and we can write the ridge estimator with a regularization parameter \(\lambda > 0\) as:
+\[
+\left(\sum_{s=1}^{t} X_{a_s,s} X_{a_s,s} + \sum_{i=1}^{d} \sqrt{\lambda} \mathbf{e}_i \left( \sqrt{\lambda} \mathbf{e}_i \right)^{\top} \right)^{-1} \left( \sum_{s=1}^{t} \Reward{a_s}{s} X_{a_s,s} + \sum_{i=1}^{d} 0 \cdot \sqrt{\lambda} \mathbf{e}_i \right),
+\]
+where the artificial data \((\sqrt{\lambda} \mathbf{e}_i, 0)\) for \(i \in [d]\) is added. Applying DR estimation can be viewed in a similar way. \citet{kim2021doubly} further augments unselected contexts and unbiased DR pseudo-rewards \(\{(X_{k,s}, Y^{DR(\check{\theta}_t)}_{k,s}) : k \in [K], s \in [t]\}\) and uses the DR estimator:
+\[
+\left( \sum_{s=1}^{t} \sum_{k=1}^{K} X_{k,s} X_{k,s} + \sum_{i=1}^{d} \sqrt{\lambda_t} \mathbf{e}_i \left( \sqrt{\lambda_t} \mathbf{e}_i \right)^{\top} \right)^{-1} \left( \sum_{s=1}^{t} \sum_{k=1}^{K} X_{k,s} \DRY{\check{\theta}}{ks} + \sum_{i=1}^{d} 0 \cdot \sqrt{\lambda_t} \mathbf{e}_i \right),
+\]
+where \(\lambda_t = \Omega(\sqrt{t})\) is the regularization parameter. However, augmenting DR pseudo-rewards for all \(K\) arms yields an \(O(K)\) term in the error bound, and the minimum eigenvalue assumption is required to cancel out this term. Instead of augmenting \(\{(X_{k,s}, Y^{DR(\check{\theta})}_{k,s}) : k \in [K], s \in [t]\}\) for all \(K\) arms, it is better to find a compressed hypothetical dataset to augment, by reducing the number of arms and finding the orthogonal eigenvectors that efficiently represent the context covariance matrix.
+
+
+\subsection{Regularization by Augmenting Orthogonal Basis}
+\label{sec:augment}
+Following the fresh perspective of the DR estimator in \citet{kim2021doubly}, this work proposes additional hypothetical data points that replace the data points \((\sqrt{\lambda} \mathbf{e}_i, 0)\). First, we present a dimension reduction method for the context without loss of information. For each round \(t\), let \(a_t\) denote a sample from the proposed policy \(\pi_t\) for round \(t\). Let \(\lambda_{1,t}, \ldots, \lambda_{r_t,t}\) and \(u_{1,t}, \ldots, u_{r_t,t}\) denote the eigenvalues and eigenvectors of the Gram matrix \(\sum_{k \in [K] \setminus \{a_t\}} X_{k,t} X_{k,t}^\top\), which has rank \(r_t\), respectively. Note that the Gram matrix is real symmetric and nonnegative definite, so the eigenvectors are orthonormal.
+
+We use \(r_t\) eigenvectors as new contexts:
+\begin{equation}
+Z_{i,t} :=
+\begin{cases}
+\sqrt{\lambda_{i,t}} u_{i,t} & \text{for } i = 1, \ldots, r_t, \\
+X_{a_t,t} & \text{for } i = r_t + 1,
+\end{cases}
+\label{eq:compressed contexts}
+\end{equation}
+where the new contexts \(Z_{i,t}\) depend on the sample \(a_t \sim \pi_t\). The Gram matrix of the new contexts satisfies \(\sum_{i=1}^{r_t + 1} Z_{i,t} Z_{i,t}^\top = \sum_{k=1}^K X_{k,t} X_{k,t}^\top\). The new contexts have only \(r_t + 1\) arms but share the same Gram matrix as the original \(K\) contexts. Let \(W_{i,t} := Z_{i,t}^\top \theta_{\star} + \eta_{a_t,t}\) denote the reward for the new context \(Z_{i,t}\) with error \(\eta_{a_t,t}\). This method provides a way to augment \(r_t + 1\) contexts instead of \(K\) context vectors and DR pseudo-rewards.
+
+Next, to replace the augmented \((\sqrt{\lambda} \mathbf{e}_i, 0)\), the orthogonal basis is computed in a specific number of rounds. For a given \(\delta \in (0, 1)\) and a hyperparameter \(\gamma \in (0, 1)\), define \(h_{t} := \left\lceil \frac{1}{(1/2 - e^{-1})} \frac{d}{1 - \gamma} \log \frac{d (t+1)^2}{\delta} \right\rceil\), which denotes the number of rounds for orthogonal regularization. At each round \(t\), we define the subset of rounds for orthogonal regularization \(\mathcal{A}_{t} \subset [t]\) by:
+\begin{equation}
+\mathcal{A}_0 = \emptyset \quad \text{and} \quad
+\mathcal{A}_t =
+\begin{cases}
+\mathcal{A}_{t-1} \cup \{t\} & \text{if } |\mathcal{A}_{t-1}| < h_t, \\
+\mathcal{A}_{t-1} & \text{otherwise.}
+\end{cases}
+\label{eq:A}
+\end{equation}
+By construction, for \(t\) that satisfies \(t \ge h_t\), we have \(h_t \le |\mathcal{A}_t| \le h_t + 1\). Define
+\begin{equation}
+T_1 := \inf \{t \ge 1 : t \ge h_t\} \le \frac{4}{(1/2 - e^{-1})} \frac{d}{1 - \gamma} \left(1 + \log \frac{2}{(e/2 - 1)} \frac{d}{1 - \gamma} \sqrt{\frac{d}{\delta}}\right).
+\label{eq:T_1}
+\end{equation}
+When \(t \ge T_1\), we have \(|\mathcal{A}_t| \ge h_t\). For \(s \in \mathcal{A}_t\), recall that \(r_s\) and \(\{u_{i,s}\}_{i \in [r_s]}\) denote the rank and the eigenvectors of \(\sum_{k \in [K] \setminus \{a_s\}} X_{k,s} X_{k,s}^\top\), respectively. In this round \(s \in \mathcal{A}_t\), if \(r_s < d\), we use the Gram-Schmidt orthogonalization to find the orthonormal vectors \(\{u_{i,s}\}_{i=r_s + 1, \ldots, d}\), which are perpendicular to \(\{u_{i,s}\}_{i \in [r_s]}\). Then we define the new contexts:
+\begin{equation}
+Z_{i,s} :=
+\begin{cases}
+\max\{x_{\max}, 1\} u_{i,s} & \text{for } i = 1, \ldots, d, \\
+X_{a_s,s} & \text{for } i = d + 1.
+\end{cases}
+\label{eq:new_contexts}
+\end{equation}
+Let \(W_{i,s} := Z_{i,s}^\top \theta_{\star} + \eta_{a_s,s}\) denote the reward for the new context \(Z_{i,s}\). We would like to augment \(\{(Z_{i,s}, W_{i,s}) : i = r_s + 1, \ldots, d, \; s \in \mathcal{A}_t\}\) instead of \((\sqrt{\lambda} \mathbf{e}_i, 0)\).
+
+At round \(t\), this regularization yields the Gram matrix:
+\[
+V_t := \sum_{s \in \mathcal{A}_t} \sum_{i=1}^{d+1} Z_{i,s} Z_{i,s}^\top + \sum_{s \in [t] \setminus \mathcal{A}_t} \sum_{i=1}^{r_s + 1} Z_{i,s} Z_{i,s}^\top.
+\]
+The following lemma shows the lower bound for the minimum eigenvalue of \(V_t\).
+
+\begin{lemma}[Positive definiteness of the augmented Gram matrix.]
+\label{lem:Gram}
+For \(T_1\) defined in~\eqref{eq:T_1}, the Gram matrix \(V_t\) satisfies
+\[
+\lambda_{\min}(V_t) \ge \max\{x_{\max}^2, 1\} h_t,
+\]
+for all \(t \ge T_1\).
+\end{lemma}
+
+\begin{proof}
+Recall the definition of the new contexts:
+\[
+Z_s := \begin{cases}
+\max\{x_{\max}, 1\} u_{i,s} & \text{for } i = 1, \ldots, d, \; s \in \mathcal{A}_t, \\
+\sqrt{\lambda_{i,s}} u_{i,s} & \text{for } i = 1, \ldots, r_s, \; s \in [t] \setminus \mathcal{A}_t, \\
+X_{a_s,s} & \text{for } i = r_s + 1, \; s \in [t] \setminus \mathcal{A}_t.
+\end{cases}
+\]
+Then, the minimum eigenvalue of \(V_t\) is:
+\begin{align*}
+\lambda_{\min}(V_t) & \ge \lambda_{\min}\left(\sum_{s \in \mathcal{A}_t} \sum_{i=1}^{d+1} Z_{i,s} Z_{i,s}^\top\right) \\
+& \ge \lambda_{\min}\left(\sum_{s \in \mathcal{A}_t} \sum_{i=1}^{d} Z_{i,s} Z_{i,s}^\top\right) \\
+& = \max\{x_{\max}^2, 1\} \lambda_{\min}\left(\sum_{s \in \mathcal{A}_t} \sum_{i=1}^{d} u_{i,s} u_{i,s}^\top\right).
+\end{align*}
+Because \(u_{1,s}, \ldots, u_{d,s}\) are orthonormal for \(s \in \mathcal{A}_t\),
+\[
+\lambda_{\min}(V_t) \ge \max\{x_{\max}^2, 1\} \sum_{s \in \mathcal{A}_t} \lambda_{\min}\left(\sum_{i=1}^{d} u_{i,s} u_{i,s}^\top\right)
+= \max\{x_{\max}^2, 1\} |\mathcal{A}_t|.
+\]
+By construction of \(\mathcal{A}_t\), we have \(|\mathcal{A}_t| \ge h_t\), which completes the proof.
+\end{proof}
+
+Increasing the minimum eigenvalue of the Gram matrix plays a crucial role in determining the convergence rate of an estimator in both linear regression and LinCB. In experimental design literature (e.g., \citealp{smith1918standard} and \citealp{guttorp2009karl}) and linear bandit research (e.g., \citealp{soare2014best} and \citealp{tao2018best}), techniques such as E-optimal design are often employed to maximize the minimum eigenvalue of the Gram matrix, thereby improving estimation performance.
+
+We enhance the minimum eigenvalue by introducing a novel approach that leverages compressed contexts and augments orthogonal basis vectors. By reducing the number of context vectors from \(K\) to \(d + 1\), the proposed Gram matrix \(V_t\) eliminates the reliance on minimum eigenvalue assumptions, offering a new pathway for robust and efficient estimation.
+
+
+\subsection{Doubly Robust Estimation in the Hypothetical Linear Bandits}
+\label{sec:hypo_bandits}
+Up to this point, based on the sample \(a_t \sim \pi_t\), we have constructed new contexts \(Z_{i,s}\) and new rewards \(W_{i,s}\) for \(i = 1, \dots, r_s + 1\) for \(s \in [t] \setminus \mathcal{A}_t\). For \(s \in \mathcal{A}_t\), we augmented orthogonal basis vectors for regularization, resulting in \(\{(W_{i,s}, Z_{i,s}) : i = 1, \dots, d + 1\}\). 
+
+For the integration of the index notation, we define the number of arms in the hypothetical bandit problem as:
+\begin{equation}
+N_s := 
+\begin{cases}
+    r_s + 1 & \text{if } s \in [t] \setminus \mathcal{A}_t, \\
+    d + 1 & \text{if } s \in \mathcal{A}_t.
+\end{cases}
+\label{eq:N}
+\end{equation}
+The data for the hypothetical bandit problem is \(\{(Z_{i,s}, W_{i,s}) : i \in [N_s], s \in [t]\}\).
+
+Let \(\tilde{a}_s \in [N_s]\) denote a random variable sampled from the multinomial distribution with probability
+\begin{equation}
+\mathbb{P}(\tilde{a}_s = i) := \phi_{i,s} = 
+\begin{cases}
+\frac{1-\gamma}{N_s - 1} & \text{for } i = 1, \dots, N_s - 1, \\
+\gamma & \text{for } i = N_s,
+\end{cases}
+\label{eq:pseudo_prob}
+\end{equation}
+which is concentrated on arm \(N_s\) with probability \(\gamma \in (0,1)\) and uniformly distributed over the other arms. If \(\gamma\) is close to 1, then the probability of selecting the action \(N_s\) is large, which increases the inverse probability weight for the arms \(i \in [N_s - 1]\), requiring a greater size for the regularization set, \(|\mathcal{A}_t| \ge h_t\). 
+
+Thus, we have constructed a hypothetical linear bandit problem with the data \(\{(Z_{i,s}, W_{i,s}) : i \in [N_s], s \in [t]\}\) and action \(\tilde{a}_s\), which shares the same parameter \(\theta_{\star}\) with the original linear bandit problem.
+
+Now, we can apply DR estimation to this hypothetical bandit problem. For an imputation estimator \(\check{\theta}\), we can construct DR pseudo-rewards as follows:
+\begin{equation}
+W_{i,s}^{HDR(\check{\theta})} := \left\{ 1 - \frac{\mathbb{I}(\tilde{a}_s = i)}{\phi_{i,s}} \right\} Z_{i,s}^{\top} \check{\theta} + \frac{\mathbb{I}(\tilde{a}_s = i)}{\phi_{i,s}} W_{i,s},
+\label{eq:HDRY}
+\end{equation}
+for \(i \in [N_s]\). Then, we define the hypothetical doubly robust (HDR) estimator:
+\begin{equation}
+\widehat{\theta}_t^{HDR(\check{\theta})} := V_t^{-1} \left( \sum_{s=1}^{t} \sum_{i=1}^{N_s} W_{i,s}^{HDR(\check{\theta})} Z_{i,s} \right).
+\label{eq:Hypo_DR}
+\end{equation}
+In fact, we cannot compute \(\widehat{\theta}_t^{HDR(\check{\theta})}\) since we do not observe \(W_{i,s}\) for \(i = 1, \dots, N_s - 1\). We only observe \(W_{N_s,s} := Z_{N_s,s}^\top \theta_{\star} + \eta_{a_s,s} = X_{a_s,s}^\top \theta_{\star} + \eta_{a_s,s} = Y_{a_s,s}\), and the pseudo-rewards~\eqref{eq:HDRY} are computable for all \(i \in [N_s]\) only when the event \(\{W_{\tilde{a}_s,s} = Y_{a_s,s}\} \cap \{Z_{\tilde{a}_s,s} = X_{a_s,s}\}\) occurs. This event indicates that the chosen rewards and contexts in the original bandit problem match those in the hypothetical bandit problem.
+
+To use the HDR estimator~\eqref{eq:Hypo_DR}, we develop a novel probabilistic method to relate the hypothetical bandit problem to the original problem.
+
+\subsection{Resampling to Couple Hypothetical and Original Linear Bandits}
+\label{sec:coupling}
+
+\begin{table}[t]
+    \centering
+    \begin{tabular}{c|c|c||c|c|c}
+    \toprule & \multicolumn{2}{c||}{Hypothetical Bandit Problem} & \multicolumn{3}{c}{Original Bandit Problem} \\
+    \hline
+     & Arm 1 & Arm 2  & Arm 1 & Arm 2 & Arm 3   \\
+    \hline
+    Failure &  \cellcolor{Gray}{$(Z_{\tilde{a}_t,t}, W_{\tilde{a}_t,t})$}  & $(X_{a_t,t},?)$ & $(X_{1,t},?)$  & $(X_{2,t},?)$ & \cellcolor{Gray}{$(X_{a_t,t},Y_{a_t,t})$} \\
+    \hline
+    Success &  $(Z_{1,t}, ?)$  & \cellcolor{Gray}{$(X_{a_t,t},Y_{a_t,t})$} & $(X_{1,t},?)$ & \cellcolor{Gray}{$(X_{a_t,t},Y_{a_t,t})$}   & $(X_{3,t},?)$ \\
+    \bottomrule
+    \end{tabular}
+    \caption{Data structure in the hypothetical bandit problem and the original bandit problem in the case when resampling fails and succeeds for \(N_t = 2\) and \(K = 3\).
+By definition, \(Z_{2,t} := X_{a_t,t}\) and \(W_{2,t} := Y_{a_t,t}\).
+The gray-shaded cell represents the action chosen by the policy \(\pi_t\) and the multinomial distribution~\eqref{eq:pseudo_prob}.
+In the success row, we consider \(W_{1,t}\) to be missing instead of \(Y_{1,t}\) and \(Y_{3,t}\).}
+    \label{tab:coupling}
+\end{table}
+
+Recall that the HDR pseudo-reward in~\eqref{eq:HDRY} is computable under the event \(\{Z_{\tilde{a}_{s},s} = X_{a_s,s}\}\), which is implied by \(\{\tilde{a}_s = N_s\}\). To ensure the event \(\{W_{\tilde{a}_s,s} = Y_{a_s,s}\} \cap \{Z_{\tilde{a}_s,s} = X_{a_s,s}\}\), we resample both \(a_s \sim \pi_s\) and \(\tilde{a}_s\) from the distribution in~\eqref{eq:pseudo_prob} until \(\{\tilde{a}_s = N_s\}\) occurs. Table~\ref{tab:coupling} illustrates examples of coupling success and failure during resampling.
+
+The new contexts and rewards \(\{(Z_{i,s}, W_{i,s}) : i \in [N_s]\}\) are updated each time \(a_s\) is resampled. This resampling process randomizes the hypothetical contexts and rewards until the DR pseudo-rewards become computable. While we earn rewards from the original bandit problem, the parameter estimation relies on a hypothetical bandit problem that uses compressed and augmented contexts.
+
+For \(m \in \mathbb{N}\), let \(\tilde{a}_s(m)\) and \(a_s(m)\) represent the actions sampled in the \(m\)-th resampling trial from the hypothetical and original bandit problems, respectively. Note that \(\tilde{a}_s(m)\) and \(a_s(m)\) are IID across trials \(m\). Define \(M_s := \inf\{m \geq 1: X_{a_s(m)} = Z_{\tilde{a}_s(m)} \text{ and } Y_{a_s(m),s} = W_{\tilde{a}_s(m),s}\}\) as the first successful resampling trial. Let \(\mathcal{M}_s := \{M_s \leq \lceil \log\frac{(s+1)^2}{\delta}/\log\frac{1}{1-\gamma}\rceil\}\) denote the matching event, ensuring a successful sample of \(a_s\) and \(\tilde{a}_s\) within \(\lceil \log\frac{(s+1)^2}{\delta}/\log\frac{1}{1-\gamma}\rceil\) resampling trials for some \(\delta \in (0, 1)\). The probability of resampling success in each trial is given by:
+\[
+\mathbb{P}(\{X_{a_s(m)} = Z_{\tilde{a}_s(m)}\} \cap \{Y_{a_s(m),s} = W_{\tilde{a}_s(m),s}\}) = \mathbb{P}(\tilde{a}_s(m) = N_s) = \gamma,
+\]
+and the maximum number of resampling trials is chosen to ensure \(\mathbb{P}(\mathcal{M}_s) \geq 1 - \frac{\delta}{(s+1)^2}\). As \(\gamma \in (0,1)\) increases, the probability of resampling success increases, and the number of maximum resampling trials decreases, while the number of rounds for the orthogonal basis augmentation, \(h_t\), increases. Thus, the hyperparameter \(\gamma\) balances the resampling and the number of rounds for regularization.
+
+Upon obtaining the coupled contexts and rewards \(Z_{\tilde{a}_s,s} = X_{a_s,s}\) and \(W_{\tilde{a}_s,s} = Y_{a_s,s}\), we construct the coupled DR pseudo-reward as:
+\begin{equation}
+W_{i,s}^{CDR(\check{\theta})} := \left(1 - \frac{\mathbb{I}(\tilde{a}_s(M_s) = i)}{\phi_{i,s}}\right) Z_{i,s}^\top \check{\theta} + \frac{\mathbb{I}(\tilde{a}_s(M_s) = i)}{\phi_{i,s}} \tilde{Y}_{i,s},
+\label{eq:CDRY}
+\end{equation}
+which is computable for all \(i \in [N_s]\) because \(a_s(M_s)\) is selected and \(W_{\tilde{a}_s(M_s),s} = Y_{a_s(M_s),s}\) is observable.
+
+Given an imputation estimator \(\check{\theta}\), the augmented doubly robust (ADR) estimator is defined as:
+\begin{equation}
+\widehat{\theta}^{ADR(\check{\theta})}_t := \left\{\sum_{s=1}^t \mathbb{I}(\mathcal{M}_s) \sum_{i=1}^{N_s} Z_{i,s} Z_{i,s}^\top \right\}^{-1} \left(\sum_{s=1}^t \mathbb{I}(\mathcal{M}_s) \sum_{i=1}^{N_s} W_{i,s}^{CDR(\check{\theta})} Z_{i,s}\right).
+\label{eq:ADR_estimator}
+\end{equation}
+The ADR estimator uses the coupled DR pseudo-rewards~\eqref{eq:CDRY} only when \(\mathcal{M}_s\) occurs; otherwise, it skips round \(s\) and relies on the previous estimator. Since \(\mathcal{M}_s\) occurs with high probability, we can couple the ADR estimator with the hypothetical DR estimator from~\eqref{eq:Hypo_DR}.
+
+\begin{lemma}[A coupling inequality]
+\label{lem:coupling}  
+For \( t \geq 1 \), let \( \Scal_{t} := \cap_{s=1}^{t} \Mcal_s \). Then for any \( \check{\theta} \in \RR^d \) and \( x > 0 \),  
+\[
+\PP\left(\left\{ \norm{\widehat{\theta}^{ADR(\check{\theta})}_{t}-\theta_{\star}}_{V_{t}} > x \right\}\right) \leq  
+\PP\left(\left\{\norm{\widehat{\theta}_t^{HDR(\check{\theta})}-\theta_{\star}}_{V_t} > x\right\} \cap \Scal_{t}\right) + \PP(\Scal_t^c),
+\]  
+and the failure probability satisfies \( \PP(\Scal_t^c) \leq \delta \).
+\end{lemma}
+
+\begin{proof}
+Fix \( t \in [T] \) throughout the proof. 
+For any \( \check{\theta} \in \RR^d \) and \( x > 0 \), decompose the probability as follows:  
+\[
+\PP\left(\norm{\widehat{\theta}_{t}^{ADR(\check{\theta})}-\theta_{\star}}_{V_t} > x \right) 
+\leq \PP\left(\left\{\norm{\widehat{\theta}_{t}^{ADR(\check{\theta})}-\theta_{\star}}_{V_t} > x\right\} \cap \Scal_t \right) + \PP\left(\Scal_t^c\right).
+\]
+Under the event \( \Scal_{t} := \cap_{s=1}^{t} \Mcal_s \), by the definition of the ADR estimator in~\eqref{eq:ADR_estimator},  
+\[
+\widehat{\theta}^{ADR(\check{\theta})}_t := \left\{\sum_{s=1}^{t}\II(\Mcal_s)\sum_{i=1}^{N_s} Z_{i,s}Z_{i,s}^\top \right\}^{-1}\left(\sum_{s=1}^{t}\II(\Mcal_s)\sum_{i=1}^{N_s} W_{i,s}^{CDR(\check{\theta})}Z_{i,s}\right).
+\]  
+On the event \( \Scal_t \), this simplifies to  
+\[
+\widehat{\theta}^{ADR(\check{\theta})}_t = \left\{\sum_{s=1}^{t}\sum_{i=1}^{N_s} Z_{i,s}Z_{i,s}^\top \right\}^{-1}\left(\sum_{s=1}^{t}\sum_{i=1}^{N_s} W_{i,s}^{CDR(\check{\theta})}Z_{i,s}\right) = V_t^{-1}\left(\sum_{s=1}^{t}\sum_{i=1}^{N_s} W_{i,s}^{CDR(\check{\theta})}Z_{i,s}\right).
+\]  
+Define the function  
+\[
+F\Bigl(\tilde{a}_1(M_1),\ldots,\tilde{a}_t(M_t)\Bigr) := \norm{\widehat{\theta}^{ADR(\check{\theta})}_t-\theta_{\star}}_{V_t} 
+= \norm{\sum_{s=1}^{t}\sum_{i=1}^{N_s} (W_{i,s}^{CDR(\check{\theta})}-Z_{i,s}^\top \theta_{\star} )Z_{i,s} }_{V_t^{-1}}.
+\]   
+For the HDR estimator \( \widehat{\theta}_t^{HDR(\check{\theta})} \), the normalized error satisfies  
+\[
+\norm{\widehat{\theta}^{HDR(\check{\theta})}_t - \theta_{\star}}_{V_t} \overset{d}{\equiv} F\Bigl(\tilde{a}_1(1),\ldots,\tilde{a}_t(1)\Bigr).
+\]  
+Using the definition of \( M_s \), where \( \tilde{a}_s(M_s) = N_s \), we have  
+\begin{align*}
+&\PP\left(\left\{F\Bigl(\tilde{a}_1(M_1),\ldots,\tilde{a}_t(M_t)\Bigr) > x\right\} \cap \Scal_t\right) \\
+&= \PP\left(\left\{F\Bigl(\tilde{a}_1(M_1),\ldots,\tilde{a}_t(M_t)\Bigr) > x\right\} \cap \Scal_t \cap \bigcap_{s=1}^{t}\{\tilde{a}_s(M_s) = N_s\}\right) \\
+&= \PP\left(\left\{F\Bigl(\tilde{a}_1(1),\ldots,\tilde{a}_t(1)\Bigr) > x\right\} \cap \Scal_t \cap \bigcap_{s=1}^{t}\{\tilde{a}_s(1) = N_s\}\right),
+\end{align*}  
+where the last equality holds because \( \{\tilde{a}_s(m) : m \in \NN\} \) are IID for each \( s \in [t] \).  
+Then,  
+\begin{align*}
+&\PP\left(\left\{F\Bigl(\tilde{a}_1(1),\ldots,\tilde{a}_t(1)\Bigr) > x\right\} \cap \Scal_t \cap \bigcap_{s=1}^{t}\{\tilde{a}_s(1) = N_s\}\right) \\
+&\leq \PP\left(\left\{F\Bigl(\tilde{a}_1(1),\ldots,\tilde{a}_t(1)\Bigr) > x\right\} \cap \Scal_t\right) \\
+&= \PP\left(\left\{\norm{\widehat{\theta}_t^{HDR(\check{\theta})}-\theta_{\star}}_{V_t} > x\right\} \cap \Scal_t\right).
+\end{align*}  
+This completes the proof.  
+\end{proof}
+
+With the coupling inequality, we can leverage the augmented design of the hypothetical DR estimator with high probability. 
+While the coupling is applicable to any hypothetical problem (and the new contexts can be arbitrarily defined), they must be chosen to be compatible with the original problem and the imputation estimator \( \check{\theta} \). 
+Selecting new contexts with a Gram matrix that has a large minimum eigenvalue is critical, as it ensures that the maximum error term in the original problem,
+\[
+\max_{k \in [K]} |X_{k,t}^\top (\widehat{\theta}^{HDR(\check{\theta})}_t - \theta_\star)| \le \norm{\widehat{\theta}^{HDR(\check{\theta})}_t - \theta_\star}_{V_{t}} \max_{k\in[K]}\norm{X_{k,t}}_{V_t^{-1}},  
+\]
+is bounded by the self-normalized norm of the ADR estimator and the normalized norm of contexts $\{X_{k,t}:k\in[K]\}$ can be bounded.
+On the other hand, if the Gram matrix has too large a minimum eigenvalue, then the error of the imputed rewards, \(\{Z_{i,s}^\top \check{\theta}:i\in[N_s],s\in[t]\}\), is not controllable.
+To find the proper imputation estimator for the new contexts, we first examine an error bound for the HDR estimator.
+
+\begin{lemma}[Error of the HDR estimator]
+\label{lem:error_decomposition}
+Set $A_t:=\sum_{s=1}^{t}\phi_{\tilde{a}_s,s}^{-1}Z_{\tilde{a}_s,s}Z_{\tilde{a}_s,s}^\top $ and $S_t := \sum_{s=1}^{t} \phi_{\tilde{a}_s,s}^{-1}(W_{\tilde{a}_s,s}-Z_{\tilde{a}_s,s}^\top \theta_{\star})Z_{\tilde{a}_s,s}$.
+Then the self-normalized bound of the estimator $\widehat{\theta}^{HDR(\check{\theta})}$ is decomposed as:
+\[
+\norm{\widehat{\theta}_t^{HDR(\check{\theta})}- \theta_{\star}}_{V_t} \le \norm{V_t^{-1/2}(V_t-A_t)(\check{\theta}-\theta_{\star})}_2 + \norm{S_t}_{V_t^{-1}}
+\]
+\end{lemma}
+
+The proof is in Appendix~\ref{sec:error_decomposition_proof}.
+The decomposition shows the two sources of error for the HDR estimator for rewards of all arms: (i) from the imputation estimator \(\check{\theta}\) used as an imputation estimator in HDR pseudo-rewards~\eqref{eq:HDRY}, and (ii) the noise error of the rewards. 
+In error term (i), \(V_t^{-1/2}(V_t - A_t)\) is the matrix martingale, and its difference is bounded by \(\lambda_{\max}(\sum_{i=1}^{N_s} V_t^{-1/2} Z_{i,s} Z_{i,s}^\top) \le \max\{x_{\max}, 1\} h_t^{-1/2}\). 
+Error term (i) is bounded by the newly developed matrix concentration inequality (Lemma \ref{lem:matrix_neg}), and error term (ii) is bounded by the martingale inequality in \citet{abbasi2011improved}.
+
+With the suitable choice of \(\check{\theta}\), we obtain an \(O(\sqrt{d \log t})\) error bound for the DR estimator, which is normalized by the novel augmented Gram matrix \(V_t\) instead of the conventional Gram matrix that includes only selected contexts.
+The imputation estimator,
+\begin{equation}
+\check{\theta}_{t} := \left(\sum_{s=1}^{t} X_{a_s,s} X_{a_s,s}^\top + \frac{d \gamma x_{\max}}{1 - \gamma} I_d \right)^{-1} \left( \sum_{s=1}^{t} X_{a_s,s} Y_{a_s,s} \right),
+\label{eq:impute}
+\end{equation}
+is appropriate for the new contexts of the hypothetical bandit problem.
+Define the proposed augmented as the ADR estimator
+\begin{equation}
+\widehat{\theta}_t := \widehat{\theta}^{ADR(\check{\theta}_t)}_t = \left\{ \sum_{s=1}^{t} \II(\Mcal_s) \sum_{i=1}^{N_s} Z_{i,s} Z_{i,s}^\top \right\}^{-1} \left( \sum_{s=1}^{t} \II(\Mcal_s) \sum_{i=1}^{N_s} W_{i,s}^{CDR(\check{\theta}_t)} Z_{i,s} \right),
+\label{eq:estimator}
+\end{equation}
+equipped with the imputation estimator~\eqref{eq:impute}.
+
+\begin{theorem}[A tail inequality for ADR estimator]
+\label{thm:tail}
+With probability at least $1-3\delta$, the estimator defined in \eqref{eq:estimator} with the imputation estimator defined in ~\eqref{eq:impute} satisfies,
+\[
+\norm{\Estimator t-\theta_{\star}}_{V_{t}}\le\sqrt{\frac{(1/2-e^{-1})d}{1-\gamma}}\theta_{\max}+\frac{(3-2e^{-1})\sigma}{\gamma}\sqrt{d\log\left(\frac{1+t/x_{\max}^{2}}{\delta}\right)}
+\]
+for all $t\ge T_{1}$.
+\end{theorem}
+
+The proof is in Appendix~\ref{sec:tail_proof}.
+While \citet{kim2021doubly} proved an \(\ell_2\)-norm error bound for the DR estimator, Theorem~\ref{thm:tail} presents an \(V_t\)-norm error bound.
+Compared to the \(\tilde{O}(\alpha/\sqrt{t})\) bound in \citet{kim2021doubly}, the term \(\alpha\) is replaced with \(d\), and the assumption that the covariance matrix must be positive definite is relaxed.
+This improvement is contributed by the novel Gram matrix \(V_t\) constructed by augmenting vectors that are orthogonal to the space generated by contexts.
+The novel bound in Theorem~\ref{thm:tail} paves the way for a novel regret analysis, which proves a \(\tilde{O}(d\sqrt{T})\) regret bound for \texttt{LinTS}.
+
+\begin{algorithm}[t]
+\caption{Augmented Doubly Robust Thompson Sampling (\texttt{ADRTS})}
+\label{alg:ADRTS} 
+\begin{algorithmic} 
+\STATE \textbf{Input:} confidence level $\delta\in(0,1)$, coupling parameter $\gamma \in (0,1)$, exploration parameter $v_{t} := \{2\log\frac{K(t+1)^2}{\delta}\}^{-1/2}$, orthogonal basis regularization parameter $h_t := \lceil \frac{1}{1/2-e^{-1}}\frac{d}{1-\gamma} \log\frac
+{d(t+1)^2}{\delta}\rceil$.
+\STATE Initialize the estimator $\widehat{\theta}_0=\mathbf{0}$, Gram matrix $V_{0}=O$, and a subset of rounds for the orthogonal basis regularization $\mA_{0}=\emptyset$. 
+\FOR{$t=1$ \textbf{to} $T$}
+\STATE Observe contexts $\{X_{k,t}:k\in[K]\}$.
+\STATE Update $\Acal_t$ as in \eqref{eq:A} and compute $N_t$ as in \eqref{eq:N}.
+\STATE Set $m=1$ sample $\tilde{a}_t(m)$ from the multinomial distribution \eqref{eq:pseudo_prob}.
+\WHILE{$\tilde{a}_t(m) \neq N_t$ and $m\le \lceil \log\frac
+{(t+1)^2}{\delta}/\log\frac{1}{1-\gamma}\rceil$}
+\STATE Sample $\tilde{\theta}_{k,t}{(m)}\sim\Ncal(\widehat{\theta}_{t-1}, v^2_{t-1}V_{t-1}^{-1} )$ independently for each $k\in[K]$ and compute $a_t{(m)} := \arg\max_{k\in[K]}X_{k,t}^\top \tilde{\theta}_{k,t}(m)$
+\STATE Sample $\tilde{a}_t{(m)}$ from the multinomial distribution \eqref{eq:pseudo_prob}. 
+\ENDWHILE
+\IF{$\tilde{a}_t(m) = N_t$}
+\STATE Pull arm $a_t(m)$ and observe $Y_{a_t(m),t}$.
+\STATE Compute the imputation estimator $\check{\theta}_t$ defined in~\eqref{eq:impute}.
+\IF{$t \in \Acal_t$}
+\STATE Compute new contexts $\{Z_{i,t}:i\in[N_t]\}$ as in \eqref{eq:compressed contexts}
+\ELSE
+\STATE Compute new contexts $\{Z_{i,t}:i\in[N_t]\}$ with orthogonal basis as in \eqref{eq:new_contexts}.
+\ENDIF
+\STATE Update $V_{t}=V_{t-1}+\sum_{i=1}^{N_t}Z_{i,s}Z_{i,s}^{\top}$
+\STATE Compute the estimator $\widehat{\theta}_t$ as in ~\eqref{eq:ADR_estimator}.
+\ELSE
+\STATE $\widehat{\theta}_{t} \leftarrow \widehat{\theta}_{t-1}$
+\ENDIF
+\ENDFOR 
+\end{algorithmic} 
+\end{algorithm}
+
+\subsection{Augmented Doubly Robust Thompson Sampling Algorithm}
+\label{sec:algorithm}
+
+The proposed algorithm, \textit{Augmented Doubly Robust Thompson Sampling} (\texttt{ADRTS}), is detailed in Algorithm \ref{alg:ADRTS}. This algorithm builds upon the structure of \texttt{LinTS} but introduces two key innovations: (i) resampling to couple the hypothetical bandit with the original bandit, and (ii) the ADR estimator, which leverages a compressed orthogonal basis for improved efficiency.
+
+For the resampling step (i), the algorithm repeatedly resamples \(\{\tilde{\theta}_{k,t}(m) :k \in [K]\}\) and computes \(a_t\) until the condition \(\{Z_{\tilde{a}_t,t} = X_{a_t,t}\} \cap \{W_{\tilde{a}_t,t} = Y_{a_t,t}\}\) is satisfied. This ensures that the hypothetical bandit aligns with the original bandit by augmenting the randomized contexts. The number of resampling attempts, set to \(\lceil\log\frac{(t+1)^2}{\delta} / \log\frac{1}{1-\gamma}\rceil\), guarantees the resampling process succeeds with probability at least \(1 - \delta / (t+1)^2\). In practice, this resampling typically succeeds after only a few iterations.
+
+For the ADR estimator (ii), although computing it might appear computationally demanding, efficient implementation strategies significantly reduce its complexity. Theoretically, the algorithm must compute new context vectors \(\{Z_{i,t} : i \in [N_t]\}\) for each resampling iteration. However, in practice, the algorithm first checks if \(\tilde{a}_t = N_t\) occurs and then computes the new contexts based on the resampled \(a_t\).
+
+The worst-case computational complexity of the algorithm is \(O(d^2(K + d)T + T \log(T+1) / \log(\frac{1}{1-\gamma}))\). The primary computational bottleneck arises from calculating the Gram matrix \(V_t\) and performing eigenvalue decomposition to construct new contexts, repeated for the specified number of resampling attempts in each round \(t \in [T]\). In practice, the computational efficiency of the ADR estimator can be further enhanced by applying the Sherman-Morrison formula, enabling rank-1 updates and reducing memory usage.
+
+
+\section{Regret Analysis}
+\label{sec:regret_analysis}
+We present the main result: the nearly minimax-optimal cumulative regret bound for \texttt{ADRTS}.
+
+\begin{theorem}[Regret Bound for \texttt{ADRTS}]
+\label{thm:regret_bound}
+Set the exploration parameter \(v_{t} = \{2\log(K(t+1)^{2}/\delta)\}^{-1/2}\) in Algorithm~\ref{alg:ADRTS}, and define \(\check{\theta}_t\) as in~\eqref{eq:impute}. Then, with probability \(1 - 3\delta\), the cumulative regret of the \texttt{ADRTS} algorithm by time \(T\) is bounded as follows:
+\begin{equation}
+R(T) \leq 2T_1 + \biggl\{\sqrt{\frac{(e-2)}{2e(1-\gamma)}}\theta_{\max} + \frac{(3e-2)\sigma}{e\gamma}\sqrt{\log\frac{2T}{\delta}}\biggr\} \cdot d \sqrt{2T \log \frac{T}{d}}.
+\label{eq:regret_bound}
+\end{equation}
+\end{theorem}
+
+The leading order of the regret bound is \(O(d\sqrt{T} \log T)\), which matches the \(\Omega(d\sqrt{T})\) lower bound established in \citet{lattimore2020bandit}, up to logarithmic factors. 
+This result represents the first nearly minimax-optimal regret bound for LinCB under arbitrary context distributions.
+
+In comparison, \citet{kim2023squeeze} achieved an \(O(\sqrt{dT \log T})\) regret bound but relied on IID contexts with a positive minimum eigenvalue for the average covariance matrix. Similarly, while \citet{huix2023tight} demonstrated an \(\tilde{O}(d\sqrt{T})\) regret bound, their analysis assumes that the parameter \(\theta_{\star}\) is drawn from a Gaussian prior. Additionally, earlier works such as \citet{kim2021doubly} and \citet{agrawal2013thompson} assume that context norms are bounded by one. 
+In contrast, the regret bound~\eqref{eq:regret_bound} avoids such normalization assumptions. 
+Since the context norm influences the bound logarithmically, increasing the norm does not lead to a linear increase in the regret.
+
+The key innovation in the novel analysis lies in deriving a tighter error bound compared to \citet{kim2021doubly} (see Section~\ref{sec:low_regret_arms}) and employing the maximal elliptical potential bound (see Section~\ref{sec:max_elliptical}), using the augmented Gram matrix \(V_t\).
+
+
+\subsection{Low-Regret Arms with A High Probability Bound}
+\label{sec:low_regret_arms}
+For each \( k \in [K] \) and \( t \in [T] \), let \(\Diff{k}{t} := X_{a_t^{\star},t}^{\top}\theta_{\star} - X_{k,t}^{\top}\theta_{\star}\) denote the mean reward gap between the optimal arm and the \(k\)-th arm.
+
+For contrast, recall the definition of super-unsaturated arms from \citet{kim2021doubly}:
+\begin{equation}
+N_t := \biggl\{ k \in [K] : \Diff{k}{t} \le 2x_{\max} \norm{\widehat{\theta}_{t-1}^{DR} - \theta_{\star}}_{2} + \sqrt{\norm{X_{a^{\star}_t,t}}_{F^{-1}_{t-1}}^2 + \norm{X_{k,t}}_{F^{-1}_{t-1}}^2} \biggr\}.
+\label{eq:super_unsaturated_set}
+\end{equation}
+In place of \eqref{eq:super_unsaturated_set}, we define a set of low-regret arms for each round \( t \) as:
+\begin{equation}
+\Pcal_{t} := \biggl\{ k \in [K] : \Diff{k}{t} \le 2x_t \norm{\widehat{\theta}_{t-1} - \theta_{\star}}_{V_{t-1}} + \sqrt{\norm{X_{a_t^{\star},t}}_{V_{t-1}^{-1}}^{2} + \norm{X_{k,t}}_{V_{t-1}^{-1}}^{2}} \biggr\},
+\label{eq:low_regret_set}
+\end{equation}
+where \(x_t := \max_{k \in [K]} \|X_{k,t}\|_{V_{t-1}^{-1}}\).
+
+While the super-unsaturated arms are characterized using an \(\ell_2\)-norm error bound, the low-regret arms leverage a \(V_t\)-norm error bound scaled by \(x_t\). Bounding the \(\ell_2\)-norm error requires the minimum eigenvalue of the covariance matrix to be positive and grow with the decision epochs to achieve the fast \(t^{-1/2}\) convergence rate; the error also depends on the inverse of the minimum eigenvalue. In contrast, we use the self-normalized \(V_t\)-norm error, which is bounded by an \(O(\sqrt{d \log t})\) term without any dependence on the minimum eigenvalue.
+
+When \(a_t \in \Pcal_t\), we employ the regret bound, and the following lemma shows a lower bound on the probability that the candidate arm is super-unsaturated.
+
+\begin{lemma}[Algorithm selects low-regret arms with high probability]
+\label{lem:super_unsaturated_arms}
+For each \(t\), let \(a_t\) be the arm selected by Algorithm~\ref{alg:ADRTS}, and let \(\Pcal_{t}\) be the set of low-regret arms defined in \eqref{eq:low_regret_set}. Setting \(v_t = \{2\log(K(t+1)^2 / \delta)\}^{-1/2}\) yields:
+\[
+\CP{\{a_t \in \Pcal_{t}\}}{\Hcal_t} \ge 1 - \frac{\delta}{(t+1)^2}.
+\]
+\end{lemma}
+
+\begin{proof}
+For \(k \in [K]\) and \(t \in [T]\), let \(\tilde{Y}_{k,t} := X_{k,t}^\top \tilde{\theta}_{k,t}\) denote the estimated reward for arm \(k\). Define the maximizer \(\tilde{M}_{t} := \arg\max_{k \in [K]} \tilde{Y}_{k,t}\). Since \texttt{ADRTS} selects the arm that maximizes \(\tilde{Y}_{k,t}\), the distribution of \(a_t\) matches that of \(\tilde{M}_t\), i.e.,
+\[
+\CP{a_t \in \Pcal_t}{\Hcal_t} = \CP{\tilde{M}_t \in \Pcal_t}{\Hcal_t}.
+\]
+Suppose the estimated reward for the optimal arm, \(\tilde{Y}_{a_t^{\star},t}\), exceeds \(\tilde{Y}_{j,t}\) for all \(j \in [K] \setminus \Pcal_t\). Since the optimal arm \(a_t^{\star}\) is always in \(\Pcal_t\) by definition, it follows that \(a_t^{\star} \in \Pcal_t\). Thus:
+\[
+\CP{\tilde{M}_t \in \Pcal_t}{\Hcal_t} \ge \CP{\bigcap_{j \in [K] \setminus \Pcal_t} \{\tilde{Y}_{j,t} < \tilde{Y}_{a_t^{\star},t}\}}{\Hcal_t}.
+\]
+Let \(Z_{j,t} := \tilde{Y}_{a_t^{\star},t} - \tilde{Y}_{j,t} - (X_{a_t^{\star},t} - X_{j,t})^{\top} \Estimator{t-1}\). Then:
+\[
+\CP{\tilde{M}_t \in \Pcal_t}{\Hcal_t} \ge \CP{\bigcap_{j \in [K] \setminus \Pcal_t} \{Z_{j,t} > (X_{j,t} - X_{a_t^{\star},t})^{\top} \Estimator{t-1}\}}{\Hcal_t}.
+\]
+Given \(\Hcal_t\), \(\{Z_{j,t} : j \in [K] \setminus \Pcal_t\}\) are Gaussian random variables with mean 0 and variance \(v_t^2 (\|X_{a_t^{\star},t}\|_{V_{t-1}^{-1}}^2 + \|X_{j,t}\|_{V_{t-1}^{-1}}^2)\). For each \(j \notin \Pcal_t\), we have:
+\[
+(X_{j,t} - X_{a_t^{\star},t})^{\top} \Estimator{t-1} \le 2x_t \norm{\Estimator{t-1} - \theta_{\star}}_{V_{t-1}} - \Diff{j}{t} \le -\sqrt{\norm{X_{a_t^{\star},t}}_{V_{t-1}^{-1}}^2 + \norm{X_{j,t}}_{V_{t-1}^{-1}}^2}.
+\]
+Thus:
+\[
+\CP{\tilde{M}_t \in \Pcal_t}{\Hcal_t} \ge \CP{\frac{Z_{j,t}}{v_t \sqrt{\norm{X_{a_t^{\star},t}}_{V_{t-1}^{-1}}^2 + \norm{X_{j,t}}_{V_{t-1}^{-1}}^2}} > -\frac{1}{v_t}, \forall j \notin \Pcal_t}{\Hcal_t}.
+\]
+Since \(Z_{j,t}\) is Gaussian with variance normalized to 1, the result follows. The detailed proof continues in Appendix~\ref{sec:low_regret_proof}.
+\end{proof}
+
+In \citet{agrawal2013thompson}, proving a lower bound for the selected arm to be saturated requires setting \(v = \sqrt{9d \log(t/\delta)}\), introducing a \(\sqrt{d}\)-dependence. 
+In contrast, Lemma~\ref{lem:super_unsaturated_arms} shows that \(v\) need not depend on \(d\), due to the definition of super-unsaturated arms in \eqref{eq:super_unsaturated_set}. This approach achieves a lower bound for \(\CP{a_t \in \Pcal_t}{\Hcal_t}\) without incurring additional \(\sqrt{d}\)-dependence. By using the self-normalized bound instead of the \(\ell_2\)-norm bound in \citet{kim2021doubly}, Theorem~\ref{thm:regret_bound} achieves a tighter bound without requiring normalized norms or positive minimum eigenvalue assumptions.
+
+\subsection{Maximal Elliptical Potential Bound}
+\label{sec:max_elliptical}
+By Lemma~\ref{lem:super_unsaturated_arms}, the algorithm selects arms from the low-regret set \(\Pcal_t\), i.e., \(a_t \in \Pcal_t\), with high probability. This leads to the following novel regret decomposition:
+
+\[
+\Regret{t} = \Diff{a_t}{t} \leq 2x_t \norm{\Estimator{t-1} - \theta_{\star}}_{V_{t-1}} + \sqrt{\norm{X_{a_t^{\star},t}}_{V_{t-1}^{-1}}^2 + \norm{X_{a_t,t}}_{V_{t-1}^{-1}}^2},
+\]
+for \(t \geq T_1\). Thus, the cumulative regret is bounded as follows:
+
+\[
+R(T) \leq 2T_1 + \sum_{t=T_1+1}^{T} \left\{ 2x_t \norm{\Estimator{t-1} - \theta_{\star}}_{V_{t-1}} + \sqrt{\norm{X_{a_t^{\star},t}}_{V_{t-1}^{-1}}^2 + \norm{X_{a_t,t}}_{V_{t-1}^{-1}}^2} \right\}.
+\]
+
+Recall that \(x_t := \|X_{k,t}\|_{V^{-1}_{t-1}}\), and applying the inequality \(\sqrt{\norm{X_{a_t^{\star},t}}_{V_{t-1}^{-1}}^2 + \norm{X_{a_t,t}}_{V_{t-1}^{-1}}^2} \leq \sqrt{2}x_t\), we get:
+
+\[
+R(T) \leq 2T_1 + \sum_{t=T_1+1}^{T} \left( 2x_t \norm{\Estimator{t-1} - \theta_{\star}}_{V_{t-1}} + \sqrt{2}x_t \right).
+\]
+
+Factoring out \(x_t\):
+
+\[
+R(T) \leq 2T_1 + \sum_{t=T_1+1}^{T} \left( 2 \norm{\Estimator{t-1} - \theta_{\star}}_{V_{t-1}} + \sqrt{2} \right) x_t.
+\]
+
+Substituting the bound \(\norm{\Estimator{t-1} - \theta_{\star}}_{V_{t-1}} = O(\sqrt{d \log t})\) from Theorem~\ref{thm:tail}, we obtain:
+
+\[
+R(T) = 2T_1 + \tilde{O}(\sqrt{d}) \cdot \sum_{t=T_1}^{T} x_t.
+\]
+
+Using the following lemma, we bound the normalized context sum, \(\sum_{t=T_1}^{T} x_t^2\):
+
+\begin{lemma}[Maximal elliptical potential lemma]
+\label{lem:elliptical}  
+For \(x_t := \max_{k \in [K]} \|X_{k,t}\|_{V_{t-1}^{-1}}\), we have:  
+\[
+\sum_{t=T_1}^{T} x_t^2 \leq 2d \log\frac{T}{d}.
+\]
+\end{lemma}
+
+\begin{proof}
+For all \(t \leq T_1\), we have \(t \in \Acal_t\). By the definition of the new contexts~\eqref{eq:new_contexts}:
+
+\[
+\sum_{t=1}^{T_1} \sum_{i=1}^{N_t} Z_{i,t} Z_{i,t}^\top = \sum_{t=1}^{T_1} \sum_{i=1}^{d} v_{i,t} v_{i,t}^\top \succeq T_1 \max\{x_{\max}^2, 1\} I_d.
+\]
+
+For \(t > T_1\), let \(\nu_t := \arg\max_{k \in [K]} \|X_{k,t}\|_{V_{t-1}^{-1}}\). By the definition of the contexts~\eqref{eq:compressed contexts},
+
+\[
+\sum_{s=T_1+1}^{t} \sum_{i=1}^{N_s} Z_{i,s} Z_{i,s}^\top = \sum_{s=T_1+1}^{t} \sum_{k=1}^{K} X_{k,s} X_{k,s}^\top \succeq \sum_{s=T_1+1}^{t} X_{\nu_s,s} X_{\nu_s,s}^\top.
+\]
+
+It follows that:
+
+\[
+V_t \succeq \sum_{s=T_1+1}^{t} \sum_{k=1}^{K} X_{k,s} X_{k,s}^\top + T_1 \max\{x_{\max}^2, 1\} I_d \succeq \sum_{s=T_1+1}^{t} X_{\nu_s,s} X_{\nu_s,s}^\top + \max\{x_{\max}^2, 1\} I_d.
+\]
+
+Defining \(W_t := \sum_{s=T_1+1}^{t} X_{\nu_s,s} X_{\nu_s,s}^\top + \max\{x_{\max}^2, 1\} I_d\), we have \(x_t \leq \|X_{\nu_t,t}\|_{W_{t-1}^{-1}}\). Applying Lemma 11 from \citet{abbasi2011improved}:
+
+\[
+\sum_{t=T_1+1}^{T} x_t^2 \leq \sum_{t=T_1+1}^{T} \|X_{\nu_t,t}\|_{W_{t-1}^{-1}}^2 \leq 2\log\frac{\det(W_T)}{\det(\max\{x_{\max}^2, 1\}I_d)}.
+\]
+
+Since \(\det(W_T) \leq \left(\frac{\Trace{W_T}}{d}\right)^d \leq \left(\frac{T \max\{x_{\max}^2, 1\}}{d}\right)^d\),
+
+\[
+\sum_{t=T_1+1}^{T} x_t^2 \leq 2d \log\frac{\Trace{W_T}}{\max\{x_{\max}^2, 1\}d} \leq 2d \log\frac{T\max\{x_{\max}^2,1\}}{\max\{x_{\max}^2, 1\}d} \leq 2d \log\frac{T}{d}.
+\]
+
+This completes the proof.  
+\end{proof}
+
+The maximal elliptical potential lemma bounds the normalized norm of the contexts for the optimal arms, \(X_{a_t^{\star},t}\), which previous analyses could not bound effectively. This is possible because the augmented Gram matrix \(V_t\) has a larger minimum eigenvalue than the covariance matrix of the context vectors summed over all \(K\) arms.
+
+
+\section{Experimental Results}
+\label{sec:experiment}
+
+This section is for evaluating the empirical performance of the proposed algorithm, \texttt{ADRTS}, against several benchmark algorithms for LinCB with simulated data. 
+The benchmarks include \texttt{LinTS}, \texttt{LinUCB}, \texttt{DRTS} \citep{kim2021doubly}, \texttt{HyRan} \citep{kim2023squeeze}, and \texttt{SupLinUCB} \citep{chu2011contextual}.
+
+
+%----------------------------------------
+% Figure 1. Regret comparison
+%----------------------------------------
+\begin{figure}[t]
+
+\centering
+\subfigure[Regret comparison ($d=10$, $K=20$)]{{\includegraphics[width=0.48\textwidth]{figures/Regrets_10dimension_20arms.png}
+}}
+\subfigure[Regret comparison ($d=30$, $K=20$)]{{\includegraphics[width=0.48\textwidth]{figures/Regrets_30dimension_20arms.png}
+}}
+\\
+\subfigure[Regret comparison ($d=10$, $K=30$)]{{\includegraphics[width=0.48\textwidth]{figures/Regrets_10dimension_30arms.png}
+}}
+\subfigure[Regret comparison ($d=30$, $K=30$)]{{\includegraphics[width=0.48\textwidth]{figures/Regrets_30dimension_30arms.png}
+}}
+\caption{\label{fig:comparison} Comparison of the regrets of the proposed \texttt{ADRTS} algorithm with other benchmark methods.  
+The lines represent the average, and the shaded areas indicate the standard deviation based on twenty experiments.  
+The results demonstrate that the proposed \texttt{ADRTS} effectively identifies the optimal arm using orthogonal regularization.}
+\end{figure}
+
+%----------------------------------------
+% Figure 2. Prediction error
+%----------------------------------------
+\begin{figure}[t]
+\centering
+\subfigure[Prediction error comparison ($d=10$, $K=20$)]{{\includegraphics[width=0.48\textwidth]{figures/est_10dimension_20arms.png}
+}}
+\hfill
+\subfigure[Prediction error comparison ($d=30$, $K=20$)]{{\includegraphics[width=0.48\textwidth]{figures/est_30dimension_20arms.png}
+}}
+\\
+\subfigure[Prediction error comparison ($d=10$, $K=30$)]{{\includegraphics[width=0.48\textwidth]{figures/est_10dimension_30arms.png}
+}}
+\hfill
+\subfigure[Prediction error comparison ($d=30$, $K=30$)]{{\includegraphics[width=0.48\textwidth]{figures/est_30dimension_30arms.png}
+}}
+%\vspace{.1in}
+\caption{\label{fig:prediction} Comparison of the prediction error across all arms, calculated as \(\sum_{i=1}^{K}\{X_{i,t}^\top(\widehat{\theta}_t-\theta_{\star})\}^2\), for the proposed \texttt{ADRTS} and other benchmark methods.  
+The lines represent the averages, and the shaded areas indicate the standard deviations based on twenty experiments.  
+The results demonstrate that the proposed estimator, enhanced with orthogonal augmentation, learns the reward more accurately than other estimators.}
+\end{figure}
+
+For the experiment setting, the parameter \(\theta_{\star}\) is defined as:
+\[
+\theta_{\star} := \frac{1}{\sqrt{d}} \biggl( \underset{\lceil d/2 \rceil}{\underbrace{1, \cdots, 1}}, \underset{d - \lceil d/2 \rceil}{\underbrace{-1, \cdots, -1}} \biggr)^{\top},
+\]
+where \(d \in \{10, 30\}\) is the dimension of the parameter. 
+The $i$-th entry of the context vectors for $K\in\{20,30\}$ arms are independently sampled from a Gaussian distribution with a mean of \(-1 + \frac{3(i-1)}{d-1}\) and variance of 1 for each \(i \in [d]\). 
+These vectors are normalized and then scaled by a scalar drawn uniformly from \([0,1]\). 
+To simulate missing context information, with probability \(1/2\), the last \(d - \lceil d/2 \rceil\) entries of the context vectors are set to zero at each round. This setting reflects practical scenarios where certain context features may be unavailable with some probability, making it challenging to estimate the corresponding entries in \(\theta_{\star}\).
+
+The hyperparameter optimization was conducted as follows: For \texttt{LinTS}, the variance parameter was selected from \(\{0.01, 0.1, 1\}\). 
+For \texttt{LinUCB} and \texttt{SupLinUCB}, the confidence bound inflation parameter was chosen from \(\{0.01, 0.1, 1\}\). 
+For \texttt{HyRan} and \texttt{ADRTS}, the regularization parameters \(p\) and \(\gamma\) were tuned from \(\{0.1, 0.5, 0.9\}\). 
+The hyperparameters for \texttt{DRTS} were fixed as specified in \citet{kim2021doubly}. 
+Values outside the specified ranges showed negligible differences in performance, suggesting robustness to hyperparameter selection for all methods.
+
+
+
+Figure~\ref{fig:comparison} compares the cumulative regret of \texttt{ADRTS} with other benchmark algorithms across various configurations of \(d\) and the number of arms \(K\). Each line represents the average cumulative regret, and the shaded regions indicate the standard deviation across 20 independent trials.
+
+The results show that \texttt{ADRTS} achieves the lowest cumulative regret in all tested settings. Compared to \texttt{LinTS}, \texttt{LinUCB}, and \texttt{SupLinUCB}, which do not leverage information from all arms, \texttt{ADRTS} demonstrates robustness to missing context data. When compared to \texttt{DRTS} and \texttt{HyRan}, which uses the original context vectors, \texttt{ADRTS} consistently identifies low-regret arms more effectively, even under significant masking of context features. 
+
+Initially, due to the orthogonal basis regularization, \texttt{ADRTS} incurs higher regret during the exploration phase, particularly when the effective rank of the context matrix is low. However, it rapidly adapts and identifies the optimal arm, ultimately outperforming the other algorithms, which continue to suffer regret due to their inability to handle missing context data effectively.
+
+Figure~\ref{fig:prediction} illustrates the prediction error across all arms, measured as \(\sum_{i=1}^{K} \{X_{i,t}^\top (\widehat{\theta}_t - \theta_{\star})\}^2\). 
+Similar to the regret results, the averages and standard deviations are computed over 20 trials.
+The initial convergence of the estimators in \texttt{DRTS} and \texttt{HyRan} is faster due to their reliance on imputed contexts. However, their prediction errors increase over time because the imputed contexts, often containing many zero entries, provide incomplete information and hinder accurate estimation. In contrast, \texttt{ADRTS} demonstrates steady and consistent convergence throughout the experimental horizon. Its orthogonal augmentation strategy allows it to extract useful information even when parts of the context vectors are masked, leading to superior prediction accuracy compared to both traditional ridge-based estimators (\texttt{LinTS}, \texttt{LinUCB}, \texttt{SupLinUCB}) and other augmented methods (\texttt{DRTS}, \texttt{HyRan}).
+
+In summary, the experiments validate that \texttt{ADRTS} achieves significant improvements in both cumulative regret and prediction accuracy over existing benchmarks. Its ability to handle missing context information effectively while leveraging orthogonal regularization makes it particularly well-suited for practical scenarios with incomplete data.
+
+\section{Conclusion and Future Works}
+
+This work introduces novel probabilistic tools for integrating statistical missing data techniques into LinCB, achieving a nearly minimax-optimal regret bound without imposing any assumptions on the context vectors. By leveraging these techniques, the proposed approach allows the algorithm to treat the contexts of all arms as if rewards for all arms were observed in every round. 
+
+This capability is achieved by reinterpreting the DR method from \citet{kim2021doubly} as a form of regularization and constructing a new bandit framework coupled with resampling.
+
+The proposed method not only improves regret performance but also represents a conceptual shift in reward estimation, paving the way for broader applicability. By coupling resampling with DR techniques, we demonstrate that the variance in reward estimation can be effectively reduced, even under arbitrary context distributions. 
+
+This framework can be extended to more general bandit models and reinforcement learning settings. In particular, applying these techniques could help reduce the variance in reward estimates for optimal arms or general policies, potentially enabling more efficient exploration and decision-making in complex environments. 
+
+Future work may explore such extensions, including applications to nonlinear bandits, structured policies, and high-dimensional settings, further expanding the impact of the methods introduced in this study.
+
+
+
+
+
+%------------------------------------
+% Acknowledgements
+%------------------------------------
+
+\acks{Wonyoung Kim was supported by a grant from the National Research Foundation of Korea (NRF), funded by the Korean government (MSIT) (No. RS-2023-00240142). 
+Wonyoung Kim also appreciates the proofreading and advising provided by Myunghee Cho Paik.
+}
+
+
+\appendix
+
+\section{Missing Proofs}
+\subsection{Proof of Lemma~\ref{lem:error_decomposition}}
+\label{sec:error_decomposition_proof}
+\begin{proof}
+Recall that
+\[
+    V_t := \sum_{s=1}^t \sum_{i=1}^{N_s}Z_{i,s}Z_{i,s}^\top, \quad
+    A_t := \sum_{s=1}^{t} \frac{1}{\phi_{\tilde{a}_s,s}} Z_{\tilde{a}_s,s}Z_{\tilde{a}_s,s}^\top = \sum_{s=1}^{t} \sum_{i=1}^{N_s}\frac{\II(\tilde{a}_s=i)}{\phi_{i,s}} Z_{i,s}Z_{i,s}^\top.
+\]
+By definition of the estimator, 
+\[
+\begin{split} 
+& \norm{\widehat{\theta}^{HDR(\check{\theta})}_{t}-\theta_{\star}}_{V_{t}}\\
+& = \norm{\sum_{s=1}^{t} \sum_{i=1}^{r_{s}+1}\left(W_{i,s}^{HDR(\check{\theta}_{t})}-Z_{i,s}^{\top}\theta_{\star}\right)Z_{i,s}}_{V_{t}^{-1}}\\
+& = \norm{\sum_{s=1}^{t} \sum_{i=1}^{r_{s}+1} \left\{ 1-\frac{\II(\tilde{a}_{s}=i)}{\phi_{i,s}} \right\} Z_{i,s}Z_{i,s}^\top (\check{\theta}-\theta_{\star}) + \frac{\II(\tilde{a}_{s}=i)}{\phi_{i,s}} \left(W_{i,s}-Z_{i,s}^{\top}\theta_{\star}\right)Z_{i,s}}_{V_{t}^{-1}}\\
+& = \norm{(V_{t}-A_{t})(\check{\theta}-\theta_{\star}) + \sum_{s=1}^{t} \sum_{i=1}^{r_{s}+1} \frac{\II(\tilde{a}_{s}=i)}{\phi_{i,s}} \left(W_{i,s}-Z_{i,s}^{\top}\theta_{\star}\right)Z_{i,s}}_{V_{t}^{-1}},
+\end{split}
+\]
+where the second equality holds by the definition \eqref{eq:HDRY}.
+Recall that 
+\[
+S_{t} := \sum_{s=1}^{t} \sum_{i=1}^{r_{s}+1} \frac{\II(\tilde{a}_{s}=i)}{\phi_{i,s}} \left(W_{i,s}-Z_{i,s}^{\top}\theta_{\star}\right)Z_{i,s}.
+\]
+Then, by the triangle inequality, we have
+\[
+\norm{\widehat{\theta}^{HDR(\check{\theta})}_{t}-\theta_{\star}}_{V_{t}} 
+\le \norm{(V_{t}-A_{t})(\check{\theta}-\theta_{\star})}_{V_{t}^{-1}} + \norm{S_{t}}_{V_{t}^{-1}}.
+\]
+This becomes
+\[
+= \norm{V_t^{-1/2}(V_{t}-A_{t})(\check{\theta}-\theta_{\star})}_{2} + \norm{S_{t}}_{V_{t}^{-1}},
+\]
+which completes the proof.
+\end{proof}
+
+\subsection{Proof of Theorem \ref{thm:tail}}
+\label{sec:tail_proof}
+
+\begin{proof}
+By the definition of the proposed estimator and Lemma~\ref{lem:coupling}, for any \( x > 0 \),
+\begin{align*}
+\PP\left(\norm{\widehat{\theta}_t - \theta_{\star}}_{V_t} > x\right) &= \PP\left(\norm{\widehat{\theta}^{ADR(\check{\theta}_t)}_t - \theta_{\star}}_{V_t} > x\right) \\
+&\le \PP\left(\left\{\norm{\widehat{\theta}^{HDR(\check{\theta}_t)}_t - \theta_{\star}}_{V_t} > x\right\} \cap \Scal_t\right) + \delta.
+\end{align*}
+From the error decomposition in Lemma~\ref{lem:error_decomposition},
+for \( x > 0 \),
+\begin{align*}
+&\PP\left(\left\{\norm{\widehat{\theta}^{HDR(\check{\theta}_t)}_t - \theta_{\star}}_{V_t} > x\right\} \cap \Scal_t\right) \\
+&\le \PP\left(\left\{\norm{V_t^{-1/2}(A_t - V_t)(\check{\theta}_t - \theta_{\star})}_{2} + \norm{S_t}_{V_t} > x\right\} \cap \Scal_t\right),
+\end{align*}
+where
+\[
+S_{t} := \sum_{s=1}^{t} \sum_{i=1}^{r_{s}+1} \frac{\II(\tilde{a}_{s}=i)}{\phi_{i,s}} \left(W_{i,s} - Z_{i,s}^{\top} \theta_{\star}\right)Z_{i,s}.
+\]
+Let \(\lambda := \frac{x_{\max}}{1 - \gamma}\), and define
+\[
+P_t := V_t^{-1/2}(V_t - A_t)(A_t + \lambda I_d)^{-1} V_t^{1/2}.
+\]
+By the definition of \( \check{\theta}_t \),
+\[
+\check{\theta}_t - \theta_{\star} := \left(\sum_{s=1}^{t} X_{a_s, s} X_{a_s, s} + \gamma \lambda I_d\right)^{-1} \left\{ \sum_{s=1}^{t} (Y_{a_s, s} - X_{a_s, s}^{\top} \theta_{\star}) X_{a_s, s} - \gamma \lambda \theta_{\star} \right\},
+\]
+and similarly,
+\[
+\check{\theta}_t - \theta_{\star} = \left(A_t + \lambda I_d\right)^{-1} \left(S_t - \lambda \theta_{\star}\right).
+\]
+Substituting into the error bound, we have
+\[
+\begin{split}
+\norm{\widehat{\theta}_t - \theta_{\star}}_{V_t} 
+& \le \norm{(V_t - A_t) (A_t + \lambda I_d)^{-1} (S_t - \lambda \theta_{\star})}_{V_t^{-1}} + \norm{S_t}_{V_t^{-1}} \\
+& = \norm{V_t^{-1/2}(V_t - A_t)(A_t + \lambda I_d)^{-1} V_t^{1/2} (S_t - \lambda \theta_{\star})}_{2} + \norm{S_t}_{V_t^{-1}},
+\end{split}
+\]
+where the last equality holds by the definition of \( \|\cdot\|_{V_t^{-1}} \).
+By the definition of the spectral norm \( \|\cdot\|_2 \),
+\begin{align*}
+&\norm{V_t^{-1/2}(V_t - A_t)(A_t + \lambda I_d)^{-1} (S_t - \lambda \theta_{\star})}_{2}\\
+&\le \norm{V_t^{-1/2}(V_t - A_t)(A_t + \lambda I_d)^{-1} V_t^{1/2}}_2 \norm{S_t - \lambda \theta_{\star}}_{V_t^{-1}}.
+\end{align*}
+Define \( P_t := V_t^{-1/2}(V_t - A_t)(A_t + \lambda I_d)^{-1} V_t^{1/2} \).
+Thus, the bound becomes
+\[
+\begin{split}
+&\PP\left(\bigcap_{t : |\Acal_t| \ge h_t} \left[\left\{ \norm{\widehat{\theta}_t - \theta_{\star}}_{V_t} > x\right\} \cap \Scal_t\right]\right)\\
+& \le \PP\left(\bigcap_{t : |\Acal_t| \ge h_t} \left[\left\{ \norm{P_t}_2 \left( \norm{S_t}_{V_t} + \sqrt{\frac{(1/2 - e^{-1})d}{1 - \gamma}} \theta_{\max} \right) + \norm{S_t}_{V_t} > x \right\} \cap \Scal_t \right]\right) \\
+& + \delta.
+\end{split}
+\]
+This completes the proof of the theorem.
+\end{proof}
+
+\subsection{Probability Bounds for the Norms}
+This section provides the probability inequalities for the norms of the core terms: \( P_t \) and \( S_t \). 
+These bounds are key to proving the convergence of the estimator. 
+We will use tail inequalities for random matrices and sums to obtain the desired results.
+
+\begin{lemma}
+\label{lem:P_t_bound}
+Suppose \( |\Acal_{t}| \ge h_{t} \). Then, with probability at least \( 1 - \frac{\delta}{t^2} \), the spectral norm \( \|P_t\|_2 \le 2(1 - e^{-1}) \).
+\end{lemma}
+
+\begin{proof}
+By the definition of \( P_t \), we have
+\[
+\|P_t\|_2 = \|V_t^{-1/2}(V_t - A_t)(A_t + \lambda I_d)^{-1} V_t^{1/2}\|_2.
+\]
+Expanding this,
+\[
+\|P_t\|_2 = \|V_t^{1/2}(A_t + \lambda I_d)^{-1} V_t^{1/2} - V_t^{-1/2} A_t (A_t + \lambda I_d)^{-1} V_t^{1/2}\|_2.
+\]
+Next, we simplify further:
+\[
+\|P_t\|_2 = \|V_t^{1/2}(A_t + \lambda I_d)^{-1} V_t^{1/2} - I_d + \lambda V_t^{-1/2}(A_t + \lambda I_d)^{-1} V_t^{1/2}\|_2.
+\]
+This gives us the bound:
+\[
+\|P_t\|_2 \le \|V_t^{1/2}(A_t + \lambda I_d)^{-1} V_t^{1/2} - I_d\|_2 + \lambda \|V_t^{-1/2}(A_t + \lambda I_d)^{-1} V_t^{1/2}\|_2.
+\]
+
+Since \( V_t \) and \( A_t \) are real symmetric and non-negative definite, we have the following:
+\[
+\|V_t^{-1/2}(A_t + \lambda I_d)^{-1} V_t^{1/2}\|_2 \le \frac{\lambda}{\lambda_{\min}(V_t)} \|V_t^{1/2}(A_t + \lambda I_d)^{-1} V_t^{1/2}\|_2.
+\]
+Thus, we obtain:
+\[
+\|P_t\|_2 \le \|V_t^{1/2}(A_t + \lambda I_d)^{-1} V_t^{1/2} - I_d\|_2 + \frac{\lambda}{\lambda_{\min}(V_t)} \|V_t^{1/2}(A_t + \lambda I_d)^{-1} V_t^{1/2}\|_2.
+\]
+We observe that
+\[
+\|P_t\|_2 \le 2 - 1 + 2 \frac{\lambda}{\lambda_{\min}(V_t)}.
+\]
+Since \( \lambda = \frac{d}{1-\gamma} x_{\max} \), and applying Lemma 1, we get:
+\[
+\|P_t\|_2 \le 1 + 2 \frac{\frac{d}{1-\gamma} x_{\max}}{\max\{x_{\max}^2, 1\} h_t}.
+\]
+Finally, we bound this expression:
+\[
+\|P_t\|_2 \le 1 + 2 \frac{\frac{d}{1-\gamma} \max\{x_{\max}^2, 1\}}{\max\{x_{\max}^2, 1\} h_t} \le 1 + 2 (1/2 - e^{-1}) = 2(1 - e^{-1}),
+\]
+where the last inequality follows from \( h_t := (1/2 - e^{-1})^{-1} d (1 - \gamma)^{-1} \log\frac{d(t+1)^2}{\delta} \).
+\end{proof}
+
+\begin{lemma}
+\label{lem:S_t_bound}
+For any \( \delta \in (0, 1) \),
+\[
+\mathbb{P}\left( \bigcap_{t : |\Acal_t| \ge h_t} \left[ \left\{ \|S_t\|_{V_t} > \frac{\sigma}{\gamma} \sqrt{d \log \left( \frac{1 + t / (h_t x_{\max}^2)}{\delta} \right)} \right\} \cap \Scal_t \right] \right) \le \delta.
+\]
+\end{lemma}
+
+\begin{proof}
+Under the event \( \Scal_t \), we have:
+\[
+\|S_t\|_{V_t^{-1}} := \left\| \sum_{s=1}^{t} \sum_{i=1}^{r_s + 1} \frac{\mathbb{I}(\tilde{a}_s = i)}{\phi_{i,s}} \left(W_{i,s} - Z_{i,s}^{\top} \theta_\star\right) Z_{i,s} \right\|_{V_t^{-1}}.
+\]
+Simplifying this, we get:
+\[
+\|S_t\|_{V_t^{-1}} = \frac{1}{\gamma} \left\| \sum_{s=1}^{t} \eta_{a_s, s} X_{a_s, s} \right\|_{V_t^{-1}}.
+\]
+Next, we observe that the Gram matrix \( V_t \) satisfies:
+\[
+V_t \succeq \sum_{s=1}^{t} X_{a_s, s} X_{a_s, s}^{\top} + \sum_{s \in \Acal_t} \sum_{i=1}^{d} Z_{i,s} Z_{i,s}^{\top}.
+\]
+By the definition of the new contexts, we have:
+\[
+\sum_{s \in \Acal_t} \sum_{i=1}^{d} Z_{i,s} Z_{i,s}^{\top} \succeq h_t \max\{x_{\max}^2, 1\} I_d.
+\]
+Thus,
+\[
+V_t \succeq \sum_{s=1}^{t} X_{a_s, s} X_{a_s, s}^{\top} + x_{\max}^2 I_d.
+\]
+Using Lemma 9 from \citet{abbasi2011improved}, with probability at least \( 1 - \delta \), we get:
+\[
+\frac{1}{\gamma} \left\| \sum_{s=1}^{t} \eta_{a_s, s} X_{a_s, s} \right\|_{V_t^{-1}} \le \frac{\sigma}{\gamma} \sqrt{d \log \left( \frac{1 + t / x_{\max}^2}{\delta} \right)}.
+\]
+This completes the proof.
+\end{proof}
+
+\subsection{Proof of Lemma~\ref{lem:super_unsaturated_arms}}
+\label{sec:low_regret_proof}
+
+\begin{proof}
+From the proof in the manuscript, we have:
+\[
+\begin{split}
+\CP{\tilde{M}_{t} \in \Pcal_{t}}{\Hcal_t} \ge & \CP{\frac{Z_{j,t}}{v_{t}\sqrt{\norm{X_{a_t^{\star},t}}_{V_{t-1}^{-1}}^{2} + \norm{X_{j,t}}_{V_{t-1}^{-1}}^{2}}} > -\frac{1}{v_t}, \forall j \notin \Pcal_{t}}{\Hcal_t} \\
+:= & \CP{Y_j > -v_t^{-1}, \forall j \neq \Pcal_{t}}{\Hcal_t},
+\end{split}
+\]
+where 
+\[
+Y_j := \frac{Z_{j,t}}{v_t \sqrt{\norm{X_{a_t^{\star},t}}_{V_{t-1}^{-1}}^{2} + \norm{X_{j,t}}_{V_{t-1}^{-1}}^{2}}}
+\]
+is a standard Gaussian random variable given \(\Hcal_t\). Therefore, we have:
+\[
+\CP{Y_j \le -v_t^{-1}}{\Hcal_t} \le \exp\left(-\frac{1}{2v_t^2}\right).
+\]
+Now, setting \( v_t = \left( 2 \log \frac{K (t+1)^2}{\delta} \right)^{-1/2} \), we get:
+\[
+\CP{Y_j \le -v_t^{-1}}{\Hcal_t} \le \exp\left(-\log \frac{(t+1)^2}{\delta}\right) = \frac{\delta}{K (t+1)^2}.
+\]
+Thus, we obtain:
+\[
+\begin{aligned}
+\CP{\tilde{M}_t \in \Pcal_{t}}{\Hcal_t} \ge & \ 1 - \CP{Y_j \le -v_t^{-1}, \exists j \notin \Pcal_{t}}{\Hcal_t} \\
+\ge & \ 1 - \sum_{j \notin \Pcal_{t}} \CP{Y_j \le -v_t^{-1}}{\Hcal_t} \\
+\ge & \ 1 - \frac{\delta}{(t+1)^2}.
+\end{aligned}
+\]
+This completes the proof.
+\end{proof}
+
+
+\subsection{A Matrix Concentration Inequality}
+\begin{lemma}[Matrix concentration inequality]
+\label{lem:matrix_neg}
+Let \(\{M_{s}: s \in [t]\}\) be a \(\RR^{d \times d}\)-valued stochastic process adapted to the filtration \(\{\Fcal_{s}: s \in [t]\}\). Suppose \(M_s\) are nonnegative definite symmetric matrices such that \(\Maxeigen{M_s} \le 1\). Then, with probability at least \(1 - \delta\),
+\[
+\sum_{s=1}^{t} M_s \succeq (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} - \log\frac{d}{\delta} I_d.
+\]
+In addition, with probability at least \(1 - \delta\),
+\[
+\sum_{s=1}^{t} M_s \preceq \left(e - 1\right) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} + \log\frac{d}{\delta} I_d.
+\]
+\end{lemma}
+
+\begin{proof}
+This proof is an adapted version of the argument from \citet{tropp2012user}. 
+
+For the lower bound, it is sufficient to prove that
+\[
+\Maxeigen{-\sum_{s=1}^{t} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}}} \le \log \frac{d}{\delta},
+\]
+with probability at least \(1 - \delta\). By the spectral mapping theorem,
+\begin{align*}
+&\exp\left( \Maxeigen{-\sum_{s=1}^{t} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}}} \right) \\
+&\le \Maxeigen{\exp\left( -\sum_{s=1}^{t} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} \right)} \\
+&\le \Trace{\exp\left( -\sum_{s=1}^{t} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} \right)}.
+\end{align*}
+Taking the expectation of both sides gives:
+\begin{align*}
+&\EE \exp\left( \Maxeigen{-\sum_{s=1}^{t} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}}} \right) \\
+&\le \EE \Trace{\exp\left( -\sum_{s=1}^{t} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} \right)} \\
+&= \EE \Trace{\CE{\exp\left( -\sum_{s=1}^{t-1} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} + \log \exp\left( -M_t \right) \right)}{\Fcal_{t-1}}} \\
+&\le \EE \Trace{\exp\left( -\sum_{s=1}^{t-1} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} + \log \CE{\exp\left( -M_t \right)}{\Fcal_{t-1}} \right)}.
+\end{align*}
+The last inequality follows from Lieb's theorem \citep{tropp2015introduction}. 
+
+Define a function \( f_{\lambda}: [0, 1] \to \RR \) as \( f_{\lambda}(x) = e^{\lambda x} - x (e^{\lambda} - 1) - 1 \). Then \( f_{\lambda}(x) \) is convex with \( f_{\lambda}(0) = f_{\lambda}(1) = 0 \) for all \(\lambda \in \RR\). Thus, \( e^{-x} \le 1 + x(e^{-1} - 1) \) for \(x \in [0, 1]\).
+
+Because the eigenvalues of \( M_s \) lie in \([0, 1]\), by the spectral mapping theorem, we have
+\[
+\CE{\exp\left(-M_t\right)}{\Fcal_{t-1}} \preceq I + (e^{-1} - 1) \CE{M_t}{\Fcal_{t-1}} \preceq \exp\left( -(1 - e^{-1}) \CE{M_t}{\Fcal_{t-1}} \right).
+\]
+Thus, we obtain:
+\begin{align*}
+& \EE \exp\left( \Maxeigen{-\sum_{s=1}^{t} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}}} \right) \\
+&\le \EE \Trace{\exp\left( -\sum_{s=1}^{t-1} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} + \log \exp\left( -M_t \right) \right)} \\
+&= \EE \Trace{\exp\Bigl( -\sum_{s=1}^{t-1} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} + \log \exp( -(1 - e^{-1}) \CE{M_t}{\Fcal_{s-1}}) \Bigr)} \\
+&= \EE \Trace{\exp\left( -\sum_{\tau=1}^{t-1} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}} \right)} \\
+&\le \vdots \\
+&\le \EE \Trace{\exp\left(O\right)} = d.
+\end{align*}
+
+Now, by Markov's inequality:
+\begin{align*}
+&\PP\left( \Maxeigen{-\sum_{s=1}^{t} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}}} > \log \frac{d}{\delta} \right) \\
+&\le \EE \exp\left( \Maxeigen{-\sum_{s=1}^{t} M_s + (1 - e^{-1}) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}}} \right) \frac{\delta}{d} \\
+&\le \delta.
+\end{align*}
+
+For the upper bound, we can prove:
+\[
+\Maxeigen{\sum_{s=1}^{t} M_s - \left( e - 1 \right) \sum_{s=1}^{t} \CE{M_s}{\Fcal_{s-1}}} \le \log \frac{d}{\delta},
+\]
+in a similar manner, using the fact that \( e^{x} \le 1 + (e - 1) x \) for \( x \in [0, 1] \).
+\end{proof}
+
+%------------------------------------
+% References
+%------------------------------------
+\vskip 0.2in
+\bibliography{ref}
+
+
+\end{document}
