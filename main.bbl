@@ -1,0 +1,282 @@
+\begin{thebibliography}{42}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Abbasi-Yadkori et~al.(2011)Abbasi-Yadkori, P{\'a}l, and
+  Szepesv{\'a}ri]{abbasi2011improved}
+Yasin Abbasi-Yadkori, D{\'a}vid P{\'a}l, and Csaba Szepesv{\'a}ri.
+\newblock Improved algorithms for linear stochastic bandits.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  2312--2320, 2011.
+
+\bibitem[Abe and Long(1999)]{abe1999associative}
+Naoki Abe and Philip~M Long.
+\newblock Associative reinforcement learning using linear probabilistic
+  concepts.
+\newblock In \emph{ICML}, 1999.
+
+\bibitem[Abeille et~al.(2017)Abeille, Lazaric, et~al.]{abeille2017linear}
+Marc Abeille, Alessandro Lazaric, et~al.
+\newblock Linear thompson sampling revisited.
+\newblock \emph{Electronic Journal of Statistics}, 11\penalty0 (2):\penalty0
+  5165--5197, 2017.
+
+\bibitem[Agrawal and Goyal(2013)]{agrawal2013thompson}
+Shipra Agrawal and Navin Goyal.
+\newblock Thompson sampling for contextual bandits with linear payoffs.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  127--135, 2013.
+
+\bibitem[Agrawal and Goyal(2017)]{agrawal2017near}
+Shipra Agrawal and Navin Goyal.
+\newblock Near-optimal regret bounds for thompson sampling.
+\newblock \emph{Journal of the ACM (JACM)}, 64\penalty0 (5):\penalty0 1--24,
+  2017.
+
+\bibitem[Auer(2002a)]{auer2002using}
+Peter Auer.
+\newblock Using confidence bounds for exploitation-exploration trade-offs.
+\newblock \emph{Journal of Machine Learning Research}, 3\penalty0
+  (Nov):\penalty0 397--422, 2002a.
+
+\bibitem[Bang and Robins(2005)]{bang2005doubly}
+Heejung Bang and James~M Robins.
+\newblock Doubly robust estimation in missing data and causal inference models.
+\newblock \emph{Biometrics}, 61\penalty0 (4):\penalty0 962--973, 2005.
+
+\bibitem[Bastani et~al.(2021)Bastani, Bayati, and Khosravi]{bastani2021mostly}
+Hamsa Bastani, Mohsen Bayati, and Khashayar Khosravi.
+\newblock Mostly exploration-free algorithms for contextual bandits.
+\newblock \emph{Management Science}, 67\penalty0 (3):\penalty0 1329--1349,
+  2021.
+
+\bibitem[Bishop(1995)]{bishop1995training}
+Chris~M Bishop.
+\newblock Training with noise is equivalent to tikhonov regularization.
+\newblock \emph{Neural computation}, 7\penalty0 (1):\penalty0 108--116, 1995.
+
+\bibitem[Bouneffouf et~al.(2020)Bouneffouf, Rish, and
+  Aggarwal]{bouneffouf2020survey}
+Djallel Bouneffouf, Irina Rish, and Charu Aggarwal.
+\newblock Survey on applications of multi-armed and contextual bandits.
+\newblock In \emph{2020 IEEE Congress on Evolutionary Computation (CEC)}, pages
+  1--8. IEEE, 2020.
+
+\bibitem[B{\"u}hlmann and Van De~Geer(2011)]{buhlmann2011statistics}
+Peter B{\"u}hlmann and Sara Van De~Geer.
+\newblock \emph{Statistics for high-dimensional data: methods, theory and
+  applications}.
+\newblock Springer Science \& Business Media, 2011.
+
+\bibitem[Chapelle and Li(2011)]{chapelle2011}
+Olivier Chapelle and Lihong Li.
+\newblock An empirical evaluation of thompson sampling.
+\newblock In J.~Shawe-Taylor, R.~S. Zemel, P.~L. Bartlett, F.~Pereira, and
+  K.~Q. Weinberger, editors, \emph{Advances in Neural Information Processing
+  Systems 24}, pages 2249--2257. Curran Associates, Inc., 2011.
+
+\bibitem[Chu et~al.(2011)Chu, Li, Reyzin, and Schapire]{chu2011contextual}
+Wei Chu, Lihong Li, Lev Reyzin, and Robert Schapire.
+\newblock Contextual bandits with linear payoff functions.
+\newblock In \emph{Proceedings of the Fourteenth International Conference on
+  Artificial Intelligence and Statistics}, pages 208--214, 2011.
+
+\bibitem[Dani et~al.(2008)Dani, Hayes, and Kakade]{dani2008stochastic}
+Varsha Dani, Thomas Hayes, and Sham Kakade.
+\newblock Stochastic linear optimization under bandit feedback.
+\newblock In \emph{21st Annual Conference on Learning Theory}, pages 355--366,
+  01 2008.
+
+\bibitem[Dimakopoulou et~al.(2019)Dimakopoulou, Zhou, Athey, and
+  Imbens]{dimakopoulou2019balanced}
+Maria Dimakopoulou, Zhengyuan Zhou, Susan Athey, and Guido Imbens.
+\newblock Balanced linear contextual bandits.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~33, pages 3445--3453, 2019.
+
+\bibitem[Ferreira et~al.(2018)Ferreira, Simchi-Levi, and
+  Wang]{ferreira2018online}
+Kris~Johnson Ferreira, David Simchi-Levi, and He~Wang.
+\newblock Online network revenue management using thompson sampling.
+\newblock \emph{Operations research}, 66\penalty0 (6):\penalty0 1586--1602,
+  2018.
+
+\bibitem[Guttorp and Lindgren(2009)]{guttorp2009karl}
+Peter Guttorp and Georg Lindgren.
+\newblock Karl pearson and the scandinavian school of statistics.
+\newblock \emph{International Statistical Review}, 77\penalty0 (1):\penalty0
+  64--71, 2009.
+
+\bibitem[Hamidi and Bayati(2019)]{hamidi2019worst}
+Nima Hamidi and Mohsen Bayati.
+\newblock Worst-case analysis of {T}hompson sampling for linear bandits.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~32, 2019.
+
+\bibitem[Hsu et~al.(2020)Hsu, Tseng, Hsieh, Chang, and
+  Chen]{hsu2020recommending}
+Jyh-Yih Hsu, Wei-Kuo Tseng, Jia-You Hsieh, Chao-Jen Chang, and Huan Chen.
+\newblock The recommending agricultural product sales promotion mode in
+  e-commerce using reinforcement learning with contextual multiarmed bandit
+  algorithms.
+\newblock \emph{Mathematical Problems in Engineering}, 2020\penalty0
+  (1):\penalty0 8836000, 2020.
+
+\bibitem[Huix et~al.(2023)Huix, Zhang, and Durmus]{huix2023tight}
+Tom Huix, Matthew Zhang, and Alain Durmus.
+\newblock Tight regret and complexity bounds for thompson sampling via langevin
+  monte carlo.
+\newblock In \emph{International Conference on Artificial Intelligence and
+  Statistics}, pages 8749--8770. PMLR, 2023.
+
+\bibitem[Kim and Paik(2019)]{kim2019doubly}
+Gisoo Kim and Myunghee~Cho Paik.
+\newblock Doubly-robust lasso bandit.
+\newblock In \emph{Advances in Neural Information Processing Systems}, pages
+  5869--5879, 2019.
+
+\bibitem[Kim et~al.(2021)Kim, Kim, and Paik]{kim2021doubly}
+Wonyoung Kim, Gi-Soo Kim, and Myunghee~Cho Paik.
+\newblock Doubly robust thompson sampling with linear payoffs.
+\newblock In A.~Beygelzimer, Y.~Dauphin, P.~Liang, and J.~Wortman Vaughan,
+  editors, \emph{Advances in Neural Information Processing Systems}, 2021.
+
+\bibitem[Kim et~al.(2023{\natexlab{a}})Kim, Lee, and Paik]{kim2023double}
+Wonyoung Kim, Kyungbok Lee, and Myunghee~Cho Paik.
+\newblock Double doubly robust thompson sampling for generalized linear
+  contextual bandits.
+\newblock In \emph{Proceedings of the AAAI Conference on Artificial
+  Intelligence}, volume~37, pages 8300--8307, 2023{\natexlab{a}}.
+
+\bibitem[Kim et~al.(2023{\natexlab{b}})Kim, Paik, and Oh]{kim2023squeeze}
+Wonyoung Kim, Myunghee~Cho Paik, and Min-Hwan Oh.
+\newblock Squeeze all: Novel estimator and self-normalized bound for linear
+  contextual bandits.
+\newblock In \emph{International Conference on Artificial Intelligence and
+  Statistics}, pages 3098--3124. PMLR, 2023{\natexlab{b}}.
+
+\bibitem[Kim et~al.(2025)Kim, Iyengar, and Zeevi]{kim2025learning}
+Wonyoung Kim, Garud Iyengar, and Assaf Zeevi.
+\newblock Learning the pareto front using bootstrapped observation samples.
+\newblock In \emph{International Conference on Artificial Intelligence and
+  Statistics}, pages 667--675. PMLR, 2025.
+
+\bibitem[Kveton et~al.(2020)Kveton, Szepesv{\'{a}}ri, Ghavamzadeh, and
+  Boutilier]{perturb20akveton}
+Branislav Kveton, Csaba Szepesv{\'{a}}ri, Mohammad Ghavamzadeh, and Craig
+  Boutilier.
+\newblock Perturbed-history exploration in stochastic linear bandits.
+\newblock In Ryan~P. Adams and Vibhav Gogate, editors, \emph{Proceedings of The
+  35th Uncertainty in Artificial Intelligence Conference}, volume 115 of
+  \emph{Proceedings of Machine Learning Research}, pages 530--540. PMLR, 22--25
+  Jul 2020.
+
+\bibitem[Kveton et~al.(2021)Kveton, Konobeev, Zhao, Hong, Cheng, and
+  Ahmed]{kveton2021metats}
+Branislav Kveton, Mikhail Konobeev, Manzil Zhao, Seohyun Hong, Chao-Kai Cheng,
+  and Tanveer Ahmed.
+\newblock {Meta-TS}: {M}eta-learned {T}hompson sampling.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  5858--5867. PMLR, 2021.
+
+\bibitem[Lai and Robbins(1985)]{lai1985asymptotically}
+Tze~Leung Lai and Herbert Robbins.
+\newblock Asymptotically efficient adaptive allocation rules.
+\newblock \emph{Advances in applied mathematics}, 6\penalty0 (1):\penalty0
+  4--22, 1985.
+
+\bibitem[Lattimore and Szepesv{\'a}ri(2020)]{lattimore2020bandit}
+Tor Lattimore and Csaba Szepesv{\'a}ri.
+\newblock \emph{Bandit algorithms}.
+\newblock Cambridge University Press, 2020.
+
+\bibitem[Mockus(2005)]{mockus2005bayesian}
+Jonas Mockus.
+\newblock The bayesian approach to global optimization.
+\newblock In \emph{System Modeling and Optimization: Proceedings of the 10th
+  IFIP Conference New York City, USA, August 31--September 4, 1981}, pages
+  473--481. Springer, 2005.
+
+\bibitem[Murphy(2005)]{murphy2005experimental}
+Susan~A Murphy.
+\newblock An experimental design for the development of adaptive treatment
+  strategies.
+\newblock \emph{Statistics in medicine}, 24\penalty0 (10):\penalty0 1455--1481,
+  2005.
+
+\bibitem[Offer-Westort et~al.(2021)Offer-Westort, Coppock, and
+  Green]{offer2021adaptive}
+Molly Offer-Westort, Alexander Coppock, and Donald~P Green.
+\newblock Adaptive experimental design: Prospects and applications in political
+  science.
+\newblock \emph{American Journal of Political Science}, 65\penalty0
+  (4):\penalty0 826--844, 2021.
+
+\bibitem[Riou et~al.(2023)Riou, Honda, and Matsushima]{riou2023matching}
+Charles Riou, Junya Honda, and Shinji Matsushima.
+\newblock Matching {L}ai and {R}obbins lower bound for {T}hompson sampling.
+\newblock In \emph{Advances in Neural Information Processing Systems},
+  volume~36, 2023.
+
+\bibitem[Rusmevichientong and Tsitsiklis(2010)]{rusmevichientong2010linearly}
+Paat Rusmevichientong and John~N Tsitsiklis.
+\newblock Linearly parameterized bandits.
+\newblock \emph{Mathematics of Operations Research}, 35\penalty0 (2):\penalty0
+  395--411, 2010.
+
+\bibitem[Satyal et~al.(2018)Satyal, Weber, Paik, Di~Ciccio, and
+  Mendling]{satyal2018ab}
+Suhrid Satyal, Ingo Weber, Hye-young Paik, Claudio Di~Ciccio, and Jan Mendling.
+\newblock Ab testing for process versions with contextual multi-armed bandit
+  algorithms.
+\newblock In \emph{Advanced Information Systems Engineering: 30th International
+  Conference, CAiSE 2018, Tallinn, Estonia, June 11-15, 2018, Proceedings 30},
+  pages 19--34. Springer, 2018.
+
+\bibitem[Smith(1918)]{smith1918standard}
+Kirstine Smith.
+\newblock On the standard deviations of adjusted and interpolated values of an
+  observed polynomial function and its constants and the guidance they give
+  towards a proper choice of the distribution of observations.
+\newblock \emph{Biometrika}, 12\penalty0 (1/2):\penalty0 1--85, 1918.
+
+\bibitem[Soare et~al.(2014)Soare, Lazaric, and Munos]{soare2014best}
+Marta Soare, Alessandro Lazaric, and R{\'e}mi Munos.
+\newblock Best-arm identification in linear bandits.
+\newblock \emph{Advances in Neural Information Processing Systems}, 27, 2014.
+
+\bibitem[Tao et~al.(2018)Tao, Blanco, and Zhou]{tao2018best}
+Chao Tao, Sa{\'u}l Blanco, and Yuan Zhou.
+\newblock Best arm identification in linear bandits with linear dimension
+  dependency.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  4877--4886. PMLR, 2018.
+
+\bibitem[Tropp(2012)]{tropp2012user}
+Joel~A Tropp.
+\newblock User-friendly tail bounds for sums of random matrices.
+\newblock \emph{Foundations of computational mathematics}, 12\penalty0
+  (4):\penalty0 389--434, 2012.
+
+\bibitem[Tropp(2015)]{tropp2015introduction}
+Joel~A Tropp.
+\newblock An introduction to matrix concentration inequalities.
+\newblock \emph{Foundations and Trends{\textregistered} in Machine Learning},
+  8\penalty0 (1-2):\penalty0 1--230, 2015.
+
+\bibitem[Xu and Zeevi(2020)]{xu2020upper}
+Yunbei Xu and Assaf Zeevi.
+\newblock Upper counterfactual confidence bounds: a new optimism principle for
+  contextual bandits.
+\newblock \emph{arXiv preprint arXiv:2007.07876}, 2020.
+
+\bibitem[Zhu and Tan(2020)]{zhu2020thompson}
+Qiuyu Zhu and Vincent Tan.
+\newblock Thompson sampling algorithms for mean-variance bandits.
+\newblock In \emph{International Conference on Machine Learning}, pages
+  11599--11608. PMLR, 2020.
+
+\end{thebibliography}

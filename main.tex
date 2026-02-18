@@ -1,25 +1,4 @@
-%% LyX 2.4.4 created this file.  For more info, see https://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
-\documentclass[11pt,twoside,english]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{float}
-\usepackage{booktabs}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amssymb}
-\usepackage{graphicx}
-
-\makeatletter
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
-%% Because html converters don't know tabularnewline
-\providecommand{\tabularnewline}{\\}
-\floatstyle{ruled}
-\newfloat{algorithm}{tbp}{loa}
-\providecommand{\algorithmname}{Algorithm}
-\floatname{algorithm}{\protect\algorithmname}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\documentclass[twoside,11pt]{article}
 \sloppy
 % Any additional packages needed should be included after jmlr2e.
 % Note that jmlr2e.sty includes epsfig, amssymb, natbib and graphicx,
@@ -39,13 +18,15 @@
 % Example of using the package with custom options:
 %\usepackage[abbrvbib, preprint]{jmlr2e}
 \usepackage{jmlr2e}
-\usepackage{amsfonts}\usepackage{subfigure}
+\usepackage{float}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{subfigure}
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{enumerate}
 \usepackage{xcolor}
 \usepackage{abbe}
-\usepackage{colortbl}\usepackage{array}% for professional tables
+\usepackage{booktabs, colortbl, array} % for professional tables
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,shapes.geometric,positioning}
 \definecolor{Gray}{gray}{0.9} %Table cell color
@@ -105,6 +86,9 @@
 \global\long\def\Sampledreward#1#2#3{\tilde{Y}_{#2,#3}^{(#1)}}%
 \global\long\def\Sampledparameter#1#2#3{\tilde{\theta}_{#2,#3}^{(#1)}}%
 \global\long\def\Mod{\text{mod}}%
+\global\long\def\abs#1{\left|\!#1\!\right|}%
+\global\long\def\CE#1#2{\EE\!\left[\left.#1\right|#2\right]}%
+\global\long\def\norm#1{\left\Vert #1\right\Vert }%
 
 % Heading arguments are {volume}{year}{pages}{date submitted}{date published}{paper id}{author-full-names}
 
@@ -113,7 +97,7 @@
 
 % Short headings should be running head and authors last names
 
-\ShortHeadings{Adaptive Data Augmentation for  Thompson Sampling}{Kim}
+\ShortHeadings{Adaptive Data Augmentation for Thompson Sampling}{Kim}
 \firstpageno{1}
 
 \newtheorem{thm}{\protect\theoremname}\newtheorem{lem}[thm]{\protect\lemmaname}\newtheorem{prop}[thm]{\protect\propositionname}
@@ -126,277 +110,31 @@
 
 \makeatother
 
-\usepackage{babel}
 \begin{document}
-% COMMON ABBRVS 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% bold alphabet 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\global\long\def\ab{\mathbf{a}}%
- 
-\global\long\def\bb{\mathbf{b}}%
- 
-\global\long\def\cb{\mathbf{c}}%
- 
-\global\long\def\db{\mathbf{d}}%
- 
-\global\long\def\eb{\mathbf{e}}%
- 
-\global\long\def\fb{\mathbf{f}}%
- 
-\global\long\def\gb{\mathbf{g}}%
- 
-\global\long\def\hb{\mathbf{h}}%
- 
-\global\long\def\ib{\mathbf{i}}%
- 
-\global\long\def\jb{\mathbf{j}}%
- 
-\global\long\def\kb{\mathbf{k}}%
- 
-\global\long\def\lb{\mathbf{l}}%
- 
-\global\long\def\mb{\mathbf{m}}%
- 
-\global\long\def\nb{\mathbf{n}}%
- 
-\global\long\def\ob{\mathbf{o}}%
- 
-\global\long\def\pb{\mathbf{p}}%
- 
-\global\long\def\qb{\mathbf{q}}%
- 
-\global\long\def\rb{\mathbf{r}}%
- 
-\global\long\def\sb{\mathbf{s}}%
- 
-\global\long\def\tb{\mathbf{t}}%
- 
-\global\long\def\ub{\mathbf{u}}%
- 
-\global\long\def\vb{\mathbf{v}}%
- 
-\global\long\def\wb{\mathbf{w}}%
- 
-\global\long\def\xb{\mathbf{x}}%
- 
-\global\long\def\yb{\mathbf{y}}%
- 
-\global\long\def\zb{\mathbf{z}}%
- 
-\global\long\def\Ab{\mathbf{A}}%
- 
-\global\long\def\Bb{\mathbf{B}}%
- 
-\global\long\def\Cb{\mathbf{C}}%
- 
-\global\long\def\Db{\mathbf{D}}%
- 
-\global\long\def\Eb{\mathbf{E}}%
- 
-\global\long\def\Fb{\mathbf{F}}%
- 
-\global\long\def\Gb{\mathbf{G}}%
- 
-\global\long\def\Hb{\mathbf{H}}%
- 
-\global\long\def\Ib{\mathbf{I}}%
- 
-\global\long\def\Jb{\mathbf{J}}%
- 
-\global\long\def\Kb{\mathbf{K}}%
- 
-\global\long\def\Lb{\mathbf{L}}%
- 
-\global\long\def\Mb{\mathbf{M}}%
- 
-\global\long\def\Nb{\mathbf{N}}%
- 
-\global\long\def\Ob{\mathbf{O}}%
- 
-\global\long\def\Pb{\mathbf{P}}%
- 
-\global\long\def\Qb{\mathbf{Q}}%
- 
-\global\long\def\Rb{\mathbf{R}}%
- 
-\global\long\def\Sb{\mathbf{S}}%
- 
-\global\long\def\Tb{\mathbf{T}}%
- 
-\global\long\def\Ub{\mathbf{U}}%
- 
-\global\long\def\Vb{\mathbf{V}}%
- 
-\global\long\def\Wb{\mathbf{W}}%
- 
-\global\long\def\Xb{\mathbf{X}}%
- 
-\global\long\def\Yb{\mathbf{Y}}%
- 
-\global\long\def\Zb{\mathbf{Z}}%
- 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% calligraphic fonts
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\global\long\def\Acal{\mathcal{A}}%
- 
-\global\long\def\Bcal{\mathcal{B}}%
- 
-\global\long\def\Ccal{\mathcal{C}}%
- 
-\global\long\def\Dcal{\mathcal{D}}%
- 
-\global\long\def\Ecal{\mathcal{E}}%
- 
-\global\long\def\Fcal{\mathcal{F}}%
- 
-\global\long\def\Gcal{\mathcal{G}}%
- 
-\global\long\def\Hcal{\mathcal{H}}%
- 
-\global\long\def\Ical{\mathcal{I}}%
- 
-\global\long\def\Jcal{\mathcal{J}}%
- 
-\global\long\def\Kcal{\mathcal{K}}%
- 
-\global\long\def\Lcal{\mathcal{L}}%
- 
-\global\long\def\Mcal{\mathcal{M}}%
- 
-\global\long\def\Ncal{\mathcal{N}}%
- 
-\global\long\def\Ocal{\mathcal{O}}%
- 
-\global\long\def\Pcal{\mathcal{P}}%
- 
-\global\long\def\Qcal{\mathcal{Q}}%
- 
-\global\long\def\Rcal{\mathcal{R}}%
- 
-\global\long\def\Scal{\mathcal{S}}%
- 
-\global\long\def\Tcal{\mathcal{T}}%
- 
-\global\long\def\Ucal{\mathcal{U}}%
- 
-\global\long\def\Vcal{\mathcal{V}}%
- 
-\global\long\def\Wcal{\mathcal{W}}%
- 
-\global\long\def\Xcal{\mathcal{X}}%
- 
-\global\long\def\Ycal{\mathcal{Y}}%
- 
-\global\long\def\Zcal{\mathcal{Z}}%
- 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% Widely accepted definitions %%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\global\long\def\BB{\mathbb{B}}%
- % Ball
-\global\long\def\CC{\mathbb{C}}%
- % Complex numbers
-\global\long\def\EE{\mathbb{E}}%
- % Expectation
-\global\long\def\VV{\mathbb{V}}%
- % Variance
-\global\long\def\II{\mathbb{I}}%
- % Indicator
-\global\long\def\KK{\mathbb{K}}%
- % Arbitrary field
-\global\long\def\LL{\mathbb{L}}%
- % Loss
-\global\long\def\MM{\mathbb{M}}%
- % Median
-\global\long\def\NN{\mathbb{N}}%
- % Natural numbers
-\global\long\def\PP{\mathbb{P}}%
- % Probability
-\global\long\def\QQ{\mathbb{Q}}%
- % Rationals
-\global\long\def\RR{\mathbb{R}}%
- % Real numbers
-\global\long\def\ZZ{\mathbb{Z}}%
- % Integers
-\global\long\def\XX{\mathbb{X}}%
- 
-\global\long\def\YY{\mathbb{Y}}%
- 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%% bold greek letters %%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\global\long\def\alphab{\boldsymbol{\alpha}}%
- 
-\global\long\def\betab{\boldsymbol{\beta}}%
- 
-\global\long\def\Sigmab{\boldsymbol{\Sigma}}%
- 
-\global\long\def\Omegab{\boldsymbol{\Omega}}%
- 
-\global\long\def\omegab{\boldsymbol{\omega}}%
- 
-\global\long\def\Gammab{\boldsymbol{\Gamma}}%
- 
-\global\long\def\Psib{\boldsymbol{\Psi}}%
- 
-\global\long\def\Thetab{\boldsymbol{\Theta}}%
- 
-\global\long\def\thetab{\boldsymbol{\theta}}%
- 
-\global\long\def\taub{\boldsymbol{\tau}}%
- 
-\global\long\def\epsilonb{\boldsymbol{\epsilon}}%
- 
-\global\long\def\etab{\boldsymbol{\eta}}%
- 
-\global\long\def\xib{\boldsymbol{\xi}}%
- 
-\global\long\def\gammab{\boldsymbol{\gamma}}%
- 
-\global\long\def\deltab{\boldsymbol{\delta}}%
- 
-\global\long\def\Deltab{\boldsymbol{\Delta}}%
- 
-\global\long\def\mub{\boldsymbol{\mu}}%
- 
-\global\long\def\rhob{\boldsymbol{\rho}}%
-\global\long\def\vPhib{\boldsymbol{\varPhi}}%
-
-\global\long\def\abs#1{\left|\!#1\!\right|}%
-\global\long\def\CE#1#2{\EE\!\left[\left.#1\right|#2\right]}%
-\global\long\def\norm#1{\left\Vert #1\right\Vert }%
-
-\title{Adaptive Data Augmentation for Thompson Sampling}
-\author{\name{W}onyoung Kim \email wyk7@cau.ac.kr \\
- \addr Department of Artificial Intelligence\\
- Chung-Ang University \\
- Seoul, Republic of Korea }
-
+	
+	\title{Adaptive Data Augmentation for Thompson Sampling}
+	\author{\name Wonyoung Kim 
+		\email wyk7@cau.ac.kr \\  
+		\addr Department of Artificial Intelligence\\         
+		Chung-Ang University \\         
+		Seoul, Republic of Korea
+	}
+	%\AND         
+	%\name Myunghee Cho Paik 
+	%\email myungheechopaik@snu.ac.kr \\ 
+	%\addr Department of Statistics \\         
+	%Seoul National University\\         
+	%Seoul 08826, Republic of Korea}
+\editor{My editor}
 \maketitle
-%\AND         
-%\name Myunghee Cho Paik 
-%\email myungheechopaik@snu.ac.kr \\ 
-%\addr Department of Statistics \\         
-%Seoul National University\\         
-%Seoul 08826, Republic of Korea}
+
 \editor{My editor} 
 \begin{abstract}
-In linear contextual bandits, the objective is to select actions that
-maximize cumulative rewards, modeled as a linear function with unknown
-parameters. Although Thompson Sampling performs well empirically,
-it does not achieve optimal regret bounds. This paper proposes a nearly
-minimax optimal Thompson Sampling for linear contextual bandits by
-developing a novel estimator with the adaptive data augmentation and
-coupling of the hypothetical samples that are designed for efficient
-parameter learning. The proposed estimator accurately predicts rewards
-for all arms without relying on assumptions for the context distribution.
-Empirical results show robust performance and significant improvement
-over existing methods. 
+Linear contextual bandits offer a robust framework for sequential decision-making under uncertainty.
+While Thompson Sampling (TS) exhibits strong empirical performance, it fails to achieve the minimax optimal regret bound in frequentist analysis because it requires more information to construct a posterior distribution that is robust against worst-case parameters.
+This work proposes a novel adaptive data augmentation method for TS to extract more information from the explored samples than is possible with the conventional methods.
+Our approach generates synthetic samples specifically designed to attain semiparametric efficiency in estimation, thereby achieving the minimax optimal regret bound.
+Empirical evaluations demonstrate that our method significantly outperforms existing methods.
 \end{abstract}
 \begin{keywords} Thompson Sampling, minimax optimal regret bound,
 hypothetical bandit problem, adaptive data augmentation, coupling.
@@ -409,8 +147,9 @@ hypothetical bandit problem, adaptive data augmentation, coupling.
 
 \section{Introduction}
 
-Linear contextual bandits (LinCB) provide a simple yet powerful framework
-for sequential decision-making. At each decision epoch, an agent selects
+In linear contextual bandits, the objective is to select actions that
+maximize cumulative rewards, modeled as a linear function with unknown
+parameters. At each decision epoch, an agent selects
 an action from a set of context vectors to maximize cumulative rewards,
 assumed to be linear functions of the chosen contexts. A special case
 is the multi-armed bandit (MAB) problem, in which the contexts are
@@ -438,22 +177,13 @@ Closing this gap is challenging due to the selective reward observation
 inherent in \texttt{LinTS}, complicating variance control for optimal-arm
 reward estimation.
 
-Recent LinCB research has leveraged advanced statistical methodologies
-to enhance algorithmic performance and theoretical guarantees. Techniques
-from high-dimensional parameter estimation \citep{buhlmann2011statistics},
-optimal experimental design \citep{smith1918standard,guttorp2009karl},
-and Bayesian optimization \citep{mockus2005bayesian} have been adapted
-to bandit settings. More recently, missing-data techniques have been
-employed to bridge the regret-bound gap by estimating missing rewards
-as though rewards from all arms were observed at every round \citep{kim2019doubly,kim2021doubly}.
-Unlike conventional estimators, which reduce errors solely for selected
-arms, these methods seek convergence across all arms. However, their
-reliance on inverse-probability weighting introduces variance that
-scales with the number of arms. To mitigate this, existing methods
-typically impose restrictive assumptions---such as independent-and-identically-distributed
-(IID) contexts or particular diversity conditions---limiting broader
-applicability. Addressing this limitation necessitates resolving open
-issues in both missing-data and LinCB literatures.
+
+Why TS is difficult for the 
+Convergence of the distribution is slower than the convergence of the samples in frequentist analysis. 
+As frequentist bound derives the regret bound over all possible distribution of parameters, LinTS requires more information to achieve the optimal regret bound.
+
+
+
 
 This paper addresses this critical gap by introducing a novel estimation
 approach capable of learning rewards for all arms without relying
@@ -496,11 +226,11 @@ of the proposed algorithm across various benchmark scenarios.
 \textbf{Reference}  & \textbf{Regret bound}  & \textbf{Key assumptions}\tabularnewline
 \midrule 
 \citet{agrawal2013thompson}  & $\tilde{O}\bigl(d^{3/2}\sqrt{T}\bigr)$  & Normalized contexts \tabularnewline
-{[}2pt{]} \citet{abeille2017linear}  & $\tilde{O}\bigl(d^{3/2}\sqrt{T}\bigr)$  & Normalized contexts \tabularnewline
-{[}2pt{]} \citet{dimakopoulou2019balanced}  & $\tilde{O}\bigl(d^{3/2}\sqrt{T}\bigr)$  & Normalized contexts \tabularnewline
-{[}2pt{]} \citet{kim2021doubly}  & $\tilde{O}\bigl(d\sqrt{T}\bigr)$  & IID contexts from special distributions \tabularnewline
-{[}2pt{]} \citet{huix2023tight}  & $\tilde{O}\bigl(d\sqrt{T}\bigr)$  & Gaussian prior on parameter \tabularnewline
-{[}2pt{]} \textbf{This work}  & $\tilde{O}\bigl(d\sqrt{T}\bigr)$  & Bounded contexts \tabularnewline
+ \citet{abeille2017linear}  & $\tilde{O}\bigl(d^{3/2}\sqrt{T}\bigr)$  & Normalized contexts \tabularnewline
+ \citet{dimakopoulou2019balanced}  & $\tilde{O}\bigl(d^{3/2}\sqrt{T}\bigr)$  & Normalized contexts \tabularnewline
+ \citet{kim2021doubly}  & $\tilde{O}\bigl(d\sqrt{T}\bigr)$  & IID contexts from special distributions \tabularnewline
+ \citet{huix2023tight}  & $\tilde{O}\bigl(d\sqrt{T}\bigr)$  & Gaussian prior on parameter \tabularnewline
+ \textbf{This work}  & $\tilde{O}\bigl(d\sqrt{T}\bigr)$  & Bounded contexts \tabularnewline
 \bottomrule
 \end{tabular}
 \end{table}
@@ -560,6 +290,36 @@ regret bounds for arbitrary contexts. This paper addresses this challenge
 by developing a novel estimator and algorithm that achieve the minimax
 optimal regret bound of $\tilde{O}(d\sqrt{T})$ without restrictive
 assumptions on the context distributions.
+
+The theoretical analysis of Thompson Sampling (TS) generally bifurcates into frequentist and Bayesian settings. 
+Frequentist analyses, such as those by \citet{hamidi2019worst}, provide robust per-instance guarantees but often fail to capture the informative value of the prior. 
+Furthermore, these bounds typically exhibit a sub-optimal factor of $\sqrt{d}$ compared to the minimax lower bound; our work specifically aims to close this gap. 
+In contrast, Bayesian analyses of TS, exemplified by \citet{kveton2021metats}, effectively incorporate prior information. 
+However, these results are generally on average over bandit instances sampled from the prior, making them inherently weaker than frequentist per-instance analyses. 
+Additionally, Bayesian frameworks often necessitate restrictive assumptions, such as Gaussian noise, to ensure closed-form posteriors, which is less general than the sub-Gaussian noise models prevalent in frequentist literature. 
+While earlier Bayesian bounds were criticized for failing to match the logarithmic lower bound established by \citet{lai1985asymptotically}, recent work by \citet{riou2023matching} has resolved this discrepancy. 
+Unlike these average-case approaches, our analysis remains strictly frequentist, providing minimax optimal guarantees that hold for any fixed bandit instance.
+
+
+Recent LinCB research has leveraged advanced statistical methodologies
+to enhance algorithmic performance and theoretical guarantees. Techniques
+from high-dimensional parameter estimation \citep{buhlmann2011statistics},
+optimal experimental design \citep{smith1918standard,guttorp2009karl},
+and Bayesian optimization \citep{mockus2005bayesian} have been adapted
+to bandit settings. More recently, missing-data techniques have been
+employed to bridge the regret-bound gap by estimating missing rewards
+as though rewards from all arms were observed at every round \citep{kim2019doubly,kim2021doubly}.
+Unlike conventional estimators, which reduce errors solely for selected
+arms, these methods seek convergence across all arms. However, their
+reliance on inverse-probability weighting introduces variance that
+scales with the number of arms. To mitigate this, existing methods
+typically impose restrictive assumptions---such as independent-and-identically-distributed
+(IID) contexts or particular diversity conditions---limiting broader
+applicability. Addressing this limitation necessitates resolving open
+issues in both missing-data and LinCB literatures.
+
+Semiparametric for LinCB.
+
 
 %-------------------------------------------
 % 3. LinCB
@@ -628,30 +388,9 @@ e.g., \citealp{abbasi2011improved} and \citealp{lattimore2020bandit})
 and encompasses specific cases studied in \citet{kim2021doubly} and
 \citet{kim2023squeeze}.
 
-%-------------------------------------------
-% 4. Proposed Method
-%-------------------------------------------
 
 
-\section{Proposed Method}
-
-\label{sec:proposed_method}
-
-This section introduces the proposed estimation scheme that enables
-\texttt{LinTS} to achieve a nearly minimax-optimal regret bound. Section~\ref{sec:augment}
-motivates the use of hypothetical sample augmentation for parameter
-estimation. Section~\ref{sec:hypo_contexts} presents a construction
-of hypothetical contexts that efficiently support parameter learning
-while minimizing the number of augmented samples. Building on the
-constructed contexts, Section~\ref{sec:hypothetical_bandit} defines
-an adaptive hypothetical bandit problem tailored for estimation. Section~\ref{sec:coupling}
-describes a resampling strategy that couples the hypothetical and
-original bandit problems. Finally, Section~\ref{sec:algorithm} outlines
-the proposed algorithm, which incorporates the novel estimator derived
-from this framework.
-
-\subsection{Augmenting Hypothetical Contexts for Linear Bandits}
-
+\section{Augmenting Hypothetical Contexts for Linear Bandits}
 \label{sec:augment}
 
 In linear contextual bandits (LinCB), the ridge estimator with $\ell_{2}$-regularization
@@ -661,7 +400,7 @@ observations. Let $\mathbf{e}i\in\mathbb{R}^{d}$ denote the $i$-th
 Euclidean basis vector. Then, the ridge estimator at round $t$ can
 be expressed as 
 \begin{equation}
-\left(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}+\sum_{i=1}^{d}\mathbf{e}_{i}\mathbf{e}_{i}^{\top}\right)^{-1}\left(\sum_{s=1}^{t}Y_{a_{s},s}X_{a_{s},s}+\sum_{i=1}^{d}0\cdot\mathbf{e}_{i}\right),\label{eq:ridge}
+	\left(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}+\sum_{i=1}^{d}\mathbf{e}_{i}\mathbf{e}_{i}^{\top}\right)^{-1}\left(\sum_{s=1}^{t}Y_{a_{s},s}X_{a_{s},s}+\sum_{i=1}^{d}0\cdot\mathbf{e}_{i}\right),\label{eq:ridge}
 \end{equation}
 which is equivalent to augmenting the dataset with dummy context--reward
 pairs $(\mathbf{e}_{i},0)$ for $i\in[d]$. \citet{bishop1995training}
@@ -678,7 +417,7 @@ multiple random perturbations to each reward observation; this is
 equivalent to augmenting the dataset with multiple context--reward
 pairs. \citet{kim2021doubly} introduced a doubly robust (DR) estimator:
 \begin{equation}
-\left(\sum_{s=1}^{t}\sum_{k=1}^{K}X_{k,s}X_{k,s}^{\top}+\sum_{i=1}^{d}\sqrt{\lambda_{t}}\mathbf{e}_{i}\left(\sqrt{\lambda_{t}}\mathbf{e}_{i}\right)^{\top}\right)^{-1}\left(\sum_{s=1}^{t}\sum_{k=1}^{K}X_{k,s}Y_{k,s}^{\mathrm{DR}}\right),\label{eq:DR_estimator}
+	\left(\sum_{s=1}^{t}\sum_{k=1}^{K}X_{k,s}X_{k,s}^{\top}+\sum_{i=1}^{d}\sqrt{\lambda_{t}}\mathbf{e}_{i}\left(\sqrt{\lambda_{t}}\mathbf{e}_{i}\right)^{\top}\right)^{-1}\left(\sum_{s=1}^{t}\sum_{k=1}^{K}X_{k,s}Y_{k,s}^{\mathrm{DR}}\right),\label{eq:DR_estimator}
 \end{equation}
 where $\lambda_{t}=\Omega(\sqrt{t})$ is a regularization parameter
 and $Y_{k,s}^{\mathrm{DR}}$ denotes a DR pseudo-reward. This estimator
@@ -720,6 +459,31 @@ Moreover, instead of using dummy vectors such as $(\mathbf{e}_{i},0)$,
 the proposed estimator augments basis vectors orthogonal to the span
 of the observed contexts, thereby adaptively improving generalization
 to future inputs.
+
+
+
+%-------------------------------------------
+% 4. Proposed Method
+%-------------------------------------------
+
+
+\section{Proposed Method}
+
+\label{sec:proposed_method}
+
+This section introduces the proposed estimation scheme that enables
+\texttt{LinTS} to achieve a nearly minimax-optimal regret bound. Section~\ref{sec:augment}
+motivates the use of hypothetical sample augmentation for parameter
+estimation. Section~\ref{sec:hypo_contexts} presents a construction
+of hypothetical contexts that efficiently support parameter learning
+while minimizing the number of augmented samples. Building on the
+constructed contexts, Section~\ref{sec:hypothetical_bandit} defines
+an adaptive hypothetical bandit problem tailored for estimation. Section~\ref{sec:coupling}
+describes a resampling strategy that couples the hypothetical and
+original bandit problems. Finally, Section~\ref{sec:algorithm} outlines
+the proposed algorithm, which incorporates the novel estimator derived
+from this framework.
+
 
 \subsection{Design of Hypothetical Contexts}
 
@@ -1037,51 +801,52 @@ This matching event provides the motivation for the coupling technique
 introduced in the next section.
 
 \subsection{Coupling the Hypothetical and Original Linear Contextual Bandits}
-
 \label{sec:coupling}
 
 \begin{figure}
-\centering \begin{tikzpicture}[
-  >=Stealth,
-  node distance = 0.7cm and 0.9cm,
-  every node/.style = font=\small,
-  process/.style = draw, rounded corners, minimum width=30mm, minimum height=11mm, align=center,
-  decision/.style = draw, diamond, aspect=2, inner sep=1pt, align=center
-]
-
-% Row 1 ---------------------------------------------------------
-\node[process] (theta)   {Estimate $\widehat{\theta}_{t-1}$};
-\node[process, right=of theta]  (observe) {Observe $\{\,X_{k,t}:k\in[K]\}$};
-\node[process, right=of observe]  (pi) {Compute the policy $\pi_t$};
-\node[process, below=of pi] (sampleA) {Sample a candidate action \\ $a_t \sim \pi_t$};
-\node[process, below=of sampleA] (compZ)  {Compute hypothetical contexts \\ $\{Z_{i,t}: i\in[N_t]\}$};
-\node[process, below=of compZ]   (sampleC){Sample hypothetical action \\ $\tilde{a}_t\sim\tilde{\pi}_t$};
-
-% Decision ------------------------------------------------------
-\node[decision, left=of sampleC] (decide)
-      {Check \\ $X_{a_t,t}=Z_{\tilde{a}_t,t}$?};
-
-\node[process, left=of decide] (play) 
-      {Play arm $a_t$ };
-\node[process, above=of play] (obsr) 
-      { Observe reward \\ $Y_{a_t,t}=W_{a_t,t}$ };
-\node[process, above=of obsr] (inct) 
-      { $t\gets t+1$ };
-% Arrows --------------------------------------------------------
-\draw[->] (theta)   -- (observe);
-\draw[->] (observe) -- (pi);
-\draw[->] (pi) -- (sampleA);
-\draw[->] (sampleA) -- (compZ);
-\draw[->] (compZ)   -- (sampleC);
-\draw[->] (sampleC) -- (decide);
-\draw[->] (decide)  -- node[above]{yes} (play);
-\draw[->] (decide)  |- node[above]{no} (sampleA);  % loop back on "no"
-\draw[->] (play)    -- (obsr);
-\draw[->] (obsr)    -- (inct);
-\draw[->] (inct)    -- (theta);
-\end{tikzpicture} \caption{Flow diagram of the proposed coupling and resampling scheme}
-\label{fig:process} \vspace{5pt}
- 
+	\centering
+	\begin{tikzpicture}[
+		>=Stealth,
+		node distance = 0.7cm and 0.9cm,
+		every node/.style = {font=\small},
+		process/.style = {draw, rounded corners, minimum width=30mm, minimum height=11mm, align=center},
+		decision/.style = {draw, diamond, aspect=2, inner sep=1pt, align=center}
+		]
+		
+		% Row 1 ---------------------------------------------------------
+		\node[process] (theta)   {Estimate $\widehat{\theta}_{t-1}$};
+		\node[process, right=of theta]  (observe) {Observe $\{\,X_{k,t}:k\in[K]\}$};
+		\node[process, right=of observe]  (pi) {Compute the policy $\pi_t$};
+		\node[process, below=of pi] (sampleA) {Sample a candidate action \\ $a_t \sim \pi_t$};
+		\node[process, below=of sampleA] (compZ)  {Compute hypothetical contexts \\ $\{Z_{i,t}: i\in[N_t]\}$};
+		\node[process, below=of compZ]   (sampleC){Sample hypothetical action \\ $\tilde{a}_t\sim\tilde{\pi}_t$};
+		
+		% Decision ------------------------------------------------------
+		\node[decision, left=of sampleC] (decide)
+		{Check \\ $X_{a_t,t}=Z_{\tilde{a}_t,t}$?};
+		
+		\node[process, left=of decide] (play) 
+		{Play arm $a_t$ };
+		\node[process, above=of play] (obsr) 
+		{ Observe reward \\ $Y_{a_t,t}=W_{a_t,t}$ };
+		\node[process, above=of obsr] (inct) 
+		{ $t\gets t+1$ };
+		% Arrows --------------------------------------------------------
+		\draw[->] (theta)   -- (observe);
+		\draw[->] (observe) -- (pi);
+		\draw[->] (pi) -- (sampleA);
+		\draw[->] (sampleA) -- (compZ);
+		\draw[->] (compZ)   -- (sampleC);
+		\draw[->] (sampleC) -- (decide);
+		\draw[->] (decide)  -- node[above]{yes} (play);
+		\draw[->] (decide)  |- node[above]{no} (sampleA);  % loop back on "no"
+		\draw[->] (play)    -- (obsr);
+		\draw[->] (obsr)    -- (inct);
+		\draw[->] (inct)    -- (theta);
+	\end{tikzpicture}
+	\caption{Flow diagram of the proposed coupling and resampling scheme}
+	\label{fig:process}
+	\vspace{5pt}
 \end{figure}
 
 This section introduces a probabilistic method to couple the hypothetical
@@ -1361,7 +1126,8 @@ memory usage.
 \label{sec:regret_analysis} The following theorem establishes a nearly
 minimax-optimal cumulative regret bound for the \texttt{HCSA+TS} algorithm.
 
-\begin{theorem}[Regret Bound for \textttHCSA+TS] \label{thm:regret_bound}
+\begin{theorem}[Regret Bound for \texttt{HCSA+TS}] 
+	\label{thm:regret_bound}
 In Algorithm~\ref{alg:ATS}, set the exploration parameter as $\Gb_{t}=\{2\log(K(t+1)^{2}/\delta)\}^{-1/2}$.
 Then, with probability at least $1-3\delta$, the cumulative regret
 of the \texttt{HCSA+TS} algorithm by round $T$ satisfies: 
@@ -2123,6 +1889,7 @@ in a similar manner, using the fact that $e^{x}\le1+(e-1)x$ for $x\in[0,1]$.
 %------------------------------------
 % References
 %------------------------------------
-\vskip 0.2in \bibliography{ref}
+\vskip 0.2in 
+\bibliography{ref}
 
 \end{document}
