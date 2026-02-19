@@ -1,0 +1,1769 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{babel}
+\end_preamble
+\use_default_options false
+\begin_modules
+theorems-ams
+\end_modules
+\maintain_unincluded_children no
+\language english
+\language_package default
+\inputencoding iso8859-15
+\fontencoding T1
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 0
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 3cm
+\topmargin 2cm
+\rightmargin 3cm
+\bottommargin 2cm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes false
+\change_bars false
+\postpone_fragile_content false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% COMMON ABBRVS 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% bold alphabet 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\ab}{\mathbf{a}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\bb}{\mathbf{b}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\cb}{\mathbf{c}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\db}{\mathbf{d}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\eb}{\mathbf{e}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\fb}{\mathbf{f}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\gb}{\mathbf{g}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\hb}{\mathbf{h}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\ib}{\mathbf{i}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\jb}{\mathbf{j}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\kb}{\mathbf{k}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\lb}{\mathbf{l}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\mb}{\mathbf{m}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\nb}{\mathbf{n}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\ob}{\mathbf{o}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\pb}{\mathbf{p}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\qb}{\mathbf{q}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\rb}{\mathbf{r}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\sb}{\mathbf{s}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\tb}{\mathbf{t}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\ub}{\mathbf{u}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\vb}{\mathbf{v}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\wb}{\mathbf{w}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\xb}{\mathbf{x}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\yb}{\mathbf{y}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\zb}{\mathbf{z}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ab}{\mathbf{A}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Bb}{\mathbf{B}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Cb}{\mathbf{C}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Db}{\mathbf{D}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Eb}{\mathbf{E}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Fb}{\mathbf{F}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Gb}{\mathbf{G}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Hb}{\mathbf{H}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ib}{\mathbf{I}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Jb}{\mathbf{J}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Kb}{\mathbf{K}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Lb}{\mathbf{L}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Mb}{\mathbf{M}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Nb}{\mathbf{N}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ob}{\mathbf{O}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Pb}{\mathbf{P}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Qb}{\mathbf{Q}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Rb}{\mathbf{R}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Sb}{\mathbf{S}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Tb}{\mathbf{T}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ub}{\mathbf{U}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Vb}{\mathbf{V}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Wb}{\mathbf{W}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Xb}{\mathbf{X}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Yb}{\mathbf{Y}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Zb}{\mathbf{Z}}
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% calligraphic fonts
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\Acal}{\mathcal{A}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Bcal}{\mathcal{B}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ccal}{\mathcal{C}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Dcal}{\mathcal{D}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ecal}{\mathcal{E}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Fcal}{\mathcal{F}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Gcal}{\mathcal{G}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Hcal}{\mathcal{H}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ical}{\mathcal{I}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Jcal}{\mathcal{J}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Kcal}{\mathcal{K}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Lcal}{\mathcal{L}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Mcal}{\mathcal{M}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ncal}{\mathcal{N}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ocal}{\mathcal{O}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Pcal}{\mathcal{P}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Qcal}{\mathcal{Q}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Rcal}{\mathcal{R}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Scal}{\mathcal{S}}
+{\mathcal{S}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Tcal}{\mathcal{T}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ucal}{\mathcal{U}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Vcal}{\mathcal{V}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Wcal}{\mathcal{W}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Xcal}{\mathcal{X}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Ycal}{\mathcal{Y}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Zcal}{\mathcal{Z}}
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%% Widely accepted definitions %%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\BB}{\mathbb{B}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Ball
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\CC}{\mathbb{C}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Complex numbers
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\EE}{\mathbb{E}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Expectation
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\VV}{\mathbb{V}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Variance
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\II}{\mathbb{I}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Indicator
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\KK}{\mathbb{K}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Arbitrary field
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\LL}{\mathbb{L}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Loss
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\MM}{\mathbb{M}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Median
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\NN}{\mathbb{N}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Natural numbers
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\PP}{\mathbb{P}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Probability
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\QQ}{\mathbb{Q}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Rationals
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\RR}{\mathbb{R}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Real numbers
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\ZZ}{\mathbb{Z}}
+\end_inset
+
+ 
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+% Integers
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\XX}{\mathbb{X}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\YY}{\mathbb{Y}}
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%% bold greek letters %%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\alphab}{\boldsymbol{\alpha}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\betab}{\boldsymbol{\beta}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Sigmab}{\boldsymbol{\Sigma}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Omegab}{\boldsymbol{\Omega}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\omegab}{\boldsymbol{\omega}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Gammab}{\boldsymbol{\Gamma}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Psib}{\boldsymbol{\Psi}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Thetab}{\boldsymbol{\Theta}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\thetab}{\boldsymbol{\theta}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\taub}{\boldsymbol{\tau}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\epsilonb}{\boldsymbol{\epsilon}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\etab}{\boldsymbol{\eta}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\xib}{\boldsymbol{\xi}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\gammab}{\boldsymbol{\gamma}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\deltab}{\boldsymbol{\delta}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\Deltab}{\boldsymbol{\Delta}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\mub}{\boldsymbol{\mu}}
+\end_inset
+
+ 
+\begin_inset FormulaMacro
+\newcommand{\rhob}{\boldsymbol{\rho}}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\vPhib}{\boldsymbol{\varPhi}}
+{\boldsymbol{\varPhi}}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\Lambdab}{\boldsymbol{\Lambda}}
+{\boldsymbol{\Lambda}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FormulaMacro
+\newcommand{\argmax}[1]{\underset{#1}{\text{argmax}}}
+{\underset{#1}{\text{argmax}}}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\argmin}[1]{\underset{#1}{\text{argmin}}}
+{\underset{#1}{\text{argmin}}}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\rank}{\text{rank}}
+{\text{rank}}
+\end_inset
+
+
+\begin_inset FormulaMacro
+\newcommand{\Ent}{\text{Ent}}
+{\text{Ent}}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Novel Optimal Design
+\end_layout
+
+\begin_layout Standard
+For each round 
+\begin_inset Formula $t$
+\end_inset
+
+,
+ let 
+\begin_inset Formula $\tilde{a}_{t}=\argmax{k\in[K]}x_{k,t}^{\top}\tilde{\beta}_{t-1}$
+\end_inset
+
+ denote the arm drawn by the Thompson Sampling algorithm where 
+\begin_inset Formula $\tilde{\beta}_{t-1}\sim N(\widehat{\beta}_{t-1},V_{t-1}^{-1})$
+\end_inset
+
+ and 
+\begin_inset Formula $\widehat{\beta}_{t-1}$
+\end_inset
+
+ is the proposed estimator and 
+\begin_inset Formula $V_{t-1}$
+\end_inset
+
+ is the Gram matrix.
+ Let 
+\begin_inset Formula $\Xb_{t}=[X_{1,t},\cdots,X_{K,t}]\in\RR^{d\times K}$
+\end_inset
+
+ denote a concatenated context matrix and 
+\begin_inset Formula $\rho_{t}:=\rank(\Xb_{t})$
+\end_inset
+
+ denote its rank.
+ It is obvious that 
+\begin_inset Formula $\rho_{t}\le\min\{d,K\}$
+\end_inset
+
+.
+ Applying reduced QR decomposition,
+ there exists a matrix with orthonormal column vectors 
+\begin_inset Formula $\Qb_{t}\in\RR^{d\times\rho_{t}}$
+\end_inset
+
+ and vectors 
+\begin_inset Formula $r_{1,t},\ldots,r_{K,t}\in\RR^{\rho_{t}}$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\begin{bmatrix}x_{1,t} & \cdots & x_{K,t}\end{bmatrix}=\Qb_{t}\begin{bmatrix}r_{1,t} & \cdots & r_{K,t}\end{bmatrix}.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $p_{t}$
+\end_inset
+
+ denote the G-optimal policy over 
+\begin_inset Formula $\{r_{1,t},\ldots,r_{K,t}\}$
+\end_inset
+
+.
+ By Kiefer-wolfwiez theorem,
+ G-optimal design is equivalent with D-optimal design,
+ which is efficiently computable.
+ By definition of the G-optimal policy,
+ we have 
+\begin_inset Formula $\max_{k^{\prime}\in[K]}r_{k^{\prime},t}^{\top}(\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top})^{-1}r_{k^{\prime},t}=\rho_{t}$
+\end_inset
+
+.
+ Thus,
+ for all 
+\begin_inset Formula $k^{\prime}\in[K]$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+(\rho_{t}\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top})^{-1/2}r_{k^{\prime},t}r_{k^{\prime},r}^{\top}(\rho_{t}\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top})^{-1/2}\preceq I_{\rho_{t}},
+\]
+
+\end_inset
+
+which implies 
+\begin_inset Formula $r_{k^{\prime},t}r_{k^{\prime},t}\preceq\rho_{t}\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top}$
+\end_inset
+
+.
+ Thus,
+ for each 
+\begin_inset Formula $k^{\prime}\in[K]$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+|x_{k^{\prime},t}^{\top}y|^{2}=|r_{k^{\prime},t}\Qb_{t}^{\top}y|^{2}\le\rho_{t}\sum_{k=1}^{K}p_{t}(k)\big(r_{k,t}\Qb_{t}^{\top}y\big)^{2}=\sum_{k=1}^{K}p_{t}(k)(\sqrt{\rho_{t}}x_{k,t}^{\top}y)^{2}.
+\]
+
+\end_inset
+
+Thus,
+ for 
+\begin_inset Formula $k^{\prime}\in[K]$
+\end_inset
+
+,
+ we obtain 
+\begin_inset Formula $x_{k^{\prime},t}x_{k^{\prime},t}^{\top}\preceq\rho_{t}\sum_{k=1}^{K}p_{t}(k)x_{k,t}x_{k,t}^{\top}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Based on this G-optimal design,
+ we construct a novel exploration scheme that is compatible with both Thompson Sampling and Doubly Robust estimator.
+ Define the distribution over 
+\begin_inset Formula $[K]$
+\end_inset
+
+ as 
+\begin_inset Formula 
+\[
+\bar{\pi}_{t}(k)=\frac{p_{t}(k)+\II(k=\tilde{a}_{t})}{2}.
+\]
+
+\end_inset
+
+Let 
+\begin_inset Formula $\{\bar{a}_{t}^{(n)}:n\ge1\}$
+\end_inset
+
+ denote the IID samples from the distribution 
+\begin_inset Formula $\bar{\pi}_{t}$
+\end_inset
+
+ and let 
+\begin_inset Formula $m_{t}:=\{n\le\lceil\log\frac{\sqrt{t}}{d}/\log2\rceil:\bar{a}_{t}^{(n)}=\tilde{a}_{t}\}$
+\end_inset
+
+ denote the stopping time when the action from 
+\begin_inset Formula $\bar{\pi}_{t}$
+\end_inset
+
+ matches 
+\begin_inset Formula $\tilde{a}_{t}$
+\end_inset
+
+ with in 
+\begin_inset Formula $\lceil\log\frac{\sqrt{t}}{d}/\log2\rceil$
+\end_inset
+
+ number of trials.
+ We select the action 
+\begin_inset Formula $a_{t}=\bar{a}_{t}^{(m_{t})}$
+\end_inset
+
+.
+ With probability at least 
+\begin_inset Formula $1-d/\sqrt{t}$
+\end_inset
+
+,
+ the algorithm selects 
+\begin_inset Formula $\tilde{a}_{t}$
+\end_inset
+
+ while it selects other actions with probability at most 
+\begin_inset Formula $d/\sqrt{t}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\Acal_{m}$
+\end_inset
+
+ denote the sigma-algebra generated by 
+\begin_inset Formula $\{\bar{a}_{t}^{(n)}:n\in[m]\}$
+\end_inset
+
+.
+ Given the sigma-algebra 
+\begin_inset Formula $\Acal_{m_{t}^{-}}$
+\end_inset
+
+ generated by the events 
+\begin_inset Formula $\cap_{m=1}^{\lceil\log\frac{\sqrt{t}}{d}/\log2\rceil}\{A\cap\{m_{t}=m\}:A\in\Acal_{m-1}\}$
+\end_inset
+
+,
+ which is the information right before the matching event,
+ the distribution of 
+\begin_inset Formula $\bar{a}_{t}^{(m_{t})}$
+\end_inset
+
+ is 
+\begin_inset Formula $\bar{\pi}_{t}$
+\end_inset
+
+ which is the mixture of G-optimal design and the selected arm 
+\begin_inset Formula $\tilde{a}_{t}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $v_{1,t},\ldots,v_{\rho_{t},t}$
+\end_inset
+
+ denote the orthogonal vectors such that 
+\begin_inset Formula $\frac{1}{2}\sum_{k=1}^{K}\rho_{t}p_{t}(k)x_{k,t}x_{k,t}^{\top}+\frac{1}{2}x_{\tilde{a}_{t},t}x_{\tilde{a}_{t},t}^{\top}=\sum_{i=1}^{\rho_{t}}v_{i,t}v_{i,t}^{\top}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $i_{t}\sim\text{unif}([\rho_{t}])$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+X_{a_{t},t}=\begin{cases}
+\sqrt{\rho_{t}}x_{a_{t}} & a_{t}\neq\tilde{a}_{t}\\
+x_{\tilde{a}_{t},t} & a_{t}=\tilde{a}_{t}
+\end{cases},\quad Y_{a_{t},t}=\begin{cases}
+\sqrt{\rho_{t}}R_{a_{t},t} & a_{t}\neq\tilde{a}_{t}\\
+R_{\tilde{a}_{t},t} & a_{t}=\tilde{a}_{t}
+\end{cases}.
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\theta_{t}^{R}:=\Gb_{t}^{-1}\sum_{s=1}^{t}Y_{a_{s},s}X_{a_{s},s},
+\]
+
+\end_inset
+
+denote the weighted ridge estimator,
+ where the Gram matrix,
+\begin_inset Formula 
+\[
+\Gb_{t}:=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}I_{d}.
+\]
+
+\end_inset
+
+We define the augmented DR estimator
+\begin_inset Formula 
+\[
+\widehat{\theta}_{t}:=\Gb_{t}^{-1}\sum_{s=1}^{t}\Big(\sum_{i=1}^{\rho_{t}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}\beta_{t}^{R}+Y_{a_{s},s}X_{a_{s},s}\Big),
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:self"
+
+\end_inset
+
+(Self-normalized bound for the ADR estimator) Suppose 
+\begin_inset Formula $t$
+\end_inset
+
+ satisfies,
+ 
+\begin_inset Formula $t\ge d\log??$
+\end_inset
+
+.
+ With probability at least 
+\begin_inset Formula $1-\delta$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\|\widehat{\theta}_{t}-\theta\|_{\Gb_{t}}\le\sqrt{2d\sigma^{2}\log\frac{1}{\delta}},
+\]
+
+\end_inset
+
+for all 
+\begin_inset Formula $t\ge??$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The initialization round is to ensure that the imputation estimator 
+\begin_inset Formula $\beta_{t}^{R}$
+\end_inset
+
+ is accurate enough to guarantee augmented estimation error bound.
+ 
+\end_layout
+
+\begin_layout Proof
+By definition,Recall that 
+\begin_inset Formula 
+\begin{align*}
+\Gb_{t} & :=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}\Ib_{d}
+\end{align*}
+
+\end_inset
+
+The definition of 
+\begin_inset Formula $v_{i,s}$
+\end_inset
+
+ implies 
+\begin_inset Formula $\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}=\sum_{i=1}^{\rho_{s}}v_{i,s}v_{i,s}^{\top}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+.
+ Let us write 
+\begin_inset Formula $\eta_{a_{s},s}:=Y_{a_{s},s}-X_{a_{s},s}^{\top}\theta_{\star}$
+\end_inset
+
+.
+ By definition of the estimator and the Gram matrix,
+\begin_inset Formula 
+\[
+\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & =\Big\Vert\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}-\Gb_{t}\big)\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{split}
+\]
+
+\end_inset
+
+Let us write 
+\begin_inset Formula $\Vb_{t}:=\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}+\lambda_{t}\Ib_{d}$
+\end_inset
+
+.
+ Then,
+\begin_inset Formula 
+\[
+\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & =\Big\Vert(\Gb_{t}-\Vb_{t})(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}-\Gb_{t}\big)\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{split}
+\]
+
+\end_inset
+
+By definition of 
+\begin_inset Formula $\theta_{t}^{R}=\Gb_{t}^{-1}\sum_{s=1}^{t}Y_{a_{s},s}X_{a_{s},s}$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+\theta_{t}^{R}-\theta_{\star}=\Gb_{t}^{-1}\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\Gb_{t}^{-1}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}
+\]
+
+\end_inset
+
+ It follows that 
+\begin_inset Formula 
+\[
+\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & =\Big\Vert(2\Ib_{d}-\Vb_{t}\Gb_{t}^{-1})\big(\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\big)\Big\Vert_{\Gb_{t}^{-1}}\\
+ & =\Big\Vert(2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2})\Gb_{t}^{-1/2}\big(\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\big)\Big\Vert_{2}.
+\end{split}
+\]
+
+\end_inset
+
+By definition of the matrix operator norm,
+ 
+\begin_inset Formula $\|M\|_{2}:=\max_{\|x\|_{2}\le1}\|Mx\|_{2}$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & \le\Big\Vert2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\cdot\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{align*}
+
+\end_inset
+
+By Lemma ??
+\begin_inset Formula 
+\begin{align*}
+\Big\Vert2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\le & 1+\Big\Vert\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\\
+\le & 3.
+\end{align*}
+
+\end_inset
+
+Thus,
+ by triangular inequality
+\begin_inset Formula 
+\begin{align*}
+\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}} & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}\\
+ & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}+3\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $C_{s}>0$
+\end_inset
+
+ to be determined later,
+ let 
+\begin_inset Formula $\bar{\eta}_{a_{s},s}:=\eta_{a_{s},s}\II(|\eta_{a_{s},s}|\le C_{s})-\EE[\eta_{a_{s},s}\II(|\eta_{a_{s},s}|\le C_{s})]|\Hcal_{s-1}]$
+\end_inset
+
+ and 
+\begin_inset Formula $\tilde{\eta}_{a_{s},s}:=\eta_{a_{s},s}\II(|\eta_{a_{s},s}|>C_{s})-\EE[\eta_{a_{s},s}\II(|\eta_{a_{s},s}|>C_{s})|\Hcal_{s-1}]$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\Big\Vert\sum_{s=1}^{t}\bar{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}+\Big\Vert\sum_{s=1}^{t}\tilde{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}.
+\]
+
+\end_inset
+
+By Lemma ??,
+ there exists a martingale differences 
+\begin_inset Formula $\{D_{1,a_{s}},D_{2,a_{s}}:s\in[t]\}$
+\end_inset
+
+,
+ such that 
+\begin_inset Formula 
+\[
+\Big\Vert\sum_{s=1}^{t}\bar{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\bar{\eta}_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+.
+ For a nonnegative random variable 
+\begin_inset Formula $Z$
+\end_inset
+
+,
+ define the entropy 
+\begin_inset Formula $\Ent(Z)=\EE[Z\log Z]-\EE[Z]\log\EE[Z]$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $\lambda\in[0,?]$
+\end_inset
+
+,
+ and 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+ and 
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
+ & =\EE\Big[\big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\big)\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)\Big]\\
+ & \quad-\EE[\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)]\log\EE[\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)].
+\end{align*}
+
+\end_inset
+
+ For 
+\begin_inset Formula $x=(x_{1},\ldots,x_{K})$
+\end_inset
+
+,
+ define 
+\begin_inset Formula $\psi_{i,s}(x)=\log\sum_{k=1}^{K}\bar{\pi}_{s}(k)e^{x_{k}}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\psi_{i,s}(0)=0$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\nabla\psi_{i,s}(x)^{\top}x=\frac{\sum_{k=1}^{K}\bar{p}_{s}(k)x_{k}e^{x_{k}}}{\sum_{k=1}^{K}\bar{p}_{s}(k)e^{x_{k}}}=e^{-\psi_{i,s}(x)}\sum_{k=1}^{K}\bar{p}_{s}(k)x_{k}e^{x_{k}}
+\]
+
+\end_inset
+
+Writing 
+\begin_inset Formula $D_{i}:=(D_{i,1},\ldots,D_{i,K})$
+\end_inset
+
+ and taking expectation over 
+\begin_inset Formula $a_{s}\sim\bar{\pi}_{s}$
+\end_inset
+
+ given 
+\begin_inset Formula $\Acal_{m_{s}^{-}}$
+\end_inset
+
+,
+\begin_inset Formula 
+\begin{align*}
+ & \EE\Big[\big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\big)\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)\Big]\\
+ & =\EE\Big[\big(\sum_{k=1}^{K}p_{s}(k)\lambda D_{i,k}e^{\lambda D_{i,k}}-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})\sum_{k=1}^{K}p_{s}(k)e^{\lambda D_{i,k}}\big)e^{-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})}\Big]\\
+ & =\EE\Big[\big(\nabla\psi_{i,s}(\lambda D_{i})-\nabla\psi_{i,s}(0)\big)^{\top}(\lambda D_{i})e^{\psi_{i,s}(\lambda D_{i})-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})}\Big].
+\end{align*}
+
+\end_inset
+
+For the Bregman divergence 
+\begin_inset Formula $B_{\psi_{i,s}}(a,b)=\psi_{i,s}(a)-\psi_{i,s}(b)-\nabla\psi_{i,s}(b)^{\top}(b-a)$
+\end_inset
+
+,
+ if follows that
+\begin_inset Formula 
+\begin{align*}
+\EE[\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)] & =\EE\Big[\exp\big(\psi_{i,s}(\lambda D_{i})-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})\big)\Big]\\
+ & =\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big].
+\end{align*}
+
+\end_inset
+
+Thus,
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
+ & =\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})\Big]-\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big]\log\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big]\\
+ & =\Ent(e^{B_{\psi_{i,s}}(\lambda D_{i},0)})+\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)\big)].
+\end{align*}
+
+\end_inset
+
+By the representation lemma (Lemma ??) for 
+\begin_inset Formula $u\in\RR$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\Ent(e^{B_{\psi_{i,s}}(\lambda D_{i},0)})\le\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(B_{\psi_{i,s}}(\lambda D_{i},0)-u\big)-(e^{B_{\psi_{i,s}}(\lambda D_{i},0)}-e^{u})].
+\]
+
+\end_inset
+
+Thus,
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
+ & \le\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-u\big)-(e^{B_{\psi_{i,s}}(\lambda D_{i},0)}-e^{u})]\\
+ & =\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-u-1+e^{u-B_{\psi_{i,s}}(\lambda D_{i},0)}\big)]
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+u-B_{\psi_{i,s}}(\lambda D_{i},0)=\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-u
+\]
+
+\end_inset
+
+Setting 
+\begin_inset Formula $u=(B_{\psi_{i,s}}(\lambda D_{i},0)+\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i}))/2$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
+ & \le\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big(\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}-1+e^{-\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}}\Big)\Big].
+\end{align*}
+
+\end_inset
+
+Because 
+\begin_inset Formula 
+\[
+|\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}|\le|
+\]
+
+\end_inset
+
+Because 
+\begin_inset Formula $\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})\ge B_{\psi_{i,s}}(\lambda D_{i},0)\ge0$
+\end_inset
+
+ due to strict convexity,
+ 
+\begin_inset Formula 
+\[
+\]
+
+\end_inset
+
+ where the last inequality holds because 
+\begin_inset Formula $\EE[\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})]=0$
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1/2}}= & \Big\Vert\Gb_{t}^{-1/2}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{2}\\
+\le & \Big\Vert\Gb_{t}^{-1/2}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\Big\Vert\cdot\Big\Vert\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+\begin_inset Formula 
+\[
+|\sum_{k=1}^{K}p_{t}(k)\sqrt{\rho_{t}}x_{k,t}^{\top}y|^{2}=|\sum_{k=1}^{K}p_{t}(k)\sqrt{\rho_{t}}r_{k,t}\Qb_{t}^{\top}y|^{2}\le\rho_{t}\sum_{k=1}^{K}p_{t}(k)(r_{k,t}\Qb_{t}^{\top}y)^{2}=\sum_{k=1}^{K}p_{t}(k)(\sqrt{\rho_{t}}x_{k,t}^{\top}y)^{2}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
