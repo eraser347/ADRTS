@@ -1806,14 +1806,6 @@ Thus,
 
 \end_inset
 
-Then 
-\begin_inset Formula 
-\[
-M_{i,s}:=\exp()
-\]
-
-\end_inset
-
 (
 \begin_inset Formula $C_{s}=O(\sqrt{d})$
 \end_inset

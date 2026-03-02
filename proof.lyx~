@@ -1085,6 +1085,12 @@ status collapsed
 \end_inset
 
 
+\begin_inset FormulaMacro
+\newcommand{\Ent}{\text{Ent}}
+{\text{Ent}}
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1320,32 +1326,38 @@ Let
  and
 \begin_inset Formula 
 \[
-\theta_{t}^{R}:=\big(\sum_{s=1}^{t}\frac{\II(i_{s}=i)}{1/\rho_{s}}v_{i,s}v_{i,s}^{\top}+\lambda I_{d}\big)^{-1}\sum_{s=1}^{t}\big(\II(a_{s}\neq\tilde{a}_{s})\sqrt{\rho_{s}}Y_{a_{s},s}x_{a_{s},s}+\II(a_{s}=\tilde{a_{s}})Y_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}\big)
+X_{a_{t},t}=\begin{cases}
+\sqrt{\rho_{t}}x_{a_{t}} & a_{t}\neq\tilde{a}_{t}\\
+x_{\tilde{a}_{t},t} & a_{t}=\tilde{a}_{t}
+\end{cases},\quad Y_{a_{t},t}=\begin{cases}
+\sqrt{\rho_{t}}R_{a_{t},t} & a_{t}\neq\tilde{a}_{t}\\
+R_{\tilde{a}_{t},t} & a_{t}=\tilde{a}_{t}
+\end{cases}.
 \]
 
 \end_inset
 
-denote the weighted ridge estimator.
- We define the core augmented DR pseudo-reward as
+
 \begin_inset Formula 
 \[
-\check{Y}_{i,t}(i_{t},a_{t})=(1-\frac{\II(i_{t}=i)}{1/\rho_{t}})v_{i,t}^{\top}\beta_{t}^{R}+\II(a_{t}\neq\tilde{a}_{t})\sqrt{\rho_{t}}Y_{a_{t}}+\II(a_{t}=\tilde{a_{t}})Y_{\tilde{a}_{t}}.
+\theta_{t}^{R}:=\Gb_{t}^{-1}\sum_{s=1}^{t}Y_{a_{s},s}X_{a_{s},s},
 \]
 
 \end_inset
 
-Define the augmented DR estimator
+denote the weighted ridge estimator,
+ where the Gram matrix,
 \begin_inset Formula 
 \[
-\widehat{\theta}_{t}:=V_{t}^{-1}\sum_{s=1}^{t}\Big((1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}\beta_{t}^{R}+\II(a_{t}\neq\tilde{a}_{t})\rho_{t}Y_{a_{t}}x_{a_{t}}+\II(a_{t}=\tilde{a_{t}})Y_{\tilde{a}_{t}}x_{\tilde{a}_{t}}\Big),
+\Gb_{t}:=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}I_{d}.
 \]
 
 \end_inset
 
-where the Gram matrix,
+We define the augmented DR estimator
 \begin_inset Formula 
 \[
-V_{t}:=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}I_{d}.
+\widehat{\theta}_{t}:=\Gb_{t}^{-1}\sum_{s=1}^{t}\Big(\sum_{i=1}^{\rho_{t}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}\beta_{t}^{R}+Y_{a_{s},s}X_{a_{s},s}\Big),
 \]
 
 \end_inset
@@ -1378,7 +1390,7 @@ name "thm:self"
  
 \begin_inset Formula 
 \[
-\|\widehat{\theta}_{t}-\theta\|_{V_{t}}\le\sqrt{2d\sigma^{2}\log\frac{1}{\delta}},
+\|\widehat{\theta}_{t}-\theta\|_{\Gb_{t}}\le\sqrt{2d\sigma^{2}\log\frac{1}{\delta}},
 \]
 
 \end_inset
@@ -1407,7 +1419,340 @@ The initialization round is to ensure that the imputation estimator
 \end_layout
 
 \begin_layout Proof
-Define 
+By definition,Recall that 
+\begin_inset Formula 
+\begin{align*}
+\Gb_{t} & :=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}\Ib_{d}
+\end{align*}
+
+\end_inset
+
+The definition of 
+\begin_inset Formula $v_{i,s}$
+\end_inset
+
+ implies 
+\begin_inset Formula $\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}=\sum_{i=1}^{\rho_{s}}v_{i,s}v_{i,s}^{\top}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+.
+ Let us write 
+\begin_inset Formula $\eta_{a_{s},s}:=Y_{a_{s},s}-X_{a_{s},s}^{\top}\theta_{\star}$
+\end_inset
+
+.
+ By definition of the estimator and the Gram matrix,
+\begin_inset Formula 
+\[
+\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & =\Big\Vert\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}-\Gb_{t}\big)\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{split}
+\]
+
+\end_inset
+
+Let us write 
+\begin_inset Formula $\Vb_{t}:=\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}+\lambda_{t}\Ib_{d}$
+\end_inset
+
+.
+ Then,
+\begin_inset Formula 
+\[
+\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & =\Big\Vert(\Gb_{t}-\Vb_{t})(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}-\Gb_{t}\big)\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{split}
+\]
+
+\end_inset
+
+By definition of 
+\begin_inset Formula $\theta_{t}^{R}=\Gb_{t}^{-1}\sum_{s=1}^{t}Y_{a_{s},s}X_{a_{s},s}$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+\theta_{t}^{R}-\theta_{\star}=\Gb_{t}^{-1}\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\Gb_{t}^{-1}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}
+\]
+
+\end_inset
+
+ It follows that 
+\begin_inset Formula 
+\[
+\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & =\Big\Vert(2\Ib_{d}-\Vb_{t}\Gb_{t}^{-1})\big(\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\big)\Big\Vert_{\Gb_{t}^{-1}}\\
+ & =\Big\Vert(2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2})\Gb_{t}^{-1/2}\big(\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\big)\Big\Vert_{2}.
+\end{split}
+\]
+
+\end_inset
+
+By definition of the matrix operator norm,
+ 
+\begin_inset Formula $\|M\|_{2}:=\max_{\|x\|_{2}\le1}\|Mx\|_{2}$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & \le\Big\Vert2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\cdot\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{align*}
+
+\end_inset
+
+By Lemma ??
+\begin_inset Formula 
+\begin{align*}
+\Big\Vert2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\le & 1+\Big\Vert\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\\
+\le & 3.
+\end{align*}
+
+\end_inset
+
+Thus,
+ by triangular inequality
+\begin_inset Formula 
+\begin{align*}
+\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}} & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}\\
+ & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}+3\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{align*}
+
+\end_inset
+
+For 
+\begin_inset Formula $C_{s}>0$
+\end_inset
+
+ to be determined later,
+ let 
+\begin_inset Formula $\bar{\eta}_{a_{s},s}:=\eta_{a_{s},s}\II(|\eta_{a_{s},s}|\le C_{s})-\EE[\eta_{a_{s},s}\II(|\eta_{a_{s},s}|\le C_{s})]|\Hcal_{s-1}]$
+\end_inset
+
+ and 
+\begin_inset Formula $\tilde{\eta}_{a_{s},s}:=\eta_{a_{s},s}\II(|\eta_{a_{s},s}|>C_{s})-\EE[\eta_{a_{s},s}\II(|\eta_{a_{s},s}|>C_{s})|\Hcal_{s-1}]$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\Big\Vert\sum_{s=1}^{t}\bar{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}+\Big\Vert\sum_{s=1}^{t}\tilde{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}.
+\]
+
+\end_inset
+
+By Lemma ??,
+ there exists a martingale differences 
+\begin_inset Formula $\{D_{1,a_{s}},D_{2,a_{s}}:s\in[t]\}$
+\end_inset
+
+,
+ such that 
+\begin_inset Formula 
+\[
+\Big\Vert\sum_{s=1}^{t}\bar{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\bar{\eta}_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+.
+ For a nonnegative random variable 
+\begin_inset Formula $Z$
+\end_inset
+
+,
+ define the entropy 
+\begin_inset Formula $\Ent(Z)=\EE[Z\log Z]-\EE[Z]\log\EE[Z]$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $\lambda\in[0,?]$
+\end_inset
+
+,
+ and 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+ and 
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
+ & =\EE\Big[\big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\big)\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)\Big]\\
+ & \quad-\EE[\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)]\log\EE[\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)].
+\end{align*}
+
+\end_inset
+
+ For 
+\begin_inset Formula $x=(x_{1},\ldots,x_{K})$
+\end_inset
+
+,
+ define 
+\begin_inset Formula $\psi_{i,s}(x)=\log\sum_{k=1}^{K}\bar{\pi}_{s}(k)e^{x_{k}}$
+\end_inset
+
+.
+ Note that 
+\begin_inset Formula $\psi_{i,s}(0)=0$
+\end_inset
+
+ and 
+\begin_inset Formula 
+\[
+\nabla\psi_{i,s}(x)^{\top}x=\frac{\sum_{k=1}^{K}\bar{p}_{s}(k)x_{k}e^{x_{k}}}{\sum_{k=1}^{K}\bar{p}_{s}(k)e^{x_{k}}}=e^{-\psi_{i,s}(x)}\sum_{k=1}^{K}\bar{p}_{s}(k)x_{k}e^{x_{k}}
+\]
+
+\end_inset
+
+Writing 
+\begin_inset Formula $D_{i}:=(D_{i,1},\ldots,D_{i,K})$
+\end_inset
+
+ and taking expectation over 
+\begin_inset Formula $a_{s}\sim\bar{\pi}_{s}$
+\end_inset
+
+ given 
+\begin_inset Formula $\Acal_{m_{s}^{-}}$
+\end_inset
+
+,
+\begin_inset Formula 
+\begin{align*}
+ & \EE\Big[\big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\big)\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)\Big]\\
+ & =\EE\Big[\big(\sum_{k=1}^{K}p_{s}(k)\lambda D_{i,k}e^{\lambda D_{i,k}}-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})\sum_{k=1}^{K}p_{s}(k)e^{\lambda D_{i,k}}\big)e^{-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})}\Big]\\
+ & =\EE\Big[\big(\nabla\psi_{i,s}(\lambda D_{i})-\nabla\psi_{i,s}(0)\big)^{\top}(\lambda D_{i})e^{\psi_{i,s}(\lambda D_{i})-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})}\Big].
+\end{align*}
+
+\end_inset
+
+For the Bregman divergence 
+\begin_inset Formula $B_{\psi_{i,s}}(a,b)=\psi_{i,s}(a)-\psi_{i,s}(b)-\nabla\psi_{i,s}(b)^{\top}(b-a)$
+\end_inset
+
+,
+ if follows that
+\begin_inset Formula 
+\begin{align*}
+\EE[\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)] & =\EE\Big[\exp\big(\psi_{i,s}(\lambda D_{i})-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})\big)\Big]\\
+ & =\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big].
+\end{align*}
+
+\end_inset
+
+Thus,
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
+ & =\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})\Big]-\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big]\log\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big]\\
+ & =\Ent(e^{B_{\psi_{i,s}}(\lambda D_{i},0)})+\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)\big)].
+\end{align*}
+
+\end_inset
+
+By the representation lemma (Lemma ??) for 
+\begin_inset Formula $u\in\RR$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\Ent(e^{B_{\psi_{i,s}}(\lambda D_{i},0)})\le\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(B_{\psi_{i,s}}(\lambda D_{i},0)-u\big)-(e^{B_{\psi_{i,s}}(\lambda D_{i},0)}-e^{u})].
+\]
+
+\end_inset
+
+Thus,
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
+ & \le\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-u\big)-(e^{B_{\psi_{i,s}}(\lambda D_{i},0)}-e^{u})]\\
+ & =\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-u-1+e^{u-B_{\psi_{i,s}}(\lambda D_{i},0)}\big)]
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+u-B_{\psi_{i,s}}(\lambda D_{i},0)=\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-u
+\]
+
+\end_inset
+
+Setting 
+\begin_inset Formula $u=(B_{\psi_{i,s}}(\lambda D_{i},0)+\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i}))/2$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
+ & \le\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big(\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}-1+e^{-\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}}\Big)\Big].
+\end{align*}
+
+\end_inset
+
+Because 
+\begin_inset Formula $\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})\ge B_{\psi_{i,s}}(\lambda D_{i},0)\ge0$
+\end_inset
+
+ due to strict convexity,
+\begin_inset Formula 
+\[
+|\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}|\le|\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})|\le1,
+\]
+
+\end_inset
+
+we have 
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
+ & \le\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big(\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}\Big)^{2}\Big]\\
+ & \le\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big(\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})}{2}\Big)^{2}\Big].
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1/2}}= & \Big\Vert\Gb_{t}^{-1/2}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{2}\\
+\le & \Big\Vert\Gb_{t}^{-1/2}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\Big\Vert\cdot\Big\Vert\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}
+\end{align*}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
 \begin_inset Formula 
 \[
 |\sum_{k=1}^{K}p_{t}(k)\sqrt{\rho_{t}}x_{k,t}^{\top}y|^{2}=|\sum_{k=1}^{K}p_{t}(k)\sqrt{\rho_{t}}r_{k,t}\Qb_{t}^{\top}y|^{2}\le\rho_{t}\sum_{k=1}^{K}p_{t}(k)(r_{k,t}\Qb_{t}^{\top}y)^{2}=\sum_{k=1}^{K}p_{t}(k)(\sqrt{\rho_{t}}x_{k,t}^{\top}y)^{2}.
