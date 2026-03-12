@@ -1456,7 +1456,7 @@ The definition of
 \end_inset
 
 Let us write 
-\begin_inset Formula $\Vb_{t}:=\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}+\lambda_{t}\Ib_{d}$
+\begin_inset Formula $\Vb_{t}:=\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}\frac{\II(i_{s}=i)}{1/\rho_{s}}v_{i,s}v_{i,s}^{\top}+\lambda_{t}\Ib_{d}$
 \end_inset
 
 .
@@ -1563,7 +1563,7 @@ By Lemma ??,
 \end_inset
 
 and 
-\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\bar{\eta}_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}$
+\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\bar{\eta}_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}\le C_{s}\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}$
 \end_inset
 
  for all 
@@ -1571,7 +1571,48 @@ and
 \end_inset
 
 .
- For a nonnegative random variable 
+ 
+\end_layout
+
+\begin_layout Lemma
+Let 
+\begin_inset Formula $A$
+\end_inset
+
+ denote a random variable sampled from the multinomial distribution 
+\begin_inset Formula $\pi(k)=\PP(A=k)$
+\end_inset
+
+ for 
+\begin_inset Formula $k=1,\ldots,m$
+\end_inset
+
+ and 
+\begin_inset Formula $D_{1},\ldots,D_{m}$
+\end_inset
+
+ denote the independent mean-zero random variables such that 
+\begin_inset Formula $|D_{k}|\le1/2$
+\end_inset
+
+ for all 
+\begin_inset Formula $k=1,\ldots,m$
+\end_inset
+
+.
+ Then,
+\begin_inset Formula 
+\[
+\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})]\le\exp(\frac{1}{2}\EE\big[\|\nabla B_{\psi}(D,0)\|_{2}^{2}\|D\|_{2}^{2}\big]).
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Proof
+For a nonnegative random variable 
 \begin_inset Formula $Z$
 \end_inset
 
@@ -1581,84 +1622,93 @@ and
 \end_inset
 
 .
- For 
-\begin_inset Formula $\lambda\in[0,?]$
-\end_inset
-
-,
- and 
-\begin_inset Formula $i=1,2$
-\end_inset
-
- and 
-\begin_inset Formula $s\in[t]$
-\end_inset
-
-,
- 
+ By definition 
 \begin_inset Formula 
-\begin{align*}
- & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
- & =\EE\Big[\big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\big)\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)\Big]\\
- & \quad-\EE[\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)]\log\EE[\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)].
-\end{align*}
+\begin{equation}
+\begin{alignedat}{1} & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & =\EE\Big[\big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\big)\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\Big]-\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})]\log\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})].
+\end{alignedat}
+\label{eq:entD}
+\end{equation}
 
 \end_inset
 
  For 
-\begin_inset Formula $x=(x_{1},\ldots,x_{K})$
+\begin_inset Formula $x=(x_{1},\ldots,x_{m})$
 \end_inset
 
 ,
  define 
-\begin_inset Formula $\psi_{i,s}(x)=\log\sum_{k=1}^{K}\bar{\pi}_{s}(k)e^{x_{k}}$
+\begin_inset Formula $\psi(x)=\log\sum_{k=1}^{m}\pi(k)e^{x_{k}}$
 \end_inset
 
 .
  Note that 
-\begin_inset Formula $\psi_{i,s}(0)=0$
+\begin_inset Formula $\psi(0)=0$
 \end_inset
 
  and 
+\begin_inset Formula $\nabla\psi(0)=\pi$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $D=(D_{1},\ldots,D_{m})$
+\end_inset
+
+.
+ Then 
 \begin_inset Formula 
 \[
-\nabla\psi_{i,s}(x)^{\top}x=\frac{\sum_{k=1}^{K}\bar{p}_{s}(k)x_{k}e^{x_{k}}}{\sum_{k=1}^{K}\bar{p}_{s}(k)e^{x_{k}}}=e^{-\psi_{i,s}(x)}\sum_{k=1}^{K}\bar{p}_{s}(k)x_{k}e^{x_{k}}
+\nabla\psi(D)^{\top}D=\frac{\sum_{k=1}^{K}\pi(k)D_{k}e^{D_{k}}}{\sum_{k=1}^{K}\pi(k)e^{D_{k}}}=e^{-\psi(D)}\sum_{k=1}^{K}\pi(k)D_{k}e^{D_{k}}.
 \]
 
 \end_inset
 
-Writing 
-\begin_inset Formula $D_{i}:=(D_{i,1},\ldots,D_{i,K})$
-\end_inset
-
- and taking expectation over 
-\begin_inset Formula $a_{s}\sim\bar{\pi}_{s}$
-\end_inset
-
- given 
-\begin_inset Formula $\Acal_{m_{s}^{-}}$
+Taking expectation over 
+\begin_inset Formula $A\sim\pi$
 \end_inset
 
 ,
 \begin_inset Formula 
 \begin{align*}
- & \EE\Big[\big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\big)\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)\Big]\\
- & =\EE\Big[\big(\sum_{k=1}^{K}p_{s}(k)\lambda D_{i,k}e^{\lambda D_{i,k}}-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})\sum_{k=1}^{K}p_{s}(k)e^{\lambda D_{i,k}}\big)e^{-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})}\Big]\\
- & =\EE\Big[\big(\nabla\psi_{i,s}(\lambda D_{i})-\nabla\psi_{i,s}(0)\big)^{\top}(\lambda D_{i})e^{\psi_{i,s}(\lambda D_{i})-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})}\Big].
+\EE\Big[\big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\big)\exp\Big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\Big)\Big]= & \EE\Big[\big(\sum_{k=1}^{m}\pi(k)D_{k}e^{D_{k}}-\sum_{k=1}^{m}\pi(k)D_{k}\sum_{k=1}^{m}\pi(k)e^{D_{k}}\big)\exp(-\nabla\psi(0)^{\top}D)\Big]\\
+= & \EE\Big[(\nabla\psi(D)^{\top}D-\nabla\psi(0)^{\top}D)e^{\psi(D)-\nabla\psi(0)^{\top}D}\Big]\\
+= & \EE\Big[\big(\nabla\psi(D)-\nabla\psi(0)\big)^{\top}De^{\psi(D)-\nabla\psi(0)^{\top}D}\Big].
 \end{align*}
 
 \end_inset
 
-For the Bregman divergence 
-\begin_inset Formula $B_{\psi_{i,s}}(a,b)=\psi_{i,s}(a)-\psi_{i,s}(b)-\nabla\psi_{i,s}(b)^{\top}(b-a)$
+By definition of the Bregman divergence 
+\begin_inset Formula $B_{\psi}(a,b)=\psi(a)-\psi(b)-\nabla\psi(b)^{\top}(b-a)$
 \end_inset
 
 ,
- if follows that
+ it follows that
 \begin_inset Formula 
 \begin{align*}
-\EE[\exp\Big(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k}\Big)] & =\EE\Big[\exp\big(\psi_{i,s}(\lambda D_{i})-\nabla\psi_{i,s}(0)^{\top}(\lambda D_{i})\big)\Big]\\
- & =\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big].
+\EE\Big[\big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\big)\exp\Big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\Big)\Big]= & \EE\Big[\big(\nabla B_{\psi}(D,0)^{\top}De^{B_{\psi}(D,0)}\Big],
+\end{align*}
+
+\end_inset
+
+where the gradient is applied to the first component of the Bregman divergence.
+ The remaining terms in 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:entD"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+ can be written as
+\begin_inset Formula 
+\begin{align*}
+\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})] & =\EE\Big[\sum_{k=1}^{m}\pi(k)e^{D_{k}}\exp(-\nabla\psi(0)^{\top}D)\Big]\\
+ & =\EE\Big[e^{B_{\psi}(D,0)}\Big].
 \end{align*}
 
 \end_inset
@@ -1666,9 +1716,9 @@ For the Bregman divergence
 Thus,
 \begin_inset Formula 
 \begin{align*}
- & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
- & =\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})\Big]-\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big]\log\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big]\\
- & =\Ent(e^{B_{\psi_{i,s}}(\lambda D_{i},0)})+\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)\big)].
+ & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & =\EE\Big[\nabla B_{\psi}(D,0)^{\top}De^{B_{\psi}(D,0)}\Big]-\EE\Big[e^{B_{\psi}(D,0)}\Big]\log\EE\Big[e^{B_{\psi}(D,0)}\Big]\\
+ & =\Ent(e^{B_{\psi}(D,0)})+\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-B_{\psi}(D,0)\big)].
 \end{align*}
 
 \end_inset
@@ -1681,7 +1731,7 @@ By the representation lemma (Lemma ??) for
  
 \begin_inset Formula 
 \[
-\Ent(e^{B_{\psi_{i,s}}(\lambda D_{i},0)})\le\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(B_{\psi_{i,s}}(\lambda D_{i},0)-u\big)-(e^{B_{\psi_{i,s}}(\lambda D_{i},0)}-e^{u})].
+\Ent(e^{B_{\psi}(D,0)})\le\EE[e^{B_{\psi}(D,0)}\big(B_{\psi}(D,0)-u\big)-(e^{B_{\psi}(D,0)}-e^{u})].
 \]
 
 \end_inset
@@ -1689,78 +1739,200 @@ By the representation lemma (Lemma ??) for
 Thus,
 \begin_inset Formula 
 \begin{align*}
- & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
- & \le\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-u\big)-(e^{B_{\psi_{i,s}}(\lambda D_{i},0)}-e^{u})]\\
- & =\EE[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\big(\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-u-1+e^{u-B_{\psi_{i,s}}(\lambda D_{i},0)}\big)]
+ & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & \le\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-u\big)-(e^{B_{\psi}(D,0)}-e^{u})]\\
+ & =\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-u-1+e^{u-B_{\psi}(D,0)}\big)]
 \end{align*}
 
 \end_inset
 
+Let 
+\begin_inset Formula $D^{\prime}$
+\end_inset
 
+ denote the independent copy of 
+\begin_inset Formula $D$
+\end_inset
+
+.
+ Setting 
+\begin_inset Formula $u=B_{\psi}(D^{\prime},0)$
+\end_inset
+
+ and taking expectation on both sides,
+ 
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & \le\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-B_{\psi}(D^{\prime},0)-1+e^{B_{\psi}(D^{\prime},0)-B_{\psi}(D,0)}\big)].
+\end{align*}
+
+\end_inset
+
+By the symmetrization argument,
+ setting 
+\begin_inset Formula $Z:=\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0)$
+\end_inset
+
+ gives
+\begin_inset Formula 
+\begin{align*}
+ & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & \le\EE[e^{B_{\psi}(D^{\prime},0)}\big(\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0)-1+e^{B_{\psi}(D,0)-B_{\psi}(D^{\prime},0)}\big)].\\
+ & =\EE[e^{B_{\psi}(D^{\prime},0)}\big(Z-1+e^{B_{\psi}(D,0)-B_{\psi}(D^{\prime},0)}\big)]\\
+ & =\EE[e^{B_{\psi}(D,0)}\big((Z-1)e^{B_{\psi}(D^{\prime},0)-B_{\psi}(D,0)}+1\big)]\\
+ & \le\EE[e^{B_{\psi}(D,0)}\big((Z-1)e^{Z}+1\big)],
+\end{align*}
+
+\end_inset
+
+where the last inequality uses the fact that 
+\begin_inset Formula $B_{\psi}(\cdot,0)$
+\end_inset
+
+ is strictly convex and 
+\begin_inset Formula $B_{\psi}(D^{\prime},0)\le\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}.$
+\end_inset
+
+ Because 
+\begin_inset Formula $\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}\ge0$
+\end_inset
+
+ and 
+\begin_inset Formula $B_{\psi}(D,0)\ge0$
+\end_inset
+
+,
+\begin_inset Formula 
+\begin{align*}
+|Z|= & |\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0)|\\
+\le & \max\{\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime},B_{\psi}(D,0)\}\\
+\le & \max\{\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime},\nabla B_{\psi}(D,0)^{\top}D\}.
+\end{align*}
+
+\end_inset
+
+By assumption,
+ 
+\begin_inset Formula $\|\nabla\psi(D^{\prime})\|_{1}=1$
+\end_inset
+
+ and 
+\begin_inset Formula $\|D^{\prime}\|_{\infty}\le1/2$
+\end_inset
+
+.
+ It follows that
+\begin_inset Formula 
+\begin{equation}
+\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}\le\|\nabla\psi(D^{\prime})-\nabla\psi(0)\|_{1}\|D^{\prime}\|_{\infty}\le1,\label{eq:Z_bound}
+\end{equation}
+
+\end_inset
+
+and 
+\begin_inset Formula $|Z|\le1$
+\end_inset
+
+.
+ Because 
+\begin_inset Formula $(z-1)e^{z}+1\le z^{3}$
+\end_inset
+
+ for 
+\begin_inset Formula $|z|\le1$
+\end_inset
+
+,
+ 
 \begin_inset Formula 
 \[
-u-B_{\psi_{i,s}}(\lambda D_{i},0)=\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-u
+\Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\le\EE[e^{B_{\psi}(D,0)}Z^{3}]
 \]
 
 \end_inset
 
-Setting 
-\begin_inset Formula $u=(B_{\psi_{i,s}}(\lambda D_{i},0)+\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i}))/2$
+By definition of 
+\begin_inset Formula $Z$
+\end_inset
+
+,
+\begin_inset Formula 
+\begin{align*}
+Z^{3}= & (\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0))^{3}\\
+\le & (\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime})^{3}\\
+\le & (\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime})^{2},
+\end{align*}
+
+\end_inset
+
+where the last inequality uses 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:Z_bound"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+.
+ Because 
+\begin_inset Formula $D$
+\end_inset
+
+ and 
+\begin_inset Formula $D^{\prime}$
+\end_inset
+
+ are independent,
+\begin_inset Formula 
+\[
+\Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\le\EE[e^{B_{\psi}(D,0)}]\EE[(\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime})^{2}]
+\]
+
+\end_inset
+
+Because 
+\begin_inset Formula $\EE[D_{k}^{\prime}]=0$
+\end_inset
+
+ for each 
+\begin_inset Formula $k=1,\ldots,m$
 \end_inset
 
 ,
  
 \begin_inset Formula 
 \begin{align*}
- & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
- & \le\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big(\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}-1+e^{-\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}}\Big)\Big].
+\EE[(\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime})^{2}]= & \EE[\big(\sum_{k=1}^{m}(\frac{\pi(k)e^{D_{k}^{\prime}}}{\sum_{k^{\prime}=1}^{m}\pi(k^{\prime})e^{D_{k^{\prime}}^{\prime}}}-\pi(k)\big)D_{k}^{\prime}\big)^{2}]\\
+= & \EE[\sum_{k=1}^{m}(\frac{\pi(k)e^{D_{k}^{\prime}}}{\sum_{k^{\prime}=1}^{m}\pi(k^{\prime})e^{D_{k^{\prime}}^{\prime}}}-\pi(k)\big)^{2}(D_{k}^{\prime})^{2}]\\
+= & \EE\big[\|\nabla B_{\psi}(D^{\prime},0)\|_{2}^{2}\|D^{\prime}\|_{2}^{2}\big]\\
+= & \EE\big[\|\nabla B_{\psi}(D,0)\|_{2}^{2}\|D\|_{2}^{2}\big],
 \end{align*}
 
 \end_inset
 
-Because 
-\begin_inset Formula $\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})\ge B_{\psi_{i,s}}(\lambda D_{i},0)\ge0$
+where the last inequality holds because the distribution of 
+\begin_inset Formula $D$
 \end_inset
 
- due to strict convexity,
+ and 
+\begin_inset Formula $D^{\prime}$
+\end_inset
+
+ are equivalent.
+ Thus,
+ by Herbt's method (Lemma ??),
 \begin_inset Formula 
 \[
-|\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}|\le|\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})|\le1,
+\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})]\le\exp(\frac{1}{2}\EE\big[\|\nabla B_{\psi}(D,0)\|_{2}^{2}\|D\|_{2}^{2}\big]),
 \]
 
 \end_inset
 
-we have 
-\begin_inset Formula 
-\begin{align*}
- & \Ent\big(\exp(\lambda D_{i,a_{s}}-\lambda\sum_{k=1}^{K}\bar{\pi}_{s}(k)D_{i,k})\big)\\
- & \le\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big(\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})-B_{\psi_{i,s}}(\lambda D_{i},0)}{2}\Big)^{2}\Big]\\
- & \le\EE\Big[e^{B_{\psi_{i,s}}(\lambda D_{i},0)}\Big(\frac{\nabla B_{\psi_{i,s}}(\lambda D_{i},0)^{\top}(\lambda D_{i})}{2}\Big)^{2}\Big].
-\end{align*}
-
-\end_inset
-
-
-\begin_inset Formula 
-\begin{align*}
-\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1/2}}= & \Big\Vert\Gb_{t}^{-1/2}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{2}\\
-\le & \Big\Vert\Gb_{t}^{-1/2}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\Big\Vert\cdot\Big\Vert\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}
-\end{align*}
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Proof
-\begin_inset Formula 
-\[
-|\sum_{k=1}^{K}p_{t}(k)\sqrt{\rho_{t}}x_{k,t}^{\top}y|^{2}=|\sum_{k=1}^{K}p_{t}(k)\sqrt{\rho_{t}}r_{k,t}\Qb_{t}^{\top}y|^{2}\le\rho_{t}\sum_{k=1}^{K}p_{t}(k)(r_{k,t}\Qb_{t}^{\top}y)^{2}=\sum_{k=1}^{K}p_{t}(k)(\sqrt{\rho_{t}}x_{k,t}^{\top}y)^{2}.
-\]
-
-\end_inset
-
-
+which completes the proof.
 \end_layout
 
 \end_body
