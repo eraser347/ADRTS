@@ -1,0 +1,539 @@
+%% LyX 2.4.4 created this file.  For more info, see https://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=3cm,rmargin=3cm}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\theoremstyle{plain}
+\newtheorem{thm}{\protect\theoremname}
+\theoremstyle{plain}
+\newtheorem{lem}[thm]{\protect\lemmaname}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{babel}
+
+\makeatother
+
+\usepackage{babel}
+\providecommand{\lemmaname}{Lemma}
+\providecommand{\theoremname}{Theorem}
+
+\begin{document}
+% COMMON ABBRVS 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% bold alphabet 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\global\long\def\ab{\mathbf{a}}%
+ 
+\global\long\def\bb{\mathbf{b}}%
+ 
+\global\long\def\cb{\mathbf{c}}%
+ 
+\global\long\def\db{\mathbf{d}}%
+ 
+\global\long\def\eb{\mathbf{e}}%
+ 
+\global\long\def\fb{\mathbf{f}}%
+ 
+\global\long\def\gb{\mathbf{g}}%
+ 
+\global\long\def\hb{\mathbf{h}}%
+ 
+\global\long\def\ib{\mathbf{i}}%
+ 
+\global\long\def\jb{\mathbf{j}}%
+ 
+\global\long\def\kb{\mathbf{k}}%
+ 
+\global\long\def\lb{\mathbf{l}}%
+ 
+\global\long\def\mb{\mathbf{m}}%
+ 
+\global\long\def\nb{\mathbf{n}}%
+ 
+\global\long\def\ob{\mathbf{o}}%
+ 
+\global\long\def\pb{\mathbf{p}}%
+ 
+\global\long\def\qb{\mathbf{q}}%
+ 
+\global\long\def\rb{\mathbf{r}}%
+ 
+\global\long\def\sb{\mathbf{s}}%
+ 
+\global\long\def\tb{\mathbf{t}}%
+ 
+\global\long\def\ub{\mathbf{u}}%
+ 
+\global\long\def\vb{\mathbf{v}}%
+ 
+\global\long\def\wb{\mathbf{w}}%
+ 
+\global\long\def\xb{\mathbf{x}}%
+ 
+\global\long\def\yb{\mathbf{y}}%
+ 
+\global\long\def\zb{\mathbf{z}}%
+ 
+\global\long\def\Ab{\mathbf{A}}%
+ 
+\global\long\def\Bb{\mathbf{B}}%
+ 
+\global\long\def\Cb{\mathbf{C}}%
+ 
+\global\long\def\Db{\mathbf{D}}%
+ 
+\global\long\def\Eb{\mathbf{E}}%
+ 
+\global\long\def\Fb{\mathbf{F}}%
+ 
+\global\long\def\Gb{\mathbf{G}}%
+ 
+\global\long\def\Hb{\mathbf{H}}%
+ 
+\global\long\def\Ib{\mathbf{I}}%
+ 
+\global\long\def\Jb{\mathbf{J}}%
+ 
+\global\long\def\Kb{\mathbf{K}}%
+ 
+\global\long\def\Lb{\mathbf{L}}%
+ 
+\global\long\def\Mb{\mathbf{M}}%
+ 
+\global\long\def\Nb{\mathbf{N}}%
+ 
+\global\long\def\Ob{\mathbf{O}}%
+ 
+\global\long\def\Pb{\mathbf{P}}%
+ 
+\global\long\def\Qb{\mathbf{Q}}%
+ 
+\global\long\def\Rb{\mathbf{R}}%
+ 
+\global\long\def\Sb{\mathbf{S}}%
+ 
+\global\long\def\Tb{\mathbf{T}}%
+ 
+\global\long\def\Ub{\mathbf{U}}%
+ 
+\global\long\def\Vb{\mathbf{V}}%
+ 
+\global\long\def\Wb{\mathbf{W}}%
+ 
+\global\long\def\Xb{\mathbf{X}}%
+ 
+\global\long\def\Yb{\mathbf{Y}}%
+ 
+\global\long\def\Zb{\mathbf{Z}}%
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% calligraphic fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\global\long\def\Acal{\mathcal{A}}%
+ 
+\global\long\def\Bcal{\mathcal{B}}%
+ 
+\global\long\def\Ccal{\mathcal{C}}%
+ 
+\global\long\def\Dcal{\mathcal{D}}%
+ 
+\global\long\def\Ecal{\mathcal{E}}%
+ 
+\global\long\def\Fcal{\mathcal{F}}%
+ 
+\global\long\def\Gcal{\mathcal{G}}%
+ 
+\global\long\def\Hcal{\mathcal{H}}%
+ 
+\global\long\def\Ical{\mathcal{I}}%
+ 
+\global\long\def\Jcal{\mathcal{J}}%
+ 
+\global\long\def\Kcal{\mathcal{K}}%
+ 
+\global\long\def\Lcal{\mathcal{L}}%
+ 
+\global\long\def\Mcal{\mathcal{M}}%
+ 
+\global\long\def\Ncal{\mathcal{N}}%
+ 
+\global\long\def\Ocal{\mathcal{O}}%
+ 
+\global\long\def\Pcal{\mathcal{P}}%
+ 
+\global\long\def\Qcal{\mathcal{Q}}%
+ 
+\global\long\def\Rcal{\mathcal{R}}%
+ 
+\global\long\def\Scal{\mathcal{S}}%
+ 
+\global\long\def\Tcal{\mathcal{T}}%
+ 
+\global\long\def\Ucal{\mathcal{U}}%
+ 
+\global\long\def\Vcal{\mathcal{V}}%
+ 
+\global\long\def\Wcal{\mathcal{W}}%
+ 
+\global\long\def\Xcal{\mathcal{X}}%
+ 
+\global\long\def\Ycal{\mathcal{Y}}%
+ 
+\global\long\def\Zcal{\mathcal{Z}}%
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Widely accepted definitions %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\global\long\def\BB{\mathbb{B}}%
+ % Ball
+\global\long\def\CC{\mathbb{C}}%
+ % Complex numbers
+\global\long\def\EE{\mathbb{E}}%
+ % Expectation
+\global\long\def\VV{\mathbb{V}}%
+ % Variance
+\global\long\def\II{\mathbb{I}}%
+ % Indicator
+\global\long\def\KK{\mathbb{K}}%
+ % Arbitrary field
+\global\long\def\LL{\mathbb{L}}%
+ % Loss
+\global\long\def\MM{\mathbb{M}}%
+ % Median
+\global\long\def\NN{\mathbb{N}}%
+ % Natural numbers
+\global\long\def\PP{\mathbb{P}}%
+ % Probability
+\global\long\def\QQ{\mathbb{Q}}%
+ % Rationals
+\global\long\def\RR{\mathbb{R}}%
+ % Real numbers
+\global\long\def\ZZ{\mathbb{Z}}%
+ % Integers
+\global\long\def\XX{\mathbb{X}}%
+ 
+\global\long\def\YY{\mathbb{Y}}%
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% bold greek letters %%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\global\long\def\alphab{\boldsymbol{\alpha}}%
+ 
+\global\long\def\betab{\boldsymbol{\beta}}%
+ 
+\global\long\def\Sigmab{\boldsymbol{\Sigma}}%
+ 
+\global\long\def\Omegab{\boldsymbol{\Omega}}%
+ 
+\global\long\def\omegab{\boldsymbol{\omega}}%
+ 
+\global\long\def\Gammab{\boldsymbol{\Gamma}}%
+ 
+\global\long\def\Psib{\boldsymbol{\Psi}}%
+ 
+\global\long\def\Thetab{\boldsymbol{\Theta}}%
+ 
+\global\long\def\thetab{\boldsymbol{\theta}}%
+ 
+\global\long\def\taub{\boldsymbol{\tau}}%
+ 
+\global\long\def\epsilonb{\boldsymbol{\epsilon}}%
+ 
+\global\long\def\etab{\boldsymbol{\eta}}%
+ 
+\global\long\def\xib{\boldsymbol{\xi}}%
+ 
+\global\long\def\gammab{\boldsymbol{\gamma}}%
+ 
+\global\long\def\deltab{\boldsymbol{\delta}}%
+ 
+\global\long\def\Deltab{\boldsymbol{\Delta}}%
+ 
+\global\long\def\mub{\boldsymbol{\mu}}%
+ 
+\global\long\def\rhob{\boldsymbol{\rho}}%
+\global\long\def\vPhib{\boldsymbol{\varPhi}}%
+\global\long\def\Lambdab{\boldsymbol{\Lambda}}%
+
+\global\long\def\argmax#1{\underset{#1}{\text{argmax}}}%
+\global\long\def\argmin#1{\underset{#1}{\text{argmin}}}%
+\global\long\def\rank{\text{rank}}%
+\global\long\def\Ent{\text{Ent}}%
+
+
+\subsection{Novel Optimal Design}
+
+For each round $t$, let $\tilde{a}_{t}=\argmax{k\in[K]}x_{k,t}^{\top}\tilde{\beta}_{t-1}$
+denote the arm drawn by the Thompson Sampling algorithm where $\tilde{\beta}_{t-1}\sim N(\widehat{\beta}_{t-1},V_{t-1}^{-1})$
+and $\widehat{\beta}_{t-1}$ is the proposed estimator and $V_{t-1}$
+is the Gram matrix. Let $\Xb_{t}=[X_{1,t},\cdots,X_{K,t}]\in\RR^{d\times K}$
+denote a concatenated context matrix and $\rho_{t}:=\rank(\Xb_{t})$
+denote its rank. It is obvious that $\rho_{t}\le\min\{d,K\}$. Applying
+reduced QR decomposition, there exists a matrix with orthonormal column
+vectors $\Qb_{t}\in\RR^{d\times\rho_{t}}$ and vectors $r_{1,t},\ldots,r_{K,t}\in\RR^{\rho_{t}}$
+\[
+\begin{bmatrix}x_{1,t} & \cdots & x_{K,t}\end{bmatrix}=\Qb_{t}\begin{bmatrix}r_{1,t} & \cdots & r_{K,t}\end{bmatrix}.
+\]
+Let $p_{t}$ denote the G-optimal policy over $\{r_{1,t},\ldots,r_{K,t}\}$.
+By Kiefer-wolfwiez theorem, G-optimal design is equivalent with D-optimal
+design, which is efficiently computable. By definition of the G-optimal
+policy, we have $\max_{k^{\prime}\in[K]}r_{k^{\prime},t}^{\top}(\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top})^{-1}r_{k^{\prime},t}=\rho_{t}$.
+Thus, for all $k^{\prime}\in[K]$
+\[
+(\rho_{t}\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top})^{-1/2}r_{k^{\prime},t}r_{k^{\prime},r}^{\top}(\rho_{t}\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top})^{-1/2}\preceq I_{\rho_{t}},
+\]
+which implies $r_{k^{\prime},t}r_{k^{\prime},t}\preceq\rho_{t}\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top}$.
+Thus, for each $k^{\prime}\in[K]$, 
+\[
+|x_{k^{\prime},t}^{\top}y|^{2}=|r_{k^{\prime},t}\Qb_{t}^{\top}y|^{2}\le\rho_{t}\sum_{k=1}^{K}p_{t}(k)\big(r_{k,t}\Qb_{t}^{\top}y\big)^{2}=\sum_{k=1}^{K}p_{t}(k)(\sqrt{\rho_{t}}x_{k,t}^{\top}y)^{2}.
+\]
+Thus, for $k^{\prime}\in[K]$, we obtain $x_{k^{\prime},t}x_{k^{\prime},t}^{\top}\preceq\rho_{t}\sum_{k=1}^{K}p_{t}(k)x_{k,t}x_{k,t}^{\top}$. 
+
+Based on this G-optimal design, we construct a novel exploration scheme
+that is compatible with both Thompson Sampling and Doubly Robust estimator.
+Define the distribution over $[K]$ as 
+\[
+\bar{\pi}_{t}(k)=\frac{p_{t}(k)+\II(k=\tilde{a}_{t})}{2}.
+\]
+Let $\{\bar{a}_{t}^{(n)}:n\ge1\}$ denote the IID samples from the
+distribution $\bar{\pi}_{t}$ and let $m_{t}:=\{n\le\lceil\log\frac{\sqrt{t}}{d}/\log2\rceil:\bar{a}_{t}^{(n)}=\tilde{a}_{t}\}$
+denote the stopping time when the action from $\bar{\pi}_{t}$ matches
+$\tilde{a}_{t}$ with in $\lceil\log\frac{\sqrt{t}}{d}/\log2\rceil$
+number of trials. We select the action $a_{t}=\bar{a}_{t}^{(m_{t})}$.
+With probability at least $1-d/\sqrt{t}$, the algorithm selects $\tilde{a}_{t}$
+while it selects other actions with probability at most $d/\sqrt{t}$.
+Let $\Acal_{m}$ denote the sigma-algebra generated by $\{\bar{a}_{t}^{(n)}:n\in[m]\}$.
+Given the sigma-algebra $\Acal_{m_{t}^{-}}$ generated by the events
+$\cap_{m=1}^{\lceil\log\frac{\sqrt{t}}{d}/\log2\rceil}\{A\cap\{m_{t}=m\}:A\in\Acal_{m-1}\}$,
+which is the information right before the matching event, the distribution
+of $\bar{a}_{t}^{(m_{t})}$ is $\bar{\pi}_{t}$ which is the mixture
+of G-optimal design and the selected arm $\tilde{a}_{t}$. 
+
+Let $v_{1,t},\ldots,v_{\rho_{t},t}$ denote the orthogonal vectors
+such that $\frac{1}{2}\sum_{k=1}^{K}\rho_{t}p_{t}(k)x_{k,t}x_{k,t}^{\top}+\frac{1}{2}x_{\tilde{a}_{t},t}x_{\tilde{a}_{t},t}^{\top}=\sum_{i=1}^{\rho_{t}}v_{i,t}v_{i,t}^{\top}$.
+Let $i_{t}\sim\text{unif}([\rho_{t}])$ and
+\[
+X_{a_{t},t}=\begin{cases}
+\sqrt{\rho_{t}}x_{a_{t}} & a_{t}\neq\tilde{a}_{t}\\
+x_{\tilde{a}_{t},t} & a_{t}=\tilde{a}_{t}
+\end{cases},\quad Y_{a_{t},t}=\begin{cases}
+\sqrt{\rho_{t}}R_{a_{t},t} & a_{t}\neq\tilde{a}_{t}\\
+R_{\tilde{a}_{t},t} & a_{t}=\tilde{a}_{t}
+\end{cases}.
+\]
+\[
+\theta_{t}^{R}:=\Gb_{t}^{-1}\sum_{s=1}^{t}Y_{a_{s},s}X_{a_{s},s},
+\]
+denote the weighted ridge estimator, where the Gram matrix,
+\[
+\Gb_{t}:=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}I_{d}.
+\]
+We define the augmented DR estimator
+\[
+\widehat{\theta}_{t}:=\Gb_{t}^{-1}\sum_{s=1}^{t}\Big(\sum_{i=1}^{\rho_{t}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}\beta_{t}^{R}+Y_{a_{s},s}X_{a_{s},s}\Big),
+\]
+
+\begin{thm}
+\label{thm:self}(Self-normalized bound for the ADR estimator) Suppose
+$t$ satisfies, $t\ge d\log??$. With probability at least $1-\delta$,
+\[
+\|\widehat{\theta}_{t}-\theta\|_{\Gb_{t}}\le\sqrt{2d\sigma^{2}\log\frac{1}{\delta}},
+\]
+for all $t\ge??$
+\end{thm}
+
+The initialization round is to ensure that the imputation estimator
+$\beta_{t}^{R}$ is accurate enough to guarantee augmented estimation
+error bound. 
+\begin{proof}
+By definition,Recall that 
+\begin{align*}
+\Gb_{t} & :=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}\Ib_{d}
+\end{align*}
+The definition of $v_{i,s}$ implies $\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}=\sum_{i=1}^{\rho_{s}}v_{i,s}v_{i,s}^{\top}$
+for all $s\in[t]$. Let us write $\eta_{a_{s},s}:=Y_{a_{s},s}-X_{a_{s},s}^{\top}\theta_{\star}$.
+By definition of the estimator and the Gram matrix,
+\[
+\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & =\Big\Vert\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}-\Gb_{t}\big)\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{split}
+\]
+Let us write $\Vb_{t}:=\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}\frac{\II(i_{s}=i)}{1/\rho_{s}}v_{i,s}v_{i,s}^{\top}+\lambda_{t}\Ib_{d}$.
+Then,
+\[
+\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & =\Big\Vert(\Gb_{t}-\Vb_{t})(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}-\Gb_{t}\big)\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{split}
+\]
+By definition of $\theta_{t}^{R}=\Gb_{t}^{-1}\sum_{s=1}^{t}Y_{a_{s},s}X_{a_{s},s}$,
+\[
+\theta_{t}^{R}-\theta_{\star}=\Gb_{t}^{-1}\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\Gb_{t}^{-1}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}
+\]
+ It follows that 
+\[
+\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & =\Big\Vert(2\Ib_{d}-\Vb_{t}\Gb_{t}^{-1})\big(\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\big)\Big\Vert_{\Gb_{t}^{-1}}\\
+ & =\Big\Vert(2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2})\Gb_{t}^{-1/2}\big(\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\big)\Big\Vert_{2}.
+\end{split}
+\]
+By definition of the matrix operator norm, $\|M\|_{2}:=\max_{\|x\|_{2}\le1}\|Mx\|_{2}$,
+\begin{align*}
+ & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
+ & \le\Big\Vert2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\cdot\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{align*}
+By Lemma ??
+\begin{align*}
+\Big\Vert2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\le & 1+\Big\Vert\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\\
+\le & 3.
+\end{align*}
+Thus, by triangular inequality
+\begin{align*}
+\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}} & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}\\
+ & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}+3\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\end{align*}
+For $C_{s}>0$ to be determined later, let $\bar{\eta}_{a_{s},s}:=\eta_{a_{s},s}\II(|\eta_{a_{s},s}|\le C_{s})-\EE[\eta_{a_{s},s}\II(|\eta_{a_{s},s}|\le C_{s})]|\Hcal_{s-1}]$
+and $\tilde{\eta}_{a_{s},s}:=\eta_{a_{s},s}\II(|\eta_{a_{s},s}|>C_{s})-\EE[\eta_{a_{s},s}\II(|\eta_{a_{s},s}|>C_{s})|\Hcal_{s-1}]$
+\[
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\Big\Vert\sum_{s=1}^{t}\bar{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}+\Big\Vert\sum_{s=1}^{t}\tilde{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}.
+\]
+By Lemma ??, there exists a martingale differences $\{D_{1,a_{s}},D_{2,a_{s}}:s\in[t]\}$,
+such that 
+\[
+\Big\Vert\sum_{s=1}^{t}\bar{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
+\]
+and $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\bar{\eta}_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}\le C_{s}\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}$
+for all $s\in[t]$. 
+\end{proof}
+\begin{lem}
+Let $A$ denote a random variable sampled from the multinomial distribution
+$\pi(k)=\PP(A=k)$ for $k=1,\ldots,m$ and $D_{1},\ldots,D_{m}$ denote
+the independent mean-zero random variables such that $|D_{k}|\le1/2$
+for all $k=1,\ldots,m$. Suppose further $\EE[D_{A}^{2}]\le L_{2}$.
+Then,
+\[
+\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})]\le\exp(4L_{2}^{2}).
+\]
+ 
+\end{lem}
+
+\begin{proof}
+For a nonnegative random variable $Z$, define the entropy $\Ent(Z)=\EE[Z\log Z]-\EE[Z]\log\EE[Z]$.
+By definition 
+\begin{equation}
+\begin{alignedat}{1} & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & =\EE\Big[\big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\big)\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\Big]-\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})]\log\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})].
+\end{alignedat}
+\label{eq:entD}
+\end{equation}
+ For $x=(x_{1},\ldots,x_{m})$, define $\psi(x)=\log\sum_{k=1}^{m}\pi(k)e^{x_{k}}$.
+Note that $\psi(0)=0$ and $\nabla\psi(0)=\pi$. Let $D=(D_{1},\ldots,D_{m})$.
+Then 
+\[
+\nabla\psi(D)^{\top}D=\frac{\sum_{k=1}^{K}\pi(k)D_{k}e^{D_{k}}}{\sum_{k=1}^{K}\pi(k)e^{D_{k}}}=e^{-\psi(D)}\sum_{k=1}^{K}\pi(k)D_{k}e^{D_{k}}.
+\]
+Taking expectation over $A\sim\pi$,
+\begin{align*}
+\EE\Big[\big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\big)\exp\Big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\Big)\Big]= & \EE\Big[\big(\sum_{k=1}^{m}\pi(k)D_{k}e^{D_{k}}-\sum_{k=1}^{m}\pi(k)D_{k}\sum_{k=1}^{m}\pi(k)e^{D_{k}}\big)\exp(-\nabla\psi(0)^{\top}D)\Big]\\
+= & \EE\Big[(\nabla\psi(D)^{\top}D-\nabla\psi(0)^{\top}D)e^{\psi(D)-\nabla\psi(0)^{\top}D}\Big]\\
+= & \EE\Big[\big(\nabla\psi(D)-\nabla\psi(0)\big)^{\top}De^{\psi(D)-\nabla\psi(0)^{\top}D}\Big].
+\end{align*}
+By definition of the Bregman divergence $B_{\psi}(a,b)=\psi(a)-\psi(b)-\nabla\psi(b)^{\top}(b-a)$,
+it follows that
+\begin{align*}
+\EE\Big[\big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\big)\exp\Big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\Big)\Big]= & \EE\Big[\big(\nabla B_{\psi}(D,0)^{\top}De^{B_{\psi}(D,0)}\Big],
+\end{align*}
+where the gradient is applied to the first component of the Bregman
+divergence. The remaining terms in \eqref{eq:entD} can be written
+as
+\begin{align*}
+\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})] & =\EE\Big[\sum_{k=1}^{m}\pi(k)e^{D_{k}}\exp(-\nabla\psi(0)^{\top}D)\Big]\\
+ & =\EE\Big[e^{B_{\psi}(D,0)}\Big].
+\end{align*}
+Thus,
+\begin{align*}
+ & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & =\EE\Big[\nabla B_{\psi}(D,0)^{\top}De^{B_{\psi}(D,0)}\Big]-\EE\Big[e^{B_{\psi}(D,0)}\Big]\log\EE\Big[e^{B_{\psi}(D,0)}\Big]\\
+ & =\Ent(e^{B_{\psi}(D,0)})+\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-B_{\psi}(D,0)\big)].
+\end{align*}
+By the representation lemma (Lemma ??) for $u\in\RR$, 
+\[
+\Ent(e^{B_{\psi}(D,0)})\le\EE[e^{B_{\psi}(D,0)}\big(B_{\psi}(D,0)-u\big)-(e^{B_{\psi}(D,0)}-e^{u})].
+\]
+Thus,
+\begin{align*}
+ & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & \le\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-u\big)-(e^{B_{\psi}(D,0)}-e^{u})]\\
+ & =\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-u-1+e^{u-B_{\psi}(D,0)}\big)]
+\end{align*}
+Let $D^{\prime}$ denote the independent copy of $D$. Setting $u=B_{\psi}(D^{\prime},0)$
+and taking expectation on both sides, 
+\begin{align*}
+ & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & \le\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-B_{\psi}(D^{\prime},0)-1+e^{B_{\psi}(D^{\prime},0)-B_{\psi}(D,0)}\big)].
+\end{align*}
+By the symmetrization argument, setting $Z:=\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0)$
+gives
+\begin{align*}
+ & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
+ & \le\EE[e^{B_{\psi}(D^{\prime},0)}\big(\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0)-1+e^{B_{\psi}(D,0)-B_{\psi}(D^{\prime},0)}\big)].\\
+ & =\EE[e^{B_{\psi}(D^{\prime},0)}\big(Z-1+e^{B_{\psi}(D,0)-B_{\psi}(D^{\prime},0)}\big)]\\
+ & =\EE[e^{B_{\psi}(D,0)}\big((Z-1)e^{B_{\psi}(D^{\prime},0)-B_{\psi}(D,0)}+1\big)]\\
+ & \le\EE[e^{B_{\psi}(D,0)}\big((Z-1)e^{Z}+1\big)],
+\end{align*}
+where the last inequality uses the fact that $B_{\psi}(\cdot,0)$
+is strictly convex and $B_{\psi}(D^{\prime},0)\le\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}.$
+Because $\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}\ge0$ and
+$B_{\psi}(D,0)\ge0$,
+\begin{align*}
+|Z|= & |\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0)|\\
+\le & \max\{\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime},B_{\psi}(D,0)\}\\
+\le & \max\{\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime},\nabla B_{\psi}(D,0)^{\top}D\}.
+\end{align*}
+By assumption, $\|\nabla\psi(D^{\prime})\|_{1}=1$ and $\|D^{\prime}\|_{\infty}\le1/2$.
+It follows that
+\begin{equation}
+\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}\le\|\nabla\psi(D^{\prime})-\nabla\psi(0)\|_{1}\|D^{\prime}\|_{\infty}\le1,\label{eq:Z_bound}
+\end{equation}
+and $|Z|\le1$. Because $(z-1)e^{z}+1\le z^{2}$ for $|z|\le1$, 
+\[
+\Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\le\EE[e^{B_{\psi}(D,0)}Z^{2}]
+\]
+By definition of $Z$,
+\begin{align*}
+Z^{2}= & (\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0))^{2}\\
+\le & (\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime})^{2}+B_{\psi}(D,0)^{2},
+\end{align*}
+where the inequality holds because $\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}\ge0$
+and $B_{\psi}(D,0)\ge0$. For the first term, by the mean value theorem,
+there exists $\bar{D}$ such that $\|\bar{D}\|_{\infty}\le1/2$ and
+\[
+\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}=\|D^{\prime}\|_{\nabla^{2}\psi(\bar{D})}^{2}\le\sum_{k=1}^{m}\frac{\pi(k)e^{\bar{D}_{k}}(D_{k}^{\prime})^{2}}{\sum_{k^{\prime}=1}^{m}\pi(k^{\prime})e^{\bar{D}_{k}}}\le e\sum_{k=1}^{K}\pi(k)(D_{k}^{\prime})^{2}
+\]
+where the first inequality holds because $\nabla^{2}\psi(\bar{D})=\sum_{k=1}^{m}\eb_{k}^{\top}\nabla\psi(\bar{D})\eb_{k}\eb_{k}^{\top}-\nabla\psi(\bar{D})\nabla\psi(\bar{D})^{\top}$.
+Thus, $\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}\le e\EE[(D_{k}^{\prime})^{2}]\le L_{2}$.
+Similarly, because $B_{\psi}(\cdot,0)$ is strictly convex,
+\[
+B_{\psi}(D,0)\le\nabla B_{\psi}(D,0)^{\top}D\le L_{2}.
+\]
+Thus, $Z^{2}\le2L_{2}^{2}$ and 
+\[
+\Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\le\EE[e^{B_{\psi}(D,0)}]2L_{2}^{2}
+\]
+By Herbt's method (Lemma ??),
+\[
+\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})]\le\exp(4L_{2}^{2}),
+\]
+which completes the proof.
+\end{proof}
+
+\end{document}

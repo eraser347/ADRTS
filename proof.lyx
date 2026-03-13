@@ -1357,7 +1357,7 @@ denote the weighted ridge estimator,
 We define the augmented DR estimator
 \begin_inset Formula 
 \[
-\widehat{\theta}_{t}:=\Gb_{t}^{-1}\sum_{s=1}^{t}\Big(\sum_{i=1}^{\rho_{t}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}\beta_{t}^{R}+Y_{a_{s},s}X_{a_{s},s}\Big),
+\widehat{\theta}_{t}:=\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}\big)^{-1}\sum_{s=1}^{t}\Big(\sum_{i=1}^{\rho_{t}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}\theta_{t}^{R}+Y_{a_{s},s}X_{a_{s},s}\Big),
 \]
 
 \end_inset
@@ -1419,7 +1419,8 @@ The initialization round is to ensure that the imputation estimator
 \end_layout
 
 \begin_layout Proof
-By definition,Recall that 
+By definition,
+ recall that 
 \begin_inset Formula 
 \begin{align*}
 \Gb_{t} & :=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}\Ib_{d}
@@ -1448,8 +1449,8 @@ The definition of
  By definition of the estimator and the Gram matrix,
 \begin_inset Formula 
 \[
-\begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
- & =\Big\Vert\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}-\Gb_{t}\big)\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\begin{split} & \widehat{\theta}_{t}-\theta_{\star}\\
+ & =\Gb_{t}^{-1}\Big(\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}\theta_{t}^{R}+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}.
 \end{split}
 \]
 
@@ -1527,23 +1528,270 @@ Thus,
 
 \end_inset
 
-For 
-\begin_inset Formula $C_{s}>0$
+Let 
+\begin_inset Formula $\bar{\Gb}_{t}:=\frac{1}{2}\sum_{s=1}^{t}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\lambda_{t}\Ib_{d}.$
+\end_inset
+
+ Then 
+\begin_inset Formula $\bar{\Gb}_{t}\preceq\Gb_{t}$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\bar{\Gb}_{t}^{-1}}+3\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+By Lemma ??,
+ there exists a martingale differences 
+\begin_inset Formula $\{D_{1,a_{s}},D_{2,a_{s}}:s\in[t]\}$
+\end_inset
+
+,
+ such that 
+\begin_inset Formula 
+\[
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\eta_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}$
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $a>0$
 \end_inset
 
  to be determined later,
  let 
-\begin_inset Formula $\bar{\eta}_{a_{s},s}:=\eta_{a_{s},s}\II(|\eta_{a_{s},s}|\le C_{s})-\EE[\eta_{a_{s},s}\II(|\eta_{a_{s},s}|\le C_{s})]|\Hcal_{s-1}]$
+\begin_inset Formula $H_{i,t}(a):=\sum_{s=1}^{t}D_{i,a_{s}}\II(|D_{i,a_{s}}|>a)+\sum_{i=1}^{n}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\[
+|D_{i,a_{s}}|\le|\eta_{a_{s},s}|\|X_{a_{s},s}\|_{G_{t}^{-1}}\le|\eta_{a_{s},s}|.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\eta_{a_{s},s}$
+\end_inset
+
+ is 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-sub-Gaussian,
+ with probability at least 
+\begin_inset Formula $1-\delta$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\max_{s\in[t]}|D_{i,a_{s}}|\le\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}.
+\]
+
+\end_inset
+
+Further,
+ for each 
+\begin_inset Formula $i=1,2$
 \end_inset
 
  and 
-\begin_inset Formula $\tilde{\eta}_{a_{s},s}:=\eta_{a_{s},s}\II(|\eta_{a_{s},s}|>C_{s})-\EE[\eta_{a_{s},s}\II(|\eta_{a_{s},s}|>C_{s})|\Hcal_{s-1}]$
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\begin{align*}
+\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \EE[\|\eta_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
+\le & \EE[\EE[\eta_{a_{s},s}^{2}|a_{s},\Hcal_{s-1}]\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
+\le & \sigma^{2}\EE[\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
+\le & \sigma^{2}\EE[\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}|\Hcal_{s-1}],
+\end{align*}
+
+\end_inset
+
+where By definition of 
+\begin_inset Formula $a_{s}$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}=\sum_{k=1}^{K}\bar{\pi}_{s}(k)X_{k,s}^{\top}\bar{\Gb}_{t}^{-1}X_{k,s}\le\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}.
+\]
+
+\end_inset
+
+Because of the G-optimal design,
+\begin_inset Formula 
+\[
+\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}\le\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s}).
+\]
+
+\end_inset
+
+Because 
+\begin_inset Formula $\bar{\Gb}_{t}=\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}+\lambda_{t}\Ib_{d}$
+\end_inset
+
+,
+\begin_inset Formula 
+\begin{align*}
+\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})\\
+= & \text{Tr}\Big(\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}\Big)\\
+\le & 2\text{Tr}\Big(\bar{\Gb}_{t}\bar{\Gb}_{t}^{-1}\Big)=2d.
+\end{align*}
+
+\end_inset
+
+Thus,
+ with probability at least 
+\begin_inset Formula $1-\delta$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)=\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le2d.
+\]
+
+\end_inset
+
+Thus,
+ for any 
+\begin_inset Formula $z>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)=\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z,H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)\le2d)+\delta
+\]
+
+\end_inset
+
+By Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:Van_Zanten"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ for any 
+\begin_inset Formula $z>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)\le2\exp\Big(-\frac{z^{2}}{4d+\frac{2}{3}\frac{\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)+\delta.
+\]
+
+\end_inset
+
+The inequality 
+\begin_inset Formula 
+\[
+2\exp\Big(-\frac{z^{2}}{4d+\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)\le\delta
+\]
+
+\end_inset
+
+ is equivalent to
+\begin_inset Formula 
+\[
+z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}-4d\log\frac{2}{\delta}\ge0.
+\]
+
+\end_inset
+
+The above inequality is implied by
+\begin_inset Formula 
+\[
+z\ge\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}}.
+\]
+
+\end_inset
+
+Thus,
+ with probability at least 
+\begin_inset Formula $1-2\delta$
+\end_inset
+
+,
+ for all 
+\begin_inset Formula $t\ge1$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+|\sum_{s=1}^{t}D_{i,a_{s}}|\le\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}},
+\]
+
+\end_inset
+
+and it follows that
+\begin_inset Formula 
+\[
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\frac{4\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+4\sqrt{d\log\frac{2}{\delta}}.
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
 \end_inset
 
 
+\end_layout
+
+\begin_layout Proof
+Observe that
 \begin_inset Formula 
 \[
-\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\Big\Vert\sum_{s=1}^{t}\bar{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}+\Big\Vert\sum_{s=1}^{t}\tilde{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}.
+\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}=\Big\Vert\sum_{s=1}^{t}(X_{a_{s},s}X_{a_{s},s}^{\top}-\EE[X_{a_{s},s}X_{a_{s},s}^{\top}|\Hcal_{s-1}])\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}
 \]
 
 \end_inset
@@ -1557,13 +1805,17 @@ By Lemma ??,
  such that 
 \begin_inset Formula 
 \[
-\Big\Vert\sum_{s=1}^{t}\bar{\eta}_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
+\Big\Vert\sum_{s=1}^{t}(X_{a_{s},s}X_{a_{s},s}^{\top}-\EE[X_{a_{s},s}X_{a_{s},s}^{\top}|\Hcal_{s-1}])\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
 \]
 
 \end_inset
 
 and 
-\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\bar{\eta}_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}\le C_{s}\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}$
+\begin_inset Formula 
+\[
+\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|(X_{a_{s},s}X_{a_{s},s}^{\top}-\EE[X_{a_{s},s}X_{a_{s},s}^{\top}|\Hcal_{s-1}])\theta_{\star}\|_{\bar{\Gb}_{t}^{-1}}
+\]
+
 \end_inset
 
  for all 
@@ -1571,376 +1823,268 @@ and
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Lemma
-Let 
-\begin_inset Formula $A$
-\end_inset
-
- denote a random variable sampled from the multinomial distribution 
-\begin_inset Formula $\pi(k)=\PP(A=k)$
-\end_inset
-
- for 
-\begin_inset Formula $k=1,\ldots,m$
-\end_inset
-
- and 
-\begin_inset Formula $D_{1},\ldots,D_{m}$
-\end_inset
-
- denote the independent mean-zero random variables such that 
-\begin_inset Formula $|D_{k}|\le1/2$
-\end_inset
-
- for all 
-\begin_inset Formula $k=1,\ldots,m$
-\end_inset
-
-.
- Then,
+ Note that
 \begin_inset Formula 
-\[
-\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})]\le\exp(\frac{1}{2}\EE\big[\|\nabla B_{\psi}(D,0)\|_{2}^{2}\|D\|_{2}^{2}\big]).
-\]
+\begin{align*}
+\|\EE[X_{a_{s},s}X_{a_{s},s}^{\top}\theta_{\star}|\Hcal_{s-1}]\|_{\bar{\Gb}_{t}^{-1}}\le & \EE[\|X_{a_{s},s}X_{a_{s},s}^{\top}\theta_{\star}\|_{\bar{\Gb}_{t}^{-1}}|\Hcal_{s-1}]\\
+\le & \EE[|X_{a_{s},s}^{\top}\theta_{\star}|\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}|\Hcal_{s-1}]\\
+\le & \sqrt{\EE[|X_{a_{s},s}^{\top}\theta_{\star}|^{2}|\Hcal_{s-1}]\EE[\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}|\Hcal_{s-1}]},
+\end{align*}
 
 \end_inset
 
- 
-\end_layout
-
-\begin_layout Proof
-For a nonnegative random variable 
-\begin_inset Formula $Z$
-\end_inset
-
-,
- define the entropy 
-\begin_inset Formula $\Ent(Z)=\EE[Z\log Z]-\EE[Z]\log\EE[Z]$
-\end_inset
-
-.
- By definition 
-\begin_inset Formula 
-\begin{equation}
-\begin{alignedat}{1} & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
- & =\EE\Big[\big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\big)\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\Big]-\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})]\log\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})].
-\end{alignedat}
-\label{eq:entD}
-\end{equation}
-
-\end_inset
-
+where the last inequality uses Cauchy-Schwartz inequality.
  For 
-\begin_inset Formula $x=(x_{1},\ldots,x_{m})$
+\begin_inset Formula $a>0$
 \end_inset
 
-,
- define 
-\begin_inset Formula $\psi(x)=\log\sum_{k=1}^{m}\pi(k)e^{x_{k}}$
-\end_inset
-
-.
- Note that 
-\begin_inset Formula $\psi(0)=0$
-\end_inset
-
- and 
-\begin_inset Formula $\nabla\psi(0)=\pi$
+ to be determined later,
+ let 
+\begin_inset Formula $H_{i,t}(a):=\sum_{s=1}^{t}D_{i,a_{s}}\II(|D_{i,a_{s}}|>a)+\sum_{i=1}^{n}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]$
 \end_inset
 
 .
- Let 
-\begin_inset Formula $D=(D_{1},\ldots,D_{m})$
-\end_inset
-
-.
- Then 
+ Note that
 \begin_inset Formula 
 \[
-\nabla\psi(D)^{\top}D=\frac{\sum_{k=1}^{K}\pi(k)D_{k}e^{D_{k}}}{\sum_{k=1}^{K}\pi(k)e^{D_{k}}}=e^{-\psi(D)}\sum_{k=1}^{K}\pi(k)D_{k}e^{D_{k}}.
+|D_{i,a_{s}}|\le|\eta_{a_{s},s}|\|X_{a_{s},s}\|_{G_{t}^{-1}}\le|\eta_{a_{s},s}|.
 \]
 
 \end_inset
 
-Taking expectation over 
-\begin_inset Formula $A\sim\pi$
+Since 
+\begin_inset Formula $\eta_{a_{s},s}$
 \end_inset
 
-,
-\begin_inset Formula 
-\begin{align*}
-\EE\Big[\big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\big)\exp\Big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\Big)\Big]= & \EE\Big[\big(\sum_{k=1}^{m}\pi(k)D_{k}e^{D_{k}}-\sum_{k=1}^{m}\pi(k)D_{k}\sum_{k=1}^{m}\pi(k)e^{D_{k}}\big)\exp(-\nabla\psi(0)^{\top}D)\Big]\\
-= & \EE\Big[(\nabla\psi(D)^{\top}D-\nabla\psi(0)^{\top}D)e^{\psi(D)-\nabla\psi(0)^{\top}D}\Big]\\
-= & \EE\Big[\big(\nabla\psi(D)-\nabla\psi(0)\big)^{\top}De^{\psi(D)-\nabla\psi(0)^{\top}D}\Big].
-\end{align*}
-
+ is 
+\begin_inset Formula $\sigma$
 \end_inset
 
-By definition of the Bregman divergence 
-\begin_inset Formula $B_{\psi}(a,b)=\psi(a)-\psi(b)-\nabla\psi(b)^{\top}(b-a)$
-\end_inset
-
-,
- it follows that
-\begin_inset Formula 
-\begin{align*}
-\EE\Big[\big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\big)\exp\Big(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k}\Big)\Big]= & \EE\Big[\big(\nabla B_{\psi}(D,0)^{\top}De^{B_{\psi}(D,0)}\Big],
-\end{align*}
-
-\end_inset
-
-where the gradient is applied to the first component of the Bregman divergence.
- The remaining terms in 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:entD"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
- can be written as
-\begin_inset Formula 
-\begin{align*}
-\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})] & =\EE\Big[\sum_{k=1}^{m}\pi(k)e^{D_{k}}\exp(-\nabla\psi(0)^{\top}D)\Big]\\
- & =\EE\Big[e^{B_{\psi}(D,0)}\Big].
-\end{align*}
-
-\end_inset
-
-Thus,
-\begin_inset Formula 
-\begin{align*}
- & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
- & =\EE\Big[\nabla B_{\psi}(D,0)^{\top}De^{B_{\psi}(D,0)}\Big]-\EE\Big[e^{B_{\psi}(D,0)}\Big]\log\EE\Big[e^{B_{\psi}(D,0)}\Big]\\
- & =\Ent(e^{B_{\psi}(D,0)})+\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-B_{\psi}(D,0)\big)].
-\end{align*}
-
-\end_inset
-
-By the representation lemma (Lemma ??) for 
-\begin_inset Formula $u\in\RR$
+-sub-Gaussian,
+ with probability at least 
+\begin_inset Formula $1-\delta$
 \end_inset
 
 ,
  
 \begin_inset Formula 
 \[
-\Ent(e^{B_{\psi}(D,0)})\le\EE[e^{B_{\psi}(D,0)}\big(B_{\psi}(D,0)-u\big)-(e^{B_{\psi}(D,0)}-e^{u})].
+\max_{s\in[t]}|D_{i,a_{s}}|\le\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}.
 \]
 
 \end_inset
 
-Thus,
-\begin_inset Formula 
-\begin{align*}
- & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
- & \le\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-u\big)-(e^{B_{\psi}(D,0)}-e^{u})]\\
- & =\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-u-1+e^{u-B_{\psi}(D,0)}\big)]
-\end{align*}
-
-\end_inset
-
-Let 
-\begin_inset Formula $D^{\prime}$
-\end_inset
-
- denote the independent copy of 
-\begin_inset Formula $D$
-\end_inset
-
-.
- Setting 
-\begin_inset Formula $u=B_{\psi}(D^{\prime},0)$
-\end_inset
-
- and taking expectation on both sides,
- 
-\begin_inset Formula 
-\begin{align*}
- & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
- & \le\EE[e^{B_{\psi}(D,0)}\big(\nabla B_{\psi}(D,0)^{\top}D-B_{\psi}(D^{\prime},0)-1+e^{B_{\psi}(D^{\prime},0)-B_{\psi}(D,0)}\big)].
-\end{align*}
-
-\end_inset
-
-By the symmetrization argument,
- setting 
-\begin_inset Formula $Z:=\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0)$
-\end_inset
-
- gives
-\begin_inset Formula 
-\begin{align*}
- & \Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\\
- & \le\EE[e^{B_{\psi}(D^{\prime},0)}\big(\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0)-1+e^{B_{\psi}(D,0)-B_{\psi}(D^{\prime},0)}\big)].\\
- & =\EE[e^{B_{\psi}(D^{\prime},0)}\big(Z-1+e^{B_{\psi}(D,0)-B_{\psi}(D^{\prime},0)}\big)]\\
- & =\EE[e^{B_{\psi}(D,0)}\big((Z-1)e^{B_{\psi}(D^{\prime},0)-B_{\psi}(D,0)}+1\big)]\\
- & \le\EE[e^{B_{\psi}(D,0)}\big((Z-1)e^{Z}+1\big)],
-\end{align*}
-
-\end_inset
-
-where the last inequality uses the fact that 
-\begin_inset Formula $B_{\psi}(\cdot,0)$
-\end_inset
-
- is strictly convex and 
-\begin_inset Formula $B_{\psi}(D^{\prime},0)\le\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}.$
-\end_inset
-
- Because 
-\begin_inset Formula $\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}\ge0$
+Further,
+ for each 
+\begin_inset Formula $i=1,2$
 \end_inset
 
  and 
-\begin_inset Formula $B_{\psi}(D,0)\ge0$
+\begin_inset Formula $s\in[t]$
 \end_inset
 
 ,
+ 
 \begin_inset Formula 
 \begin{align*}
-|Z|= & |\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0)|\\
-\le & \max\{\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime},B_{\psi}(D,0)\}\\
-\le & \max\{\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime},\nabla B_{\psi}(D,0)^{\top}D\}.
+\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \EE[\|\eta_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
+\le & \EE[\EE[\eta_{a_{s},s}^{2}|a_{s},\Hcal_{s-1}]\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
+\le & \sigma^{2}\EE[\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
+\le & \sigma^{2}\EE[\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}|\Hcal_{s-1}],
 \end{align*}
 
 \end_inset
 
-By assumption,
- 
-\begin_inset Formula $\|\nabla\psi(D^{\prime})\|_{1}=1$
-\end_inset
-
- and 
-\begin_inset Formula $\|D^{\prime}\|_{\infty}\le1/2$
-\end_inset
-
-.
- It follows that
-\begin_inset Formula 
-\begin{equation}
-\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}\le\|\nabla\psi(D^{\prime})-\nabla\psi(0)\|_{1}\|D^{\prime}\|_{\infty}\le1,\label{eq:Z_bound}
-\end{equation}
-
-\end_inset
-
-and 
-\begin_inset Formula $|Z|\le1$
-\end_inset
-
-.
- Because 
-\begin_inset Formula $(z-1)e^{z}+1\le z^{3}$
-\end_inset
-
- for 
-\begin_inset Formula $|z|\le1$
+where By definition of 
+\begin_inset Formula $a_{s}$
 \end_inset
 
 ,
  
 \begin_inset Formula 
 \[
-\Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\le\EE[e^{B_{\psi}(D,0)}Z^{3}]
+\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}=\sum_{k=1}^{K}\bar{\pi}_{s}(k)X_{k,s}^{\top}\bar{\Gb}_{t}^{-1}X_{k,s}\le\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}.
 \]
 
 \end_inset
 
-By definition of 
-\begin_inset Formula $Z$
-\end_inset
-
-,
-\begin_inset Formula 
-\begin{align*}
-Z^{3}= & (\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime}-B_{\psi}(D,0))^{3}\\
-\le & (\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime})^{3}\\
-\le & (\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime})^{2},
-\end{align*}
-
-\end_inset
-
-where the last inequality uses 
-\begin_inset CommandInset ref
-LatexCommand eqref
-reference "eq:Z_bound"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-.
- Because 
-\begin_inset Formula $D$
-\end_inset
-
- and 
-\begin_inset Formula $D^{\prime}$
-\end_inset
-
- are independent,
+Because of the G-optimal design,
 \begin_inset Formula 
 \[
-\Ent\big(\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})\big)\le\EE[e^{B_{\psi}(D,0)}]\EE[(\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime})^{2}]
-\]
-
-\end_inset
-
-Note that 
-\begin_inset Formula 
-\[
-x^{\top}(e^{2}/KI_{d}-\nabla B_{\psi}(D^{\prime},0)\nabla B_{\psi}(D^{\prime},0)^{\top})x\ge0
+\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}\le\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s}).
 \]
 
 \end_inset
 
 Because 
-\begin_inset Formula $\EE[D_{k}^{\prime}]=0$
+\begin_inset Formula $\bar{\Gb}_{t}=\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}+\lambda_{t}\Ib_{d}$
 \end_inset
 
- for each 
-\begin_inset Formula $k=1,\ldots,m$
+,
+\begin_inset Formula 
+\begin{align*}
+\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})\\
+= & \text{Tr}\Big(\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}\Big)\\
+\le & 2\text{Tr}\Big(\bar{\Gb}_{t}\bar{\Gb}_{t}^{-1}\Big)=2d.
+\end{align*}
+
+\end_inset
+
+Thus,
+ with probability at least 
+\begin_inset Formula $1-\delta$
 \end_inset
 
 ,
  
 \begin_inset Formula 
-\begin{align*}
-\EE[(\nabla B_{\psi}(D^{\prime},0)^{\top}D^{\prime})^{2}]= & \EE[\big(\sum_{k=1}^{m}(\frac{\pi(k)e^{D_{k}^{\prime}}}{\sum_{k^{\prime}=1}^{m}\pi(k^{\prime})e^{D_{k^{\prime}}^{\prime}}}-\pi(k)\big)D_{k}^{\prime}\big)^{2}]\\
-= & \EE[\sum_{k=1}^{m}(\frac{\pi(k)e^{D_{k}^{\prime}}}{\sum_{k^{\prime}=1}^{m}\pi(k^{\prime})e^{D_{k^{\prime}}^{\prime}}}-\pi(k)\big)^{2}(D_{k}^{\prime})^{2}]\\
-= & \EE\big[\|\nabla B_{\psi}(D^{\prime},0)\|_{2}^{2}\|D^{\prime}\|_{2}^{2}\big]\\
-= & \EE\big[\|\nabla B_{\psi}(D,0)\|_{2}^{2}\|D\|_{2}^{2}\big],
-\end{align*}
-
-\end_inset
-
-where the last inequality holds because the distribution of 
-\begin_inset Formula $D$
-\end_inset
-
- and 
-\begin_inset Formula $D^{\prime}$
-\end_inset
-
- are equivalent.
- Thus,
- by Herbt's method (Lemma ??),
-\begin_inset Formula 
 \[
-\EE[\exp(D_{A}-\sum_{k=1}^{m}\pi(k)D_{k})]\le\exp(\frac{1}{2}\EE\big[\|\nabla B_{\psi}(D,0)\|_{2}^{2}\|D\|_{2}^{2}\big]),
+H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)=\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le2d.
 \]
 
 \end_inset
 
-which completes the proof.
+Thus,
+ for any 
+\begin_inset Formula $z>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)=\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z,H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)\le2d)+\delta
+\]
+
+\end_inset
+
+By Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:Van_Zanten"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ for any 
+\begin_inset Formula $z>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)\le2\exp\Big(-\frac{z^{2}}{4d+\frac{2}{3}\frac{\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)+\delta.
+\]
+
+\end_inset
+
+The inequality 
+\begin_inset Formula 
+\[
+2\exp\Big(-\frac{z^{2}}{4d+\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)\le\delta
+\]
+
+\end_inset
+
+ is equivalent to
+\begin_inset Formula 
+\[
+z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}-4d\log\frac{2}{\delta}\ge0.
+\]
+
+\end_inset
+
+The above inequality is implied by
+\begin_inset Formula 
+\[
+z\ge\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}}.
+\]
+
+\end_inset
+
+Thus,
+ with probability at least 
+\begin_inset Formula $1-2\delta$
+\end_inset
+
+,
+ for all 
+\begin_inset Formula $t\ge1$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+|\sum_{s=1}^{t}D_{i,a_{s}}|\le\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}},
+\]
+
+\end_inset
+
+and it follows that
+\begin_inset Formula 
+\[
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\frac{4\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+4\sqrt{d\log\frac{2}{\delta}}.
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:Van_Zanten"
+
+\end_inset
+
+ (Inequalities Van Zantan) For any 
+\begin_inset Formula $n\ge1$
+\end_inset
+
+,
+ let 
+\begin_inset Formula $\xi_{n}$
+\end_inset
+
+ denote the martingale difference adapted to the sequence 
+\begin_inset Formula $\Fcal_{n}$
+\end_inset
+
+.
+ For each 
+\begin_inset Formula $a>0$
+\end_inset
+
+,
+ let 
+\begin_inset Formula $H_{n}(a)=\sum_{i=1}^{n}\xi_{i}^{2}\II(|\xi_{i}|>a)+\sum_{i=1}^{n}\EE[\xi_{i}^{2}|\Fcal_{i-1}]$
+\end_inset
+
+.
+ Then for any 
+\begin_inset Formula $z>0,a>0$
+\end_inset
+
+ and 
+\begin_inset Formula $L>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\PP\Big(\max_{n}|\sum_{i=1}^{n}\xi_{i}|>z,H_{n}(a)\le L\Big)\le2\exp(-\frac{z^{2}}{2L+\frac{2}{3}az}).
+\]
+
+\end_inset
+
+ 
 \end_layout
 
 \end_body
