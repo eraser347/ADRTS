@@ -1151,6 +1151,373 @@ For each round
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Lemma
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:inclusion_bound"
+
+\end_inset
+
+ For the linearly independent vectors 
+\begin_inset Formula $x_{1},\ldots,x_{d}\in\RR^{d}$
+\end_inset
+
+,
+ and 
+\begin_inset Formula $w_{1},\ldots,w_{d}\in(0,1)$
+\end_inset
+
+,
+ for each 
+\begin_inset Formula $i=1,\ldots,d$
+\end_inset
+
+
+\begin_inset Formula 
+\[
+x_{i}^{\top}(x_{i}x_{i}^{\top}+\sum_{j\neq i}w_{j}x_{j}x_{j}^{\top})^{-1}x_{i}\le1.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Let us fix 
+\begin_inset Formula $i=1,\ldots,d$
+\end_inset
+
+ and write 
+\begin_inset Formula $z_{j}=x_{j}/\|x_{i}\|_{2}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ denote a small constant that satisfies 
+\begin_inset Formula $\lambda_{\min}(\epsilon z_{i}z_{i}^{\top}+\sum_{j\neq i}w_{j}z_{j}z_{j}^{\top})\ge\epsilon_{i}$
+\end_inset
+
+.
+ Since 
+\begin_inset Formula $z_{1},\ldots,z_{d}$
+\end_inset
+
+ are linearly independent,
+ the constant 
+\begin_inset Formula $\epsilon>0$
+\end_inset
+
+ exists.
+ Then,
+\begin_inset Formula 
+\[
+x_{i}^{\top}(x_{i}x_{i}^{\top}+\sum_{j\neq i}w_{j}x_{j}x_{j}^{\top})^{-1}x_{i}\le z_{i}^{\top}\Big((1-\epsilon_{i})z_{i}z_{i}^{\top}+\epsilon_{i}I\Big)^{-1}z_{i}.
+\]
+
+\end_inset
+
+Note that 
+\begin_inset Formula $z_{i}^{\top}z_{i}=1$
+\end_inset
+
+.
+ By Sherman-Morrison formula
+\begin_inset Formula 
+\[
+z_{i}^{\top}\Big((1-\epsilon_{i})z_{i}z_{i}^{\top}+\epsilon_{i}I\Big)^{-1}z_{i}=\frac{1}{\epsilon_{i}}-\frac{\frac{1-\epsilon_{i}}{\epsilon_{i}^{2}}}{1+\frac{1-\epsilon_{i}}{\epsilon_{i}}}=1,
+\]
+
+\end_inset
+
+which completes the proof.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Theorem
+() For 
+\begin_inset Formula $K>d$
+\end_inset
+
+,
+ given 
+\begin_inset Formula $x_{1},\ldots,x_{K}\in\RR^{d}$
+\end_inset
+
+ that includes 
+\begin_inset Formula $d$
+\end_inset
+
+-linearly independent vectors,
+ define 
+\begin_inset Formula $M(w):=\sum_{i=1}^{K}w_{i}x_{i}x_{i}^{\top}$
+\end_inset
+
+ for 
+\begin_inset Formula $w\in\RR_{+}^{K}$
+\end_inset
+
+.
+ Let 
+\begin_inset Formula $w_{\star}$
+\end_inset
+
+ denote a solution to the following optimization problem:
+\begin_inset Formula 
+\begin{align*}
+\underset{w}{\text{maximize}} & \log\det\big(M(w)\big)\\
+\text{s.t} & 0\le w_{i}\le1\\
+ & \sum_{i=1}^{K}w_{i}=d.
+\end{align*}
+
+\end_inset
+
+Then 
+\begin_inset Formula $M(w_{\star})-x_{i}x_{i}^{\top}$
+\end_inset
+
+ is nonnegative definite for all 
+\begin_inset Formula $i=1,\ldots,K$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Proof
+Since 
+\begin_inset Formula $K>d$
+\end_inset
+
+,
+ there exists a point 
+\begin_inset Formula $w$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{i}\in(0,1)$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{K}w_{i}=K$
+\end_inset
+
+.
+ Thus,
+ the Slater's condition is met.
+ Note that 
+\begin_inset Formula $w\mapsto\log\det(M(w))$
+\end_inset
+
+ is a concave function.
+ Thus,
+ the necessity condition of KKT condition holds.
+ Thus,
+ 
+\begin_inset Formula 
+\begin{align*}
+x_{i}^{\top}M(w_{\star})^{-1}x_{i} & =\lambda+\mu_{i}-\eta_{i}\quad\forall i=1,\ldots,d\\
+\sum_{i=1}^{K}w_{\star,i}=d, & \quad0\le w_{\star,i}\le1,\forall i=1,\ldots,d\\
+\mu_{i}(w_{\star,i}-1)=0, & \quad\eta_{i}w_{\star,i}=0\\
+\mu_{i}\ge0, & \eta_{i}\ge0,\forall i=1,\ldots,d.
+\end{align*}
+
+\end_inset
+
+Note that
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{K}w_{\star,i}x_{i}^{\top}M(w_{\star})^{-1}x_{i}= & \sum_{i=1}^{K}w_{\star,i}\lambda+\sum_{i=1}^{K}w_{\star,i}\mu_{i}+\sum_{i=1}^{K}w_{\star,i}\eta_{i}\\
+= & d\lambda+\sum_{i=1}^{K}\mu_{i}.
+\end{align*}
+
+\end_inset
+
+The left hand side
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{K}w_{\star,i}x_{i}^{\top}M(w_{\star})^{-1}x_{i}= & \text{Tr}\Big(\sum_{i=1}^{K}w_{\star,i}x_{i}^{\top}M(w_{\star})^{-1}x_{i}\Big)\\
+= & \text{Tr}\Big(M(w_{\star})M(w_{\star})^{-1}\Big)\\
+= & d.
+\end{align*}
+
+\end_inset
+
+Thus,
+ 
+\begin_inset Formula $\lambda=1-\sum_{i=1}^{K}\mu_{i}/d\le1$
+\end_inset
+
+.
+ For 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{\star,i}=0$
+\end_inset
+
+,
+ we have 
+\begin_inset Formula $\mu_{i}=0$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+x_{i}^{\top}M(w_{\star})^{-1}x_{i}=\lambda-\eta_{i}\le\lambda\le1.
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{\star,i}\in(0,1)$
+\end_inset
+
+,
+ we have 
+\begin_inset Formula $\mu_{i}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta_{i}=0$
+\end_inset
+
+.
+ Thus,
+\begin_inset Formula 
+\[
+x_{i}^{\top}M(w_{\star})^{-1}x_{i}=\lambda\le1.
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{\star,i}=1$
+\end_inset
+
+,
+ remind that 
+\begin_inset Formula $M(w_{\star})$
+\end_inset
+
+ is invertible and includes 
+\begin_inset Formula $d$
+\end_inset
+
+ linearly independent vectors.
+ Then by Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:inclusion_bound"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+x_{i}^{\top}M(w_{\star})^{-1}x_{i}=x_{i}^{\top}\big(x_{i}x_{i}^{\top}+\sum_{j\neq i}w_{\star,j}x_{j}x_{j}^{\top}\big)^{-1}x_{i}\le1.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $w_{\star,i}\in[0,1]$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=1,\ldots,K$
+\end_inset
+
+ we have 
+\begin_inset Formula $x_{i}^{\top}M(w_{\star})^{-1}x_{i}\le1$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $\lambda_{\max}(M(w_{\star})^{-1/2}x_{i}x_{i}^{\top}M(w_{\star})^{-1/2})\le1$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=1,\ldots,K$
+\end_inset
+
+.
+ Thus,
+ for any 
+\begin_inset Formula $x\in\RR^{d}$
+\end_inset
+
+,
+ such that 
+\begin_inset Formula $\|x\|_{2}\le1$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+x^{\top}\big(M(w_{\star})-x_{i}x_{i}^{\top})x=x^{\top}M(w_{\star})^{1/2}\big(I_{d}-M(w_{\star})^{-1/2}x_{i}x_{i}^{\top}M(w_{\star})^{-1/2}\big)M(w_{\star})^{1/2}x\ge0,
+\]
+
+\end_inset
+
+holds for 
+\begin_inset Formula $i=1,\ldots,K$
+\end_inset
+
+,
+ which completes the proof.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Let 
 \begin_inset Formula $p_{t}$
 \end_inset
