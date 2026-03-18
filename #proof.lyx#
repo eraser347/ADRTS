@@ -1860,15 +1860,18 @@ By definition of the matrix operator norm,
 By Lemma ??
 \begin_inset Formula 
 \begin{align*}
-\Big\Vert\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\le & 2.
+\Big\Vert2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\le & 1+\Big\Vert\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\\
+\le & 3.
 \end{align*}
 
 \end_inset
 
 Thus,
+ by triangular inequality
 \begin_inset Formula 
 \begin{align*}
-\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}} & \le2\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}.
+\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}} & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}\\
+ & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}+3\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
 \end{align*}
 
 \end_inset
@@ -1884,7 +1887,7 @@ Let
  and
 \begin_inset Formula 
 \[
-\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\le2\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\bar{\Gb}_{t}^{-1}}
+\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\bar{\Gb}_{t}^{-1}}+3\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}
 \]
 
 \end_inset
@@ -1909,13 +1912,13 @@ By Lemma ??,
  such that 
 \begin_inset Formula 
 \[
-\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\bar{\Gb}_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
 \]
 
 \end_inset
 
 and 
-\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\eta_{a_{s},s}X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}$
+\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\eta_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}$
 \end_inset
 
  for all 
@@ -1992,7 +1995,7 @@ where By definition of
  
 \begin_inset Formula 
 \[
-\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}=\sum_{k=1}^{K}\bar{\pi}_{s}(k)X_{k,s}^{\top}\bar{\Gb}_{t}^{-1}X_{k,s}\le\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})+\frac{1}{2}x_{\tilde{a}_{s},s}\bar{\Gb}_{t}^{-1}x_{\tilde{a}_{s},s}^{\top}.
+\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}=\sum_{k=1}^{K}\bar{\pi}_{s}(k)X_{k,s}^{\top}\bar{\Gb}_{t}^{-1}X_{k,s}\le\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}.
 \]
 
 \end_inset
@@ -2012,9 +2015,9 @@ Because
 ,
 \begin_inset Formula 
 \begin{align*}
-\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \sigma^{2}\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})\\
-= & \sigma^{2}\text{Tr}\Big(\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}\Big)\\
-\le & \sigma^{2}2\text{Tr}\Big(\bar{\Gb}_{t}\bar{\Gb}_{t}^{-1}\Big)=2\sigma^{2}d.
+\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})\\
+= & \text{Tr}\Big(\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}\Big)\\
+\le & 2\text{Tr}\Big(\bar{\Gb}_{t}\bar{\Gb}_{t}^{-1}\Big)=2d.
 \end{align*}
 
 \end_inset
@@ -2028,7 +2031,7 @@ Thus,
  
 \begin_inset Formula 
 \[
-H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)=\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le2\sigma^{2}d.
+H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)=\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le2d.
 \]
 
 \end_inset
@@ -2067,7 +2070,7 @@ nolink "false"
  
 \begin_inset Formula 
 \[
-\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)\le2\exp\Big(-\frac{z^{2}}{4d\sigma^{2}+\frac{2}{3}\frac{\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)+\delta.
+\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)\le2\exp\Big(-\frac{z^{2}}{4d+\frac{2}{3}\frac{\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)+\delta.
 \]
 
 \end_inset
@@ -2075,7 +2078,7 @@ nolink "false"
 The inequality 
 \begin_inset Formula 
 \[
-2\exp\Big(-\frac{z^{2}}{4d\sigma^{2}+\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)\le\delta
+2\exp\Big(-\frac{z^{2}}{4d+\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)\le\delta
 \]
 
 \end_inset
@@ -2083,7 +2086,7 @@ The inequality
  is equivalent to
 \begin_inset Formula 
 \[
-z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}-4d\sigma^{2}\log\frac{2}{\delta}\ge0.
+z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}-4d\log\frac{2}{\delta}\ge0.
 \]
 
 \end_inset
@@ -2091,7 +2094,7 @@ z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta
 The above inequality is implied by
 \begin_inset Formula 
 \[
-z\ge\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\sigma^{2}\log\frac{2}{\delta}}.
+z\ge\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}}.
 \]
 
 \end_inset
@@ -2109,7 +2112,7 @@ Thus,
 ,
 \begin_inset Formula 
 \[
-|\sum_{s=1}^{t}D_{i,a_{s}}|\le\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\sigma^{2}\log\frac{2}{\delta}},
+|\sum_{s=1}^{t}D_{i,a_{s}}|\le\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}},
 \]
 
 \end_inset
@@ -2117,7 +2120,7 @@ Thus,
 and it follows that
 \begin_inset Formula 
 \[
-\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\frac{4\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+4\sqrt{d\sigma^{2}\log\frac{2}{\delta}}.
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\frac{4\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+4\sqrt{d\log\frac{2}{\delta}}.
 \]
 
 \end_inset
@@ -2133,6 +2136,255 @@ and it follows that
 \end_layout
 
 \begin_layout Proof
+Observe that
+\begin_inset Formula 
+\[
+\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}=\Big\Vert\sum_{s=1}^{t}(X_{a_{s},s}X_{a_{s},s}^{\top}-\EE[X_{a_{s},s}X_{a_{s},s}^{\top}|\Hcal_{s-1}])\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}
+\]
+
+\end_inset
+
+By Lemma ??,
+ there exists a martingale differences 
+\begin_inset Formula $\{D_{1,a_{s}},D_{2,a_{s}}:s\in[t]\}$
+\end_inset
+
+,
+ such that 
+\begin_inset Formula 
+\[
+\Big\Vert\sum_{s=1}^{t}(X_{a_{s},s}X_{a_{s},s}^{\top}-\EE[X_{a_{s},s}X_{a_{s},s}^{\top}|\Hcal_{s-1}])\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
+\]
+
+\end_inset
+
+and 
+\begin_inset Formula 
+\[
+\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|(X_{a_{s},s}X_{a_{s},s}^{\top}-\EE[X_{a_{s},s}X_{a_{s},s}^{\top}|\Hcal_{s-1}])\theta_{\star}\|_{\bar{\Gb}_{t}^{-1}}
+\]
+
+\end_inset
+
+ for all 
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\begin{align*}
+\|\EE[X_{a_{s},s}X_{a_{s},s}^{\top}\theta_{\star}|\Hcal_{s-1}]\|_{\bar{\Gb}_{t}^{-1}}\le & \EE[\|X_{a_{s},s}X_{a_{s},s}^{\top}\theta_{\star}\|_{\bar{\Gb}_{t}^{-1}}|\Hcal_{s-1}]\\
+\le & \EE[|X_{a_{s},s}^{\top}\theta_{\star}|\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}|\Hcal_{s-1}]\\
+\le & \sqrt{\EE[|X_{a_{s},s}^{\top}\theta_{\star}|^{2}|\Hcal_{s-1}]\EE[\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}|\Hcal_{s-1}]},
+\end{align*}
+
+\end_inset
+
+where the last inequality uses Cauchy-Schwartz inequality.
+ For 
+\begin_inset Formula $a>0$
+\end_inset
+
+ to be determined later,
+ let 
+\begin_inset Formula $H_{i,t}(a):=\sum_{s=1}^{t}D_{i,a_{s}}\II(|D_{i,a_{s}}|>a)+\sum_{i=1}^{n}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]$
+\end_inset
+
+.
+ Note that
+\begin_inset Formula 
+\[
+|D_{i,a_{s}}|\le|\eta_{a_{s},s}|\|X_{a_{s},s}\|_{G_{t}^{-1}}\le|\eta_{a_{s},s}|.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $\eta_{a_{s},s}$
+\end_inset
+
+ is 
+\begin_inset Formula $\sigma$
+\end_inset
+
+-sub-Gaussian,
+ with probability at least 
+\begin_inset Formula $1-\delta$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\max_{s\in[t]}|D_{i,a_{s}}|\le\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}.
+\]
+
+\end_inset
+
+Further,
+ for each 
+\begin_inset Formula $i=1,2$
+\end_inset
+
+ and 
+\begin_inset Formula $s\in[t]$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\begin{align*}
+\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \EE[\|\eta_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
+\le & \EE[\EE[\eta_{a_{s},s}^{2}|a_{s},\Hcal_{s-1}]\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
+\le & \sigma^{2}\EE[\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
+\le & \sigma^{2}\EE[\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}|\Hcal_{s-1}],
+\end{align*}
+
+\end_inset
+
+where By definition of 
+\begin_inset Formula $a_{s}$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}=\sum_{k=1}^{K}\bar{\pi}_{s}(k)X_{k,s}^{\top}\bar{\Gb}_{t}^{-1}X_{k,s}\le\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}.
+\]
+
+\end_inset
+
+Because of the G-optimal design,
+\begin_inset Formula 
+\[
+\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}\le\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s}).
+\]
+
+\end_inset
+
+Because 
+\begin_inset Formula $\bar{\Gb}_{t}=\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}+\lambda_{t}\Ib_{d}$
+\end_inset
+
+,
+\begin_inset Formula 
+\begin{align*}
+\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})\\
+= & \text{Tr}\Big(\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}\Big)\\
+\le & 2\text{Tr}\Big(\bar{\Gb}_{t}\bar{\Gb}_{t}^{-1}\Big)=2d.
+\end{align*}
+
+\end_inset
+
+Thus,
+ with probability at least 
+\begin_inset Formula $1-\delta$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)=\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le2d.
+\]
+
+\end_inset
+
+Thus,
+ for any 
+\begin_inset Formula $z>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)=\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z,H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)\le2d)+\delta
+\]
+
+\end_inset
+
+By Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:Van_Zanten"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ for any 
+\begin_inset Formula $z>0$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)\le2\exp\Big(-\frac{z^{2}}{4d+\frac{2}{3}\frac{\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)+\delta.
+\]
+
+\end_inset
+
+The inequality 
+\begin_inset Formula 
+\[
+2\exp\Big(-\frac{z^{2}}{4d+\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)\le\delta
+\]
+
+\end_inset
+
+ is equivalent to
+\begin_inset Formula 
+\[
+z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}-4d\log\frac{2}{\delta}\ge0.
+\]
+
+\end_inset
+
+The above inequality is implied by
+\begin_inset Formula 
+\[
+z\ge\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}}.
+\]
+
+\end_inset
+
+Thus,
+ with probability at least 
+\begin_inset Formula $1-2\delta$
+\end_inset
+
+,
+ for all 
+\begin_inset Formula $t\ge1$
+\end_inset
+
+,
+\begin_inset Formula 
+\[
+|\sum_{s=1}^{t}D_{i,a_{s}}|\le\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}},
+\]
+
+\end_inset
+
+and it follows that
+\begin_inset Formula 
+\[
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\frac{4\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+4\sqrt{d\log\frac{2}{\delta}}.
+\]
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Lemma
 \begin_inset CommandInset label
 LatexCommand label
 name "lem:Van_Zanten"

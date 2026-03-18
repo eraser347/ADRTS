@@ -1121,7 +1121,7 @@ For each round
 
  is the Gram matrix.
  Let 
-\begin_inset Formula $\Xb_{t}=[X_{1,t},\cdots,X_{K,t}]\in\RR^{d\times K}$
+\begin_inset Formula $\Xb_{t}=[x_{1,t},\cdots,x_{K,t}]\in\RR^{d\times K}$
 \end_inset
 
  denote a concatenated context matrix and 
@@ -1155,7 +1155,13 @@ For each round
 \end_layout
 
 \begin_layout Lemma
-For the linearly independent vectors 
+\begin_inset CommandInset label
+LatexCommand label
+name "lem:inclusion_bound"
+
+\end_inset
+
+ For the linearly independent vectors 
 \begin_inset Formula $x_{1},\ldots,x_{d}\in\RR^{d}$
 \end_inset
 
@@ -1249,7 +1255,13 @@ which completes the proof.
 \end_layout
 
 \begin_layout Theorem
-() For 
+\begin_inset CommandInset label
+LatexCommand label
+name "thm:opt"
+
+\end_inset
+
+ () For 
 \begin_inset Formula $K>d$
 \end_inset
 
@@ -1278,11 +1290,13 @@ which completes the proof.
 
  denote a solution to the following optimization problem:
 \begin_inset Formula 
-\begin{align*}
-\underset{w}{\text{maximize}} & \log\det\big(M(w)\big)\\
+\begin{equation}
+\begin{split}\underset{w}{\text{maximize}} & \log\det\big(M(w)\big)\\
 \text{s.t} & 0\le w_{i}\le1\\
  & \sum_{i=1}^{K}w_{i}=d.
-\end{align*}
+\end{split}
+\label{eq:opt_problem}
+\end{equation}
 
 \end_inset
 
@@ -1305,76 +1319,282 @@ Then
 \end_layout
 
 \begin_layout Proof
-
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $p_{t}$
-\end_inset
-
- denote the G-optimal policy over 
-\begin_inset Formula $\{r_{1,t},\ldots,r_{K,t}\}$
-\end_inset
-
-.
- By Kiefer-wolfwiez theorem,
- G-optimal design is equivalent with D-optimal design,
- which is efficiently computable.
- By definition of the G-optimal policy,
- we have 
-\begin_inset Formula $\max_{k^{\prime}\in[K]}r_{k^{\prime},t}^{\top}(\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top})^{-1}r_{k^{\prime},t}=\rho_{t}$
-\end_inset
-
-.
- Thus,
- for all 
-\begin_inset Formula $k^{\prime}\in[K]$
-\end_inset
-
-
-\begin_inset Formula 
-\[
-(\rho_{t}\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top})^{-1/2}r_{k^{\prime},t}r_{k^{\prime},r}^{\top}(\rho_{t}\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top})^{-1/2}\preceq I_{\rho_{t}},
-\]
-
-\end_inset
-
-which implies 
-\begin_inset Formula $r_{k^{\prime},t}r_{k^{\prime},t}\preceq\rho_{t}\sum_{k=1}^{K}p_{t}(k)r_{k,t}r_{k,t}^{\top}$
-\end_inset
-
-.
- Thus,
- for each 
-\begin_inset Formula $k^{\prime}\in[K]$
+Since 
+\begin_inset Formula $K>d$
 \end_inset
 
 ,
+ there exists a point 
+\begin_inset Formula $w$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{i}\in(0,1)$
+\end_inset
+
+ and 
+\begin_inset Formula $\sum_{i=1}^{K}w_{i}=K$
+\end_inset
+
+.
+ Thus,
+ the Slater's condition is met.
+ Note that 
+\begin_inset Formula $w\mapsto\log\det(M(w))$
+\end_inset
+
+ is a concave function.
+ Thus,
+ the necessity condition of KKT condition holds.
+ Thus,
  
 \begin_inset Formula 
-\[
-|x_{k^{\prime},t}^{\top}y|^{2}=|r_{k^{\prime},t}\Qb_{t}^{\top}y|^{2}\le\rho_{t}\sum_{k=1}^{K}p_{t}(k)\big(r_{k,t}\Qb_{t}^{\top}y\big)^{2}=\sum_{k=1}^{K}p_{t}(k)(\sqrt{\rho_{t}}x_{k,t}^{\top}y)^{2}.
-\]
+\begin{align*}
+x_{i}^{\top}M(w_{\star})^{-1}x_{i} & =\lambda+\mu_{i}-\eta_{i}\quad\forall i=1,\ldots,d\\
+\sum_{i=1}^{K}w_{\star,i}=d, & \quad0\le w_{\star,i}\le1,\forall i=1,\ldots,d\\
+\mu_{i}(w_{\star,i}-1)=0, & \quad\eta_{i}w_{\star,i}=0\\
+\mu_{i}\ge0, & \eta_{i}\ge0,\forall i=1,\ldots,d.
+\end{align*}
+
+\end_inset
+
+Note that
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{K}w_{\star,i}x_{i}^{\top}M(w_{\star})^{-1}x_{i}= & \sum_{i=1}^{K}w_{\star,i}\lambda+\sum_{i=1}^{K}w_{\star,i}\mu_{i}+\sum_{i=1}^{K}w_{\star,i}\eta_{i}\\
+= & d\lambda+\sum_{i=1}^{K}\mu_{i}.
+\end{align*}
+
+\end_inset
+
+The left hand side
+\begin_inset Formula 
+\begin{align*}
+\sum_{i=1}^{K}w_{\star,i}x_{i}^{\top}M(w_{\star})^{-1}x_{i}= & \text{Tr}\Big(\sum_{i=1}^{K}w_{\star,i}x_{i}^{\top}M(w_{\star})^{-1}x_{i}\Big)\\
+= & \text{Tr}\Big(M(w_{\star})M(w_{\star})^{-1}\Big)\\
+= & d.
+\end{align*}
 
 \end_inset
 
 Thus,
- for 
-\begin_inset Formula $k^{\prime}\in[K]$
-\end_inset
-
-,
- we obtain 
-\begin_inset Formula $x_{k^{\prime},t}x_{k^{\prime},t}^{\top}\preceq\rho_{t}\sum_{k=1}^{K}p_{t}(k)x_{k,t}x_{k,t}^{\top}$
+ 
+\begin_inset Formula $\lambda=1-\sum_{i=1}^{K}\mu_{i}/d\le1$
 \end_inset
 
 .
+ For 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{\star,i}=0$
+\end_inset
+
+,
+ we have 
+\begin_inset Formula $\mu_{i}=0$
+\end_inset
+
+ and
+\begin_inset Formula 
+\[
+x_{i}^{\top}M(w_{\star})^{-1}x_{i}=\lambda-\eta_{i}\le\lambda\le1.
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{\star,i}\in(0,1)$
+\end_inset
+
+,
+ we have 
+\begin_inset Formula $\mu_{i}=0$
+\end_inset
+
+ and 
+\begin_inset Formula $\eta_{i}=0$
+\end_inset
+
+.
+ Thus,
+\begin_inset Formula 
+\[
+x_{i}^{\top}M(w_{\star})^{-1}x_{i}=\lambda\le1.
+\]
+
+\end_inset
+
+For 
+\begin_inset Formula $i$
+\end_inset
+
+ such that 
+\begin_inset Formula $w_{\star,i}=1$
+\end_inset
+
+,
+ remind that 
+\begin_inset Formula $M(w_{\star})$
+\end_inset
+
+ is invertible and includes 
+\begin_inset Formula $d$
+\end_inset
+
+ linearly independent vectors.
+ Then by Lemma 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "lem:inclusion_bound"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+x_{i}^{\top}M(w_{\star})^{-1}x_{i}=x_{i}^{\top}\big(x_{i}x_{i}^{\top}+\sum_{j\neq i}w_{\star,j}x_{j}x_{j}^{\top}\big)^{-1}x_{i}\le1.
+\]
+
+\end_inset
+
+Since 
+\begin_inset Formula $w_{\star,i}\in[0,1]$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=1,\ldots,K$
+\end_inset
+
+ we have 
+\begin_inset Formula $x_{i}^{\top}M(w_{\star})^{-1}x_{i}\le1$
+\end_inset
+
+.
+ This implies 
+\begin_inset Formula $\lambda_{\max}(M(w_{\star})^{-1/2}x_{i}x_{i}^{\top}M(w_{\star})^{-1/2})\le1$
+\end_inset
+
+ for all 
+\begin_inset Formula $i=1,\ldots,K$
+\end_inset
+
+.
+ Thus,
+ for any 
+\begin_inset Formula $x\in\RR^{d}$
+\end_inset
+
+,
+ such that 
+\begin_inset Formula $\|x\|_{2}\le1$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+x^{\top}\big(M(w_{\star})-x_{i}x_{i}^{\top})x=x^{\top}M(w_{\star})^{1/2}\big(I_{d}-M(w_{\star})^{-1/2}x_{i}x_{i}^{\top}M(w_{\star})^{-1/2}\big)M(w_{\star})^{1/2}x\ge0,
+\]
+
+\end_inset
+
+holds for 
+\begin_inset Formula $i=1,\ldots,K$
+\end_inset
+
+,
+ which completes the proof.
  
 \end_layout
 
 \begin_layout Standard
-Based on this G-optimal design,
+\begin_inset Separator plain
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+For the solution 
+\begin_inset Formula $w_{t}^{\star}$
+\end_inset
+
+ of the optimization problem 
+\begin_inset CommandInset ref
+LatexCommand eqref
+reference "eq:opt_problem"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ define 
+\begin_inset Formula $p_{t}=w_{t}^{\star}/d$
+\end_inset
+
+.
+ Because 
+\begin_inset Formula $\sum_{k=1}^{K}p_{t}(k)=\sum_{k=1}^{K}w_{t}^{\star}(k)/d=1$
+\end_inset
+
+,
+ 
+\begin_inset Formula $p_{t}$
+\end_inset
+
+ induces a distribution over 
+\begin_inset Formula $\{r_{1,t},\ldots,r_{K,t}\}$
+\end_inset
+
+.
+ By Theorem 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "thm:opt"
+plural "false"
+caps "false"
+noprefix "false"
+nolink "false"
+
+\end_inset
+
+,
+ for any 
+\begin_inset Formula $k^{\prime}\in[K]$
+\end_inset
+
+,
+ 
+\begin_inset Formula 
+\[
+\sum_{k=1}^{K}dp_{t}(k)x_{k,t}x_{k,t}^{\top}=\Qb_{t}\Big(\sum_{k=1}^{K}dp_{t}(k)r_{k,t}r_{k,t}^{\top}\Big)\Qb_{t}^{\top}\succeq\Qb_{t}(r_{k^{\prime},t}r_{k^{\prime},t}^{\top})\Qb_{t}=x_{k^{\prime},t}x_{k^{\prime},t}^{\top}.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Based the optimized design,
+ 
+\begin_inset Formula $p_{t}$
+\end_inset
+
  we construct a novel exploration scheme that is compatible with both Thompson Sampling and Doubly Robust estimator.
  Define the distribution over 
 \begin_inset Formula $[K]$
@@ -1464,31 +1684,14 @@ Let
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-Let 
-\begin_inset Formula $v_{1,t},\ldots,v_{\rho_{t},t}$
-\end_inset
-
- denote the orthogonal vectors such that 
-\begin_inset Formula $\frac{1}{2}\sum_{k=1}^{K}\rho_{t}p_{t}(k)x_{k,t}x_{k,t}^{\top}+\frac{1}{2}x_{\tilde{a}_{t},t}x_{\tilde{a}_{t},t}^{\top}=\sum_{i=1}^{\rho_{t}}v_{i,t}v_{i,t}^{\top}$
-\end_inset
-
-.
  Let 
-\begin_inset Formula $i_{t}\sim\text{unif}([\rho_{t}])$
-\end_inset
-
- and
 \begin_inset Formula 
 \[
 X_{a_{t},t}=\begin{cases}
-\sqrt{\rho_{t}}x_{a_{t}} & a_{t}\neq\tilde{a}_{t}\\
+\sqrt{d}x_{a_{t}} & a_{t}\neq\tilde{a}_{t}\\
 x_{\tilde{a}_{t},t} & a_{t}=\tilde{a}_{t}
 \end{cases},\quad Y_{a_{t},t}=\begin{cases}
-\sqrt{\rho_{t}}R_{a_{t},t} & a_{t}\neq\tilde{a}_{t}\\
+\sqrt{d}R_{a_{t},t} & a_{t}\neq\tilde{a}_{t}\\
 R_{\tilde{a}_{t},t} & a_{t}=\tilde{a}_{t}
 \end{cases}.
 \]
@@ -1507,7 +1710,7 @@ denote the weighted ridge estimator,
  where the Gram matrix,
 \begin_inset Formula 
 \[
-\Gb_{t}:=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}I_{d}.
+\Gb_{t}:=\sum_{s=1}^{t}\sum_{k=1}^{K}\bar{\pi}_{s}(k)X_{k,s}X_{k,s}^{\top}+\lambda_{t}I_{d}.
 \]
 
 \end_inset
@@ -1515,7 +1718,7 @@ denote the weighted ridge estimator,
 We define the augmented DR estimator
 \begin_inset Formula 
 \[
-\widehat{\theta}_{t}:=\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}\big)^{-1}\sum_{s=1}^{t}\Big(\sum_{i=1}^{\rho_{t}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}\theta_{t}^{R}+Y_{a_{s},s}X_{a_{s},s}\Big),
+\widehat{\theta}_{t}:=\Gb_{t}^{-1}\sum_{s=1}^{t}\Big(\sum_{k=1}^{K}\big(\bar{\pi}_{s}(k)-\II(a_{s}=k)\big)X_{k,s}\theta_{t}^{R}+Y_{a_{s},s}X_{a_{s},s}\Big),
 \]
 
 \end_inset
@@ -1581,25 +1784,12 @@ By definition,
  recall that 
 \begin_inset Formula 
 \begin{align*}
-\Gb_{t} & :=\sum_{s=1}^{t}\big(\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}\big)+\lambda_{t}\Ib_{d}
+\Gb_{t} & =\sum_{s=1}^{t}\sum_{k=1}^{K}\bar{\pi}_{s}(k)X_{k,s}X_{k,s}^{\top}+\lambda_{t}I_{d}
 \end{align*}
 
 \end_inset
 
-The definition of 
-\begin_inset Formula $v_{i,s}$
-\end_inset
-
- implies 
-\begin_inset Formula $\frac{1}{2}\sum_{k=1}^{K}\rho_{s}p_{s}(k)x_{k,s}x_{k,s}^{\top}+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}=\sum_{i=1}^{\rho_{s}}v_{i,s}v_{i,s}^{\top}$
-\end_inset
-
- for all 
-\begin_inset Formula $s\in[t]$
-\end_inset
-
-.
- Let us write 
+Let us write 
 \begin_inset Formula $\eta_{a_{s},s}:=Y_{a_{s},s}-X_{a_{s},s}^{\top}\theta_{\star}$
 \end_inset
 
@@ -1608,14 +1798,14 @@ The definition of
 \begin_inset Formula 
 \[
 \begin{split} & \widehat{\theta}_{t}-\theta_{\star}\\
- & =\Gb_{t}^{-1}\Big(\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}(1-\frac{\II(i_{s}=i)}{1/\rho_{s}})v_{i,s}v_{i,s}^{\top}\theta_{t}^{R}+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}.
+ & =\Gb_{t}^{-1}\Big(\sum_{s=1}^{t}\sum_{k=1}^{K}\big(\bar{\pi}_{s}(k)-\II(a_{s}=k)\big)X_{k,s}X_{k,s}^{\top}(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big).
 \end{split}
 \]
 
 \end_inset
 
 Let us write 
-\begin_inset Formula $\Vb_{t}:=\sum_{s=1}^{t}\sum_{i=1}^{\rho_{s}}\frac{\II(i_{s}=i)}{1/\rho_{s}}v_{i,s}v_{i,s}^{\top}+\lambda_{t}\Ib_{d}$
+\begin_inset Formula $\Vb_{t}:=\sum_{s=1}^{t}\sum_{k=1}^{K}\II(a_{s}=k)X_{k,s}X_{k,s}^{\top}+\lambda_{t}\Ib_{d}$
 \end_inset
 
 .
@@ -1623,7 +1813,7 @@ Let us write
 \begin_inset Formula 
 \[
 \begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
- & =\Big\Vert(\Gb_{t}-\Vb_{t})(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\big(\sum_{s=1}^{t}X_{a_{s}}X_{a_{s}}^{\top}-\Gb_{t}\big)\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+ & =\Big\Vert(\Gb_{t}-\Vb_{t})(\theta_{t}^{R}-\theta_{\star})+\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}.
 \end{split}
 \]
 
@@ -1636,7 +1826,7 @@ By definition of
 ,
 \begin_inset Formula 
 \[
-\theta_{t}^{R}-\theta_{\star}=\Gb_{t}^{-1}\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+\Gb_{t}^{-1}(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}
+\theta_{t}^{R}-\theta_{\star}=\Gb_{t}^{-1}\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}
 \]
 
 \end_inset
@@ -1645,8 +1835,8 @@ By definition of
 \begin_inset Formula 
 \[
 \begin{split} & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
- & =\Big\Vert(2\Ib_{d}-\Vb_{t}\Gb_{t}^{-1})\big(\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\big)\Big\Vert_{\Gb_{t}^{-1}}\\
- & =\Big\Vert(2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2})\Gb_{t}^{-1/2}\big(\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\big)\Big\Vert_{2}.
+ & =\Big\Vert(\Ib_{d}-\Vb_{t}\Gb_{t}^{-1})\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\\
+ & =\Big\Vert(\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2})\Gb_{t}^{-1/2}\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{2}.
 \end{split}
 \]
 
@@ -1662,7 +1852,7 @@ By definition of the matrix operator norm,
 \begin_inset Formula 
 \begin{align*}
  & \|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\\
- & \le\Big\Vert2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\cdot\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+ & \le\Big\Vert\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\cdot\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}.
 \end{align*}
 
 \end_inset
@@ -1670,18 +1860,15 @@ By definition of the matrix operator norm,
 By Lemma ??
 \begin_inset Formula 
 \begin{align*}
-\Big\Vert2\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\le & 1+\Big\Vert\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\\
-\le & 3.
+\Big\Vert\Ib_{d}-\Gb_{t}^{-1/2}\Vb_{t}\Gb_{t}^{-1/2}\Big\Vert_{2}\le & 2.
 \end{align*}
 
 \end_inset
 
 Thus,
- by triangular inequality
 \begin_inset Formula 
 \begin{align*}
-\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}} & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}+(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}\\
- & \le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}+3\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\Gb_{t}^{-1}}.
+\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}} & \le2\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}.
 \end{align*}
 
 \end_inset
@@ -1697,7 +1884,7 @@ Let
  and
 \begin_inset Formula 
 \[
-\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\le3\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\bar{\Gb}_{t}^{-1}}+3\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}
+\|\widehat{\theta}_{t}-\theta_{\star}\|_{\Gb_{t}}\le2\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\bar{\Gb}_{t}^{-1}}
 \]
 
 \end_inset
@@ -1722,13 +1909,13 @@ By Lemma ??,
  such that 
 \begin_inset Formula 
 \[
-\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\bar{\Gb}_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
 \]
 
 \end_inset
 
 and 
-\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\eta_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}$
+\begin_inset Formula $\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|\eta_{a_{s},s}X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}$
 \end_inset
 
  for all 
@@ -1825,9 +2012,9 @@ Because
 ,
 \begin_inset Formula 
 \begin{align*}
-\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})\\
-= & \text{Tr}\Big(\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}\Big)\\
-\le & 2\text{Tr}\Big(\bar{\Gb}_{t}\bar{\Gb}_{t}^{-1}\Big)=2d.
+\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \sigma^{2}\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})\\
+= & \sigma^{2}\text{Tr}\Big(\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}\Big)\\
+\le & \sigma^{2}2\text{Tr}\Big(\bar{\Gb}_{t}\bar{\Gb}_{t}^{-1}\Big)=2\sigma^{2}d.
 \end{align*}
 
 \end_inset
@@ -1841,7 +2028,7 @@ Thus,
  
 \begin_inset Formula 
 \[
-H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)=\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le2d.
+H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)=\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le2\sigma^{2}d.
 \]
 
 \end_inset
@@ -1880,7 +2067,7 @@ nolink "false"
  
 \begin_inset Formula 
 \[
-\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)\le2\exp\Big(-\frac{z^{2}}{4d+\frac{2}{3}\frac{\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)+\delta.
+\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)\le2\exp\Big(-\frac{z^{2}}{4d\sigma^{2}+\frac{2}{3}\frac{\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)+\delta.
 \]
 
 \end_inset
@@ -1888,7 +2075,7 @@ nolink "false"
 The inequality 
 \begin_inset Formula 
 \[
-2\exp\Big(-\frac{z^{2}}{4d+\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)\le\delta
+2\exp\Big(-\frac{z^{2}}{4d\sigma^{2}+\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)\le\delta
 \]
 
 \end_inset
@@ -1896,7 +2083,7 @@ The inequality
  is equivalent to
 \begin_inset Formula 
 \[
-z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}-4d\log\frac{2}{\delta}\ge0.
+z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}-4d\sigma^{2}\log\frac{2}{\delta}\ge0.
 \]
 
 \end_inset
@@ -1904,7 +2091,7 @@ z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta
 The above inequality is implied by
 \begin_inset Formula 
 \[
-z\ge\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}}.
+z\ge\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\sigma^{2}\log\frac{2}{\delta}}.
 \]
 
 \end_inset
@@ -1922,7 +2109,7 @@ Thus,
 ,
 \begin_inset Formula 
 \[
-|\sum_{s=1}^{t}D_{i,a_{s}}|\le\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}},
+|\sum_{s=1}^{t}D_{i,a_{s}}|\le\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\sigma^{2}\log\frac{2}{\delta}},
 \]
 
 \end_inset
@@ -1930,7 +2117,7 @@ Thus,
 and it follows that
 \begin_inset Formula 
 \[
-\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\frac{4\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+4\sqrt{d\log\frac{2}{\delta}}.
+\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\frac{4\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+4\sqrt{d\sigma^{2}\log\frac{2}{\delta}}.
 \]
 
 \end_inset
@@ -1946,255 +2133,6 @@ and it follows that
 \end_layout
 
 \begin_layout Proof
-Observe that
-\begin_inset Formula 
-\[
-\Big\Vert(\sum_{s=1}^{t}X_{a_{s},s}X_{a_{s},s}^{\top}-\Gb_{t})\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}=\Big\Vert\sum_{s=1}^{t}(X_{a_{s},s}X_{a_{s},s}^{\top}-\EE[X_{a_{s},s}X_{a_{s},s}^{\top}|\Hcal_{s-1}])\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}
-\]
-
-\end_inset
-
-By Lemma ??,
- there exists a martingale differences 
-\begin_inset Formula $\{D_{1,a_{s}},D_{2,a_{s}}:s\in[t]\}$
-\end_inset
-
-,
- such that 
-\begin_inset Formula 
-\[
-\Big\Vert\sum_{s=1}^{t}(X_{a_{s},s}X_{a_{s},s}^{\top}-\EE[X_{a_{s},s}X_{a_{s},s}^{\top}|\Hcal_{s-1}])\theta_{\star}\Big\Vert_{\bar{\Gb}_{t}^{-1}}=\sqrt{\big(\sum_{s=1}^{t}D_{1,a_{s}}\big)^{2}+\big(\sum_{s=1}^{t}D_{2,a_{s}}\big)^{2}},
-\]
-
-\end_inset
-
-and 
-\begin_inset Formula 
-\[
-\max\{|D_{1,a_{s}}|,|D_{2,a_{s}}|\}\le\|(X_{a_{s},s}X_{a_{s},s}^{\top}-\EE[X_{a_{s},s}X_{a_{s},s}^{\top}|\Hcal_{s-1}])\theta_{\star}\|_{\bar{\Gb}_{t}^{-1}}
-\]
-
-\end_inset
-
- for all 
-\begin_inset Formula $s\in[t]$
-\end_inset
-
-.
- Note that
-\begin_inset Formula 
-\begin{align*}
-\|\EE[X_{a_{s},s}X_{a_{s},s}^{\top}\theta_{\star}|\Hcal_{s-1}]\|_{\bar{\Gb}_{t}^{-1}}\le & \EE[\|X_{a_{s},s}X_{a_{s},s}^{\top}\theta_{\star}\|_{\bar{\Gb}_{t}^{-1}}|\Hcal_{s-1}]\\
-\le & \EE[|X_{a_{s},s}^{\top}\theta_{\star}|\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}|\Hcal_{s-1}]\\
-\le & \sqrt{\EE[|X_{a_{s},s}^{\top}\theta_{\star}|^{2}|\Hcal_{s-1}]\EE[\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}|\Hcal_{s-1}]},
-\end{align*}
-
-\end_inset
-
-where the last inequality uses Cauchy-Schwartz inequality.
- For 
-\begin_inset Formula $a>0$
-\end_inset
-
- to be determined later,
- let 
-\begin_inset Formula $H_{i,t}(a):=\sum_{s=1}^{t}D_{i,a_{s}}\II(|D_{i,a_{s}}|>a)+\sum_{i=1}^{n}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]$
-\end_inset
-
-.
- Note that
-\begin_inset Formula 
-\[
-|D_{i,a_{s}}|\le|\eta_{a_{s},s}|\|X_{a_{s},s}\|_{G_{t}^{-1}}\le|\eta_{a_{s},s}|.
-\]
-
-\end_inset
-
-Since 
-\begin_inset Formula $\eta_{a_{s},s}$
-\end_inset
-
- is 
-\begin_inset Formula $\sigma$
-\end_inset
-
--sub-Gaussian,
- with probability at least 
-\begin_inset Formula $1-\delta$
-\end_inset
-
-,
- 
-\begin_inset Formula 
-\[
-\max_{s\in[t]}|D_{i,a_{s}}|\le\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}.
-\]
-
-\end_inset
-
-Further,
- for each 
-\begin_inset Formula $i=1,2$
-\end_inset
-
- and 
-\begin_inset Formula $s\in[t]$
-\end_inset
-
-,
- 
-\begin_inset Formula 
-\begin{align*}
-\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \EE[\|\eta_{a_{s},s}X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
-\le & \EE[\EE[\eta_{a_{s},s}^{2}|a_{s},\Hcal_{s-1}]\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
-\le & \sigma^{2}\EE[\|X_{a_{s},s}\|_{\Gb_{t}^{-1}}^{2}|\Hcal_{s-1}]\\
-\le & \sigma^{2}\EE[\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}|\Hcal_{s-1}],
-\end{align*}
-
-\end_inset
-
-where By definition of 
-\begin_inset Formula $a_{s}$
-\end_inset
-
-,
- 
-\begin_inset Formula 
-\[
-\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}=\sum_{k=1}^{K}\bar{\pi}_{s}(k)X_{k,s}^{\top}\bar{\Gb}_{t}^{-1}X_{k,s}\le\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})+\frac{1}{2}x_{\tilde{a}_{s},s}x_{\tilde{a}_{s},s}^{\top}.
-\]
-
-\end_inset
-
-Because of the G-optimal design,
-\begin_inset Formula 
-\[
-\|X_{a_{s},s}\|_{\bar{\Gb}_{t}^{-1}}^{2}\le\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s}).
-\]
-
-\end_inset
-
-Because 
-\begin_inset Formula $\bar{\Gb}_{t}=\frac{1}{2}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}+\lambda_{t}\Ib_{d}$
-\end_inset
-
-,
-\begin_inset Formula 
-\begin{align*}
-\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le & \sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}(\sqrt{p_{s}(k)}X_{k,s})\\
-= & \text{Tr}\Big(\sum_{s=1}^{t}\sum_{k=1}^{K}(\sqrt{p_{s}(k)}X_{k,s})(\sqrt{p_{s}(k)}X_{k,s})^{\top}\bar{\Gb}_{t}^{-1}\Big)\\
-\le & 2\text{Tr}\Big(\bar{\Gb}_{t}\bar{\Gb}_{t}^{-1}\Big)=2d.
-\end{align*}
-
-\end_inset
-
-Thus,
- with probability at least 
-\begin_inset Formula $1-\delta$
-\end_inset
-
-,
- 
-\begin_inset Formula 
-\[
-H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)=\sum_{s=1}^{t}\EE[D_{i,a_{s}}^{2}|\Hcal_{s-1}]\le2d.
-\]
-
-\end_inset
-
-Thus,
- for any 
-\begin_inset Formula $z>0$
-\end_inset
-
-,
- 
-\begin_inset Formula 
-\[
-\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)=\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z,H_{i,t}\big(\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}\big)\le2d)+\delta
-\]
-
-\end_inset
-
-By Lemma 
-\begin_inset CommandInset ref
-LatexCommand ref
-reference "lem:Van_Zanten"
-plural "false"
-caps "false"
-noprefix "false"
-nolink "false"
-
-\end_inset
-
-,
- for any 
-\begin_inset Formula $z>0$
-\end_inset
-
-,
- 
-\begin_inset Formula 
-\[
-\PP(\max_{t\ge1}|\sum_{s=1}^{t}D_{i,a_{s}}|\ge z)\le2\exp\Big(-\frac{z^{2}}{4d+\frac{2}{3}\frac{\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)+\delta.
-\]
-
-\end_inset
-
-The inequality 
-\begin_inset Formula 
-\[
-2\exp\Big(-\frac{z^{2}}{4d+\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}z}\Big)\le\delta
-\]
-
-\end_inset
-
- is equivalent to
-\begin_inset Formula 
-\[
-z^{2}-z\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}-4d\log\frac{2}{\delta}\ge0.
-\]
-
-\end_inset
-
-The above inequality is implied by
-\begin_inset Formula 
-\[
-z\ge\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}}.
-\]
-
-\end_inset
-
-Thus,
- with probability at least 
-\begin_inset Formula $1-2\delta$
-\end_inset
-
-,
- for all 
-\begin_inset Formula $t\ge1$
-\end_inset
-
-,
-\begin_inset Formula 
-\[
-|\sum_{s=1}^{t}D_{i,a_{s}}|\le\frac{2\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+\sqrt{4d\log\frac{2}{\delta}},
-\]
-
-\end_inset
-
-and it follows that
-\begin_inset Formula 
-\[
-\Big\Vert\sum_{s=1}^{t}\eta_{a_{s},s}X_{a_{s},s}\Big\Vert_{\Gb_{t}^{-1}}\le\frac{4\sqrt{2\sigma^{2}\log\frac{2t^{2}}{\delta}}}{3}\log\frac{2}{\delta}+4\sqrt{d\log\frac{2}{\delta}}.
-\]
-
-\end_inset
-
- 
-\end_layout
-
-\begin_layout Lemma
 \begin_inset CommandInset label
 LatexCommand label
 name "lem:Van_Zanten"
